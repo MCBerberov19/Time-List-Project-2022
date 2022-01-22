@@ -18,12 +18,18 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Event.cpp">
+    <ClCompile Include="BackEnd\CPP Files\Event.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Interface\CPP Files\FrontEnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Event.h">
+    <ClInclude Include="BackEnd\Header Files\Event.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Interface\Header Files\FrontEnd.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

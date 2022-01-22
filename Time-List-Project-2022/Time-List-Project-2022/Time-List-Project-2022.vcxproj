@@ -139,11 +139,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Event.cpp" />
+    <ClCompile Include="BackEnd\CPP Files\Event.cpp" />
+    <ClCompile Include="Interface\CPP Files\FrontEnd.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Event.h" />
+    <ClInclude Include="BackEnd\Header Files\Event.h" />
+    <ClInclude Include="Interface\Header Files\FrontEnd.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
