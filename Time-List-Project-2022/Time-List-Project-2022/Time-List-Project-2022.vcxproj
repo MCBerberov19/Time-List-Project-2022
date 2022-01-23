@@ -143,11 +143,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Event Data Management\CPP Files\Event.cpp" />
+    <ClCompile Include="Event Data Management\CPP Files\UserChoiceManagement.cpp" />
     <ClCompile Include="Interface\CPP Files\FrontEnd.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Event Data Management\Header Files\Event.h" />
+    <ClInclude Include="Event Data Management\Header Files\UserChoiceManagement.h" />
     <ClInclude Include="Interface\Header Files\FrontEnd.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

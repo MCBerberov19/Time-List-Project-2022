@@ -1,4 +1,5 @@
-#include <SFML/Graphics.hpp>
+#include "../../Event Data Management/Header Files/UserChoiceManagement.h"
+#include "../Header Files/FrontEnd.h"
 
 void printMainMenu(sf::RenderWindow& window)
 {
@@ -27,6 +28,51 @@ void printMainMenu(sf::RenderWindow& window)
 	window.draw(lastButton);
 }
 
+void printEnterAnEventPage(sf::RenderWindow& window)
+{
+	sf::Texture t1,t2;
+	
+	t1.loadFromFile("Images and Fonts/background.jpg");
+	t2.loadFromFile("Images and Fonts/back.png");
+
+	sf::Sprite background(t1);
+	sf::Sprite backButton(t2);
+
+	window.draw(background);
+	backButton.setPosition(30,30);
+	window.draw(backButton);
+}
+
+void printSearchAnEventPage(sf::RenderWindow& window)
+{
+	sf::Texture t1, t2;
+
+	t1.loadFromFile("Images and Fonts/background.jpg");
+	t2.loadFromFile("Images and Fonts/back.png");
+
+	sf::Sprite background(t1);
+	sf::Sprite backButton(t2);
+
+	window.draw(background);
+	backButton.setPosition(30, 30);
+	window.draw(backButton);
+}
+
+void printLastSearchedEventsPage(sf::RenderWindow& window)
+{
+	sf::Texture t1, t2;
+
+	t1.loadFromFile("Images and Fonts/background.jpg");
+	t2.loadFromFile("Images and Fonts/back.png");
+
+	sf::Sprite background(t1);
+	sf::Sprite backButton(t2);
+
+	window.draw(background);
+	backButton.setPosition(30, 30);
+	window.draw(backButton);
+}
+
 void setMenu(int &stage)
 {
 
@@ -38,20 +84,25 @@ void setMenu(int &stage)
 	{
 		sf::Event event1;
 
-		
-		printMainMenu(window);
-		//switch (stage)
-		/*{
+		switch(stage)
+		{
+		case 0:
+			printMainMenu(window);
+			ChoiceFlow::MainMenu::onClickMainMenu(window, event1, stage);
+			break;
 		case 1:
-			window.clear(sf::Color(179, 122, 76));
+			printEnterAnEventPage(window);
+			ChoiceFlow::EnterAnEvent::onClickEventPage(window, event1, stage);
 			break;
 		case 2:
-			window.clear(sf::Color(179, 122, 76));
+			printSearchAnEventPage(window);
+			ChoiceFlow::SearchedAnEvent::onClickSearchPage(window, event1, stage);
 			break;
 		case 3:
-			window.clear(sf::Color(179, 122, 76));
+			printLastSearchedEventsPage(window);
+			ChoiceFlow::LastSearchedEvents::onClickLastEventsPage(window, event1, stage);
 			break;
-		}*/
+		}
 		window.display();
 		window.clear();
 	}

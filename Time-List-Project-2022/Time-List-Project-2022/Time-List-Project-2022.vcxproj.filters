@@ -24,12 +24,18 @@
     <ClCompile Include="Interface\CPP Files\FrontEnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Event Data Management\CPP Files\UserChoiceManagement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Interface\Header Files\FrontEnd.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Event Data Management\Header Files\Event.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Event Data Management\Header Files\UserChoiceManagement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
