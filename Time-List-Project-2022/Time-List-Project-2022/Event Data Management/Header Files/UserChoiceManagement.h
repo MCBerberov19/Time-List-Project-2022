@@ -9,18 +9,10 @@ namespace ChoiceFlow
 	}
 	namespace EnterAnEvent
 	{
-		namespace inputData
-		{
-			static int box;
-			static sf::String title;
-			static sf::String year;
-			static sf::String topic;
-			static sf::String description;
-		}
 
-		void onClickEventPage(sf::RenderWindow& window, sf::Event& event1, int& stage);
+		void onClickEventPage(sf::RenderWindow& window, sf::Event& event1, int& stage, int& box);
 
-		void inputEventData(sf::Event& event1);
+		void inputEventData(sf::Event& event1, sf::String& text, int size, bool num);
 	}
 	namespace SearchedAnEvent
 	{

@@ -1,6 +1,14 @@
 #include "../../Event Data Management/Header Files/UserChoiceManagement.h"
 #include "../Header Files/FrontEnd.h"
-#include <iostream>
+
+namespace inputData
+{
+	int box;
+	sf::String title;
+	sf::String year;
+	sf::String topic;
+	sf::String description;
+}
 
 void printMainMenu(sf::RenderWindow& window)
 {
@@ -55,24 +63,22 @@ void printEnterAnEventPage(sf::RenderWindow& window)
 	titleText.setCharacterSize(25);
 	titleText.setFillColor(sf::Color::Black);
 	titleText.setPosition(240, 125); //27
-	std::string res = ChoiceFlow::EnterAnEvent::inputData::title.toAnsiString();
-	std::cout << res;
-	titleText.setString(ChoiceFlow::EnterAnEvent::inputData::title);
+	titleText.setString(inputData::title);
 	yearText.setFont(font);
 	yearText.setCharacterSize(25);
 	yearText.setFillColor(sf::Color::Black);
 	yearText.setPosition(210, 218); //4
-	yearText.setString(ChoiceFlow::EnterAnEvent::inputData::year);
+	yearText.setString(inputData::year);
 	topicText.setFont(font);
 	topicText.setCharacterSize(25);
 	topicText.setFillColor(sf::Color::Black);
 	topicText.setPosition(505, 220); //12
-	topicText.setString(ChoiceFlow::EnterAnEvent::inputData::topic);
+	topicText.setString(inputData::topic);
 	descriptionText.setFont(font);
 	descriptionText.setCharacterSize(25);
 	descriptionText.setFillColor(sf::Color::Black);
 	descriptionText.setPosition(500, 550);
-	descriptionText.setString(ChoiceFlow::EnterAnEvent::inputData::description);
+	descriptionText.setString(inputData::description);
 
 	window.draw(background);
 	backButton.setPosition(30,30);
@@ -140,9 +146,23 @@ void setMenu(int &stage)
 			ChoiceFlow::MainMenu::onClickMainMenu(window, event1, stage);
 			break;
 		case 1:
-			ChoiceFlow::EnterAnEvent::onClickEventPage(window, event1, stage);
+			ChoiceFlow::EnterAnEvent::onClickEventPage(window, event1, stage, inputData::box);
 			printEnterAnEventPage(window);
-			ChoiceFlow::EnterAnEvent::inputEventData(event1);
+			switch (inputData::box)
+			{
+				case 1:
+					ChoiceFlow::EnterAnEvent::inputEventData(event1, inputData::title, 27, false);
+					break;
+				case 2:
+					ChoiceFlow::EnterAnEvent::inputEventData(event1, inputData::year,4, true);
+					break;
+				case 3:
+					ChoiceFlow::EnterAnEvent::inputEventData(event1, inputData::topic,12, false);
+					break;
+				case 4:
+					ChoiceFlow::EnterAnEvent::inputEventData(event1, inputData::description,100, false);
+					break;
+			}
 			break;
 		case 2:
 			printSearchAnEventPage(window);

@@ -1,6 +1,4 @@
 #include "../Header Files/UserChoiceManagement.h"
-#include "../../Interface/Header Files/FrontEnd.h"
-#include <iostream>
 
 void ChoiceFlow::MainMenu::onClickMainMenu(sf::RenderWindow& window, sf::Event& event1, int& stage)
 {
@@ -32,7 +30,7 @@ void ChoiceFlow::MainMenu::onClickMainMenu(sf::RenderWindow& window, sf::Event& 
 	}
 }
 
-void ChoiceFlow::EnterAnEvent::onClickEventPage(sf::RenderWindow& window, sf::Event& event1, int& stage)
+void ChoiceFlow::EnterAnEvent::onClickEventPage(sf::RenderWindow& window, sf::Event& event1, int& stage, int& box)
 {
 	while (window.pollEvent(event1))
 	{
@@ -52,25 +50,25 @@ void ChoiceFlow::EnterAnEvent::onClickEventPage(sf::RenderWindow& window, sf::Ev
 			else if ((sf::Mouse::getPosition(window).x >= 180 && sf::Mouse::getPosition(window).x <= 605) && //title
 				(sf::Mouse::getPosition(window).y >= 115 && sf::Mouse::getPosition(window).y <= 160))
 			{
-				inputData::box = 1;
+				box = 1;
 			}
 
 			else if ((sf::Mouse::getPosition(window).x >= 150 && sf::Mouse::getPosition(window).x <= 305) && //year
 				(sf::Mouse::getPosition(window).y >= 210 && sf::Mouse::getPosition(window).y <= 260))
 			{
-				inputData::box = 2;
+				box = 2;
 			}
 
 			else if ((sf::Mouse::getPosition(window).x >= 440 && sf::Mouse::getPosition(window).x <= 685) && //topic
 				(sf::Mouse::getPosition(window).y >= 210 && sf::Mouse::getPosition(window).y <= 260))
 			{
-				inputData::box = 3;
+				box = 3;
 			}
 
 			else if ((sf::Mouse::getPosition(window).x >= 140 && sf::Mouse::getPosition(window).x <= 680) && //description
 				(sf::Mouse::getPosition(window).y >= 330 && sf::Mouse::getPosition(window).y <= 600))
 			{
-				inputData::box = 4;
+				box = 4;
 			}
 
 			else if ((sf::Mouse::getPosition(window).x >= 285 && sf::Mouse::getPosition(window).x <= 525) && //enter
@@ -79,96 +77,40 @@ void ChoiceFlow::EnterAnEvent::onClickEventPage(sf::RenderWindow& window, sf::Ev
 				
 			}
 			else {
-				inputData::box = 0;
+				box = 0;
 			}
 		}
 	}
 }
 
-void ChoiceFlow::EnterAnEvent::inputEventData(sf::Event& event1)
+void ChoiceFlow::EnterAnEvent::inputEventData(sf::Event& event1, sf::String& text, int size, bool num)
 {
-	switch (inputData::box)
+	if (event1.type == sf::Event::TextEntered)
 	{
-	case 1:
-		if (event1.type == sf::Event::TextEntered)
+		if (event1.text.unicode == '\b' && text.getSize() > 0)
 		{
-			if (event1.text.unicode == '\b' && inputData::title.getSize() > 0)
+			text.erase(text.getSize() - 1, 1);
+		}
+		else if (event1.text.unicode != '\b' && event1.text.unicode < 128 && text.getSize() <= size)
+		{
+			if (num)
 			{
-				inputData::title.erase(inputData::title.getSize() - 1, 1);
-			}
-			else if (event1.text.unicode != '\b' && event1.text.unicode < 128 && inputData::title.getSize() <= 27)
-			{
-				inputData::title += static_cast<char>(event1.text.unicode);
-				if (inputData::title.getSize() >= 2
-					&& inputData::title[inputData::title.getSize() - 1] ==
-					inputData::title[inputData::title.getSize() - 2])
+				if (event1.text.unicode > 47 && event1.text.unicode < 58)
 				{
-					inputData::title.erase(inputData::title.getSize() - 1, 1);
+					text += static_cast<char>(event1.text.unicode);
 				}
-
+			}
+			else
+			{
+				text += static_cast<char>(event1.text.unicode);
+				if (text.getSize() >= 2
+					&& text[text.getSize() - 1] ==
+					text[text.getSize() - 2])
+				{
+					text.erase(text.getSize() - 1, 1);
+				}
 			}
 		}
-		break;
-	case 2:
-		if (event1.type == sf::Event::TextEntered)
-		{
-			if (event1.text.unicode == '\b' && inputData::year.getSize() > 0)
-			{
-				inputData::year.erase(inputData::year.getSize() - 1, 1);
-			}
-			else if (event1.text.unicode != '\b' && event1.text.unicode < 128 && inputData::year.getSize() <= 4)
-			{
-				inputData::year += static_cast<char>(event1.text.unicode);
-				if (inputData::year.getSize() >= 2
-					&& inputData::year[inputData::year.getSize() - 1] ==
-					inputData::year[inputData::year.getSize() - 2])
-				{
-					inputData::year.erase(inputData::year.getSize() - 1, 1);
-				}
-
-			}
-		}
-		break;
-	case 3:
-		if (event1.type == sf::Event::TextEntered)
-		{
-			if (event1.text.unicode == '\b' && inputData::topic.getSize() > 0)
-			{
-				inputData::topic.erase(inputData::topic.getSize() - 1, 1);
-			}
-			else if (event1.text.unicode != '\b' && event1.text.unicode < 128 && inputData::topic.getSize() <= 12)
-			{
-				inputData::topic += static_cast<char>(event1.text.unicode);
-				if (inputData::topic.getSize() >= 2
-					&& inputData::topic[inputData::topic.getSize() - 1] ==
-					inputData::topic[inputData::topic.getSize() - 2])
-				{
-					inputData::topic.erase(inputData::topic.getSize() - 1, 1);
-				}
-
-			}
-		}
-		break;
-	case 4:
-		if (event1.type == sf::Event::TextEntered)
-		{
-			if (event1.text.unicode == '\b' && inputData::description.getSize() > 0)
-			{
-				inputData::description.erase(inputData::description.getSize() - 1, 1);
-			}
-			else if (event1.text.unicode != '\b' && event1.text.unicode < 128 && inputData::description.getSize() <= 18)
-			{
-				inputData::description += static_cast<char>(event1.text.unicode);
-				if (inputData::description.getSize() >= 2
-					&& inputData::description[inputData::description.getSize() - 1] ==
-					inputData::description[inputData::description.getSize() - 2])
-				{
-					inputData::description.erase(inputData::description.getSize() - 1, 1);
-				}
-
-			}
-		}
-		break;
 	}
 }
 
