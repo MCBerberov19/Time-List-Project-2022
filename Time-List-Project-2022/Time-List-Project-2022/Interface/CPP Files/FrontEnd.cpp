@@ -1,5 +1,6 @@
 #include "../../Event Data Management/Header Files/UserChoiceManagement.h"
 #include "../Header Files/FrontEnd.h"
+#include <iostream>
 
 void printMainMenu(sf::RenderWindow& window)
 {
@@ -30,8 +31,11 @@ void printMainMenu(sf::RenderWindow& window)
 
 void printEnterAnEventPage(sf::RenderWindow& window)
 {
-	sf::Texture t1,t2,t3,t4,t5,t6,t7;
-	
+	sf::Text titleText, yearText, topicText, descriptionText;
+	sf::Texture t1, t2, t3, t4, t5, t6, t7;
+	sf::Font font;
+	font.loadFromFile("Images and Fonts/arial.ttf");
+
 	t1.loadFromFile("Images and Fonts/background.jpg");
 	t2.loadFromFile("Images and Fonts/back.png");
 	t3.loadFromFile("Images and Fonts/title.png");
@@ -47,18 +51,44 @@ void printEnterAnEventPage(sf::RenderWindow& window)
 	sf::Sprite topic(t5);
 	sf::Sprite description(t6);
 	sf::Sprite enter(t7);
+	titleText.setFont(font);
+	titleText.setCharacterSize(25);
+	titleText.setFillColor(sf::Color::Black);
+	titleText.setPosition(240, 125); //27
+	std::string res = ChoiceFlow::EnterAnEvent::inputData::title.toAnsiString();
+	std::cout << res;
+	titleText.setString(ChoiceFlow::EnterAnEvent::inputData::title);
+	yearText.setFont(font);
+	yearText.setCharacterSize(25);
+	yearText.setFillColor(sf::Color::Black);
+	yearText.setPosition(210, 218); //4
+	yearText.setString(ChoiceFlow::EnterAnEvent::inputData::year);
+	topicText.setFont(font);
+	topicText.setCharacterSize(25);
+	topicText.setFillColor(sf::Color::Black);
+	topicText.setPosition(505, 220); //12
+	topicText.setString(ChoiceFlow::EnterAnEvent::inputData::topic);
+	descriptionText.setFont(font);
+	descriptionText.setCharacterSize(25);
+	descriptionText.setFillColor(sf::Color::Black);
+	descriptionText.setPosition(500, 550);
+	descriptionText.setString(ChoiceFlow::EnterAnEvent::inputData::description);
 
 	window.draw(background);
 	backButton.setPosition(30,30);
 	window.draw(backButton);
 	title.setPosition(-50, -50);
 	window.draw(title);
+	window.draw(titleText);
 	year.setPosition(150, 210);
 	window.draw(year);
+	window.draw(yearText);
 	topic.setPosition(440, 208);
 	window.draw(topic);
+	window.draw(topicText);
 	description.setPosition(10, 280);
 	window.draw(description);
+	window.draw(descriptionText);
 	enter.setPosition(275, 645);
 	window.draw(enter);
 }
@@ -66,7 +96,7 @@ void printEnterAnEventPage(sf::RenderWindow& window)
 void printSearchAnEventPage(sf::RenderWindow& window)
 {
 	sf::Texture t1, t2;
-
+	
 	t1.loadFromFile("Images and Fonts/background.jpg");
 	t2.loadFromFile("Images and Fonts/back.png");
 
@@ -110,8 +140,9 @@ void setMenu(int &stage)
 			ChoiceFlow::MainMenu::onClickMainMenu(window, event1, stage);
 			break;
 		case 1:
-			printEnterAnEventPage(window);
 			ChoiceFlow::EnterAnEvent::onClickEventPage(window, event1, stage);
+			printEnterAnEventPage(window);
+			ChoiceFlow::EnterAnEvent::inputEventData(event1);
 			break;
 		case 2:
 			printSearchAnEventPage(window);

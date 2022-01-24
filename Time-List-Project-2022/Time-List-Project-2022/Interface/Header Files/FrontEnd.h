@@ -1,5 +1,5 @@
 #pragma once
-#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics.hpp>
 
 void printMainMenu(sf::RenderWindow& window);
 
