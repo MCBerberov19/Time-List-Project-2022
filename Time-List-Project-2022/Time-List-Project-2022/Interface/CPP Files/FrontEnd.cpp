@@ -30,17 +30,37 @@ void printMainMenu(sf::RenderWindow& window)
 
 void printEnterAnEventPage(sf::RenderWindow& window)
 {
-	sf::Texture t1,t2;
+	sf::Texture t1,t2,t3,t4,t5,t6,t7;
 	
 	t1.loadFromFile("Images and Fonts/background.jpg");
 	t2.loadFromFile("Images and Fonts/back.png");
+	t3.loadFromFile("Images and Fonts/title.png");
+	t4.loadFromFile("Images and Fonts/year.png");
+	t5.loadFromFile("Images and Fonts/topic.png");
+	t6.loadFromFile("Images and Fonts/description.png");
+	t7.loadFromFile("Images and Fonts/enter.png");
 
 	sf::Sprite background(t1);
 	sf::Sprite backButton(t2);
+	sf::Sprite title(t3);
+	sf::Sprite year(t4);
+	sf::Sprite topic(t5);
+	sf::Sprite description(t6);
+	sf::Sprite enter(t7);
 
 	window.draw(background);
 	backButton.setPosition(30,30);
 	window.draw(backButton);
+	title.setPosition(-50, -50);
+	window.draw(title);
+	year.setPosition(150, 210);
+	window.draw(year);
+	topic.setPosition(440, 208);
+	window.draw(topic);
+	description.setPosition(10, 280);
+	window.draw(description);
+	enter.setPosition(275, 645);
+	window.draw(enter);
 }
 
 void printSearchAnEventPage(sf::RenderWindow& window)
@@ -77,7 +97,6 @@ void setMenu(int &stage)
 {
 
 	sf::RenderWindow window(sf::VideoMode(800, 800), "History Notes", sf::Style::Close);
-	window.setVerticalSyncEnabled(true);
 	window.setFramerateLimit(30);
 
 	while (window.isOpen())
