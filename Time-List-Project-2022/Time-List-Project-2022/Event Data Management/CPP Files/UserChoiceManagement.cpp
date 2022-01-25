@@ -119,28 +119,31 @@ void ChoiceFlow::EnterAnEvent::seperateLinesInDescription(sf::String& descriptio
 {
 	std::cout << description.getSize() << std::endl;
 
-	if (description.getSize() > 0 && description.getSize() <= 30)
+	if (description.getSize() > 0 && description.getSize() <= 28)
 	{
-		descriptionText1.setString(description.substring(0, description.getSize()));
+		descriptionText1.setString(description.substring(0, 29));
 	}
-	else if (description.getSize() > 30 && description.getSize() <= 68)
+	else if (description.getSize() > 28 && description.getSize() <= 71)
 	{
-		descriptionText1.setString(description.substring(0, 30));
-		descriptionText2.setString(description.substring(30, 67));
+		descriptionText1.setString(description.substring(0, 29));
+		descriptionText2.setString(description.substring(29, 72));
 	}
-	else if (description.getSize() > 68 && description.getSize() <= 108)
+	else if (description.getSize() > 71 && description.getSize() <= 116)
 	{
-		descriptionText1.setString(description.substring(0, 27));
-		descriptionText2.setString(description.substring(27, 67));
-		descriptionText3.setString(description.substring(67, 107));
+		std::cout <<description.substring(29, 40).toAnsiString();
+		descriptionText1.setString(description.substring(0, 29));
+		descriptionText2.setString(description.substring(29, 43));
+		descriptionText3.setString(description.substring(72, 117));
 	}
-	else if (description.getSize() > 108 && description.getSize() <= 148)
-	{
-		descriptionText1.setString(description.substring(0, 27));
-		descriptionText2.setString(description.substring(27, 67));
-		descriptionText3.setString(description.substring(67, 107));
-		descriptionText4.setString(description.substring(107, 147));
-	}
+	//Everything up there is working
+
+	//Start the next if
+	//else if (description.getSize() > 108 && description.getSize() <= 148)
+	//{
+	//	descriptionText1.setString(description.substring(0, 30));
+	//	descriptionText2.setString(description.substring(30, 67));
+	//	
+	//}
 }
 
 void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage)
