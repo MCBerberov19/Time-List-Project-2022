@@ -1,4 +1,5 @@
 #include "../Header Files/UserChoiceManagement.h"
+#include <iostream>
 
 void ChoiceFlow::MainMenu::onClickMainMenu(sf::RenderWindow& window, sf::Event& event1, int& stage)
 {
@@ -111,6 +112,34 @@ void ChoiceFlow::EnterAnEvent::inputEventData(sf::Event& event1, sf::String& tex
 				}
 			}
 		}
+	}
+}
+
+void ChoiceFlow::EnterAnEvent::seperateLinesInDescription(sf::String& description, sf::Text& descriptionText1, sf::Text& descriptionText2, sf::Text& descriptionText3, sf::Text& descriptionText4, sf::Text& descriptionText5, sf::Text& descriptionText6, sf::Text& descriptionText7, sf::Text& descriptionText8)
+{
+	std::cout << description.getSize() << std::endl;
+
+	if (description.getSize() > 0 && description.getSize() <= 30)
+	{
+		descriptionText1.setString(description.substring(0, description.getSize()));
+	}
+	else if (description.getSize() > 30 && description.getSize() <= 68)
+	{
+		descriptionText1.setString(description.substring(0, 30));
+		descriptionText2.setString(description.substring(30, 67));
+	}
+	else if (description.getSize() > 68 && description.getSize() <= 108)
+	{
+		descriptionText1.setString(description.substring(0, 27));
+		descriptionText2.setString(description.substring(27, 67));
+		descriptionText3.setString(description.substring(67, 107));
+	}
+	else if (description.getSize() > 108 && description.getSize() <= 148)
+	{
+		descriptionText1.setString(description.substring(0, 27));
+		descriptionText2.setString(description.substring(27, 67));
+		descriptionText3.setString(description.substring(67, 107));
+		descriptionText4.setString(description.substring(107, 147));
 	}
 }
 

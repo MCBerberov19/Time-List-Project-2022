@@ -8,6 +8,8 @@ namespace inputData
 	sf::String year;
 	sf::String topic;
 	sf::String description;
+
+	int descStage = 0;
 }
 
 void printMainMenu(sf::RenderWindow& window)
@@ -39,7 +41,7 @@ void printMainMenu(sf::RenderWindow& window)
 
 void printEnterAnEventPage(sf::RenderWindow& window)
 {
-	sf::Text titleText, yearText, topicText, descriptionText;
+	sf::Text titleText, yearText, topicText, descriptionText1, descriptionText2, descriptionText3, descriptionText4, descriptionText5, descriptionText6, descriptionText7, descriptionText8;
 	sf::Texture t1, t2, t3, t4, t5, t6, t7;
 	sf::Font font;
 	font.loadFromFile("Images and Fonts/arial.ttf");
@@ -74,11 +76,48 @@ void printEnterAnEventPage(sf::RenderWindow& window)
 	topicText.setFillColor(sf::Color::Black);
 	topicText.setPosition(505, 220); //12
 	topicText.setString(inputData::topic);
-	descriptionText.setFont(font);
-	descriptionText.setCharacterSize(25);
-	descriptionText.setFillColor(sf::Color::Black);
-	descriptionText.setPosition(500, 550);
-	descriptionText.setString(inputData::description);
+	descriptionText1.setFont(font);
+	descriptionText1.setCharacterSize(25);
+	descriptionText1.setFillColor(sf::Color::Black);
+	descriptionText1.setPosition(305, 338); //305, 338 first sentence , max size = 28
+	//descriptionText1.setString("Testasdasdasdsadasdasdsadaaa");
+	descriptionText2.setFont(font);
+	descriptionText2.setCharacterSize(25);
+	descriptionText2.setFillColor(sf::Color::Black);
+	descriptionText2.setPosition(145, 370); //145, 370 first sentence, max size = 40
+	//descriptionText2.setString("Testasdasdasdsadasdasdsadasdaasdasdsdsad"); 
+	descriptionText3.setFont(font);
+	descriptionText3.setCharacterSize(25);
+	descriptionText3.setFillColor(sf::Color::Black);
+	descriptionText3.setPosition(145, 402); //145, 402 first sentence, max size = 40
+	//descriptionText3.setString("Testasdasdasdsadasdasdsadasdaasdasdsdsad");
+	descriptionText4.setFont(font);
+	descriptionText4.setCharacterSize(25);
+	descriptionText4.setFillColor(sf::Color::Black);
+	descriptionText4.setPosition(145, 434); //145, 434 first sentence, max size = 40
+	//descriptionText4.setString("Testasdasdasdsadasdasdsadasdaasdasdsdsad");
+	descriptionText5.setFont(font);
+	descriptionText5.setCharacterSize(25);
+	descriptionText5.setFillColor(sf::Color::Black);
+	descriptionText5.setPosition(145, 466); //145, 466 first sentence, max size = 40
+	//descriptionText5.setString("Testasdasdasdsadasdasdsadasdaasdasdsdsad");
+	descriptionText6.setFont(font);
+	descriptionText6.setCharacterSize(25);
+	descriptionText6.setFillColor(sf::Color::Black);
+	descriptionText6.setPosition(145, 498); //145, 498 first sentence, max size = 40
+	//descriptionText6.setString("Testasdasdasdsadasdasdsadasdaasdasdsdsad");
+	descriptionText7.setFont(font);
+	descriptionText7.setCharacterSize(25);
+	descriptionText7.setFillColor(sf::Color::Black);
+	descriptionText7.setPosition(145, 530); //145, 530 first sentence, max size = 40
+	//descriptionText7.setString("Testasdasdasdsadasdasdsadasdaasdasdsdsad");
+	descriptionText8.setFont(font);
+	descriptionText8.setCharacterSize(25);
+	descriptionText8.setFillColor(sf::Color::Black);
+	descriptionText8.setPosition(145, 562); //145, 562 first sentence, max size = 40
+	//descriptionText8.setString("Testasdasdasdsadasdasdsadasdaasdasdsdsad");
+
+	//if(inputData::description.getSize())
 
 	window.draw(background);
 	backButton.setPosition(30,30);
@@ -94,7 +133,25 @@ void printEnterAnEventPage(sf::RenderWindow& window)
 	window.draw(topicText);
 	description.setPosition(10, 280);
 	window.draw(description);
-	window.draw(descriptionText);
+	/*if (inputData::description.getSize() > 0 && inpi)
+	{
+		descriptionText1.setString(inputData::description.substring(0, 28));
+		if (inputData::description.getSize() > 28) //Create a function for this (ifs to check if the size is higher than and less than)
+		{
+
+		}
+	}*/
+
+	ChoiceFlow::EnterAnEvent::seperateLinesInDescription(inputData::description, descriptionText1, descriptionText2, descriptionText3, descriptionText4, descriptionText5, descriptionText6, descriptionText7, descriptionText8);
+
+	window.draw(descriptionText1);
+	window.draw(descriptionText2);
+	window.draw(descriptionText3);
+	window.draw(descriptionText4);
+	window.draw(descriptionText5);
+	window.draw(descriptionText6);
+	window.draw(descriptionText7);
+	window.draw(descriptionText8);
 	enter.setPosition(275, 645);
 	window.draw(enter);
 }
@@ -160,7 +217,7 @@ void setMenu(int &stage)
 					ChoiceFlow::EnterAnEvent::inputEventData(event1, inputData::topic,12, false);
 					break;
 				case 4:
-					ChoiceFlow::EnterAnEvent::inputEventData(event1, inputData::description,100, false);
+					ChoiceFlow::EnterAnEvent::inputEventData(event1, inputData::description, 308, false);
 					break;
 			}
 			break;
