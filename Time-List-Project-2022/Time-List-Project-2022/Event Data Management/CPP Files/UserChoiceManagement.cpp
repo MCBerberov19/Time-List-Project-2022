@@ -129,23 +129,58 @@ void ChoiceFlow::EnterAnEvent::seperateLinesInDescription(sf::String& descriptio
 		descriptionText2.setString(description.substring(29, 72));
 	}
 	else if (description.getSize() > 71 && description.getSize() <= 116)
-	{
-		std::cout <<description.substring(29, 40).toAnsiString();
+	{	
 		descriptionText1.setString(description.substring(0, 29));
 		descriptionText2.setString(description.substring(29, 43));
 		descriptionText3.setString(description.substring(72, 117));
 	}
-	//Everything up there is working
-
-	//Start the next if
-	//else if (description.getSize() > 108 && description.getSize() <= 148)
-	//{
-	//	descriptionText1.setString(description.substring(0, 30));
-	//	descriptionText2.setString(description.substring(30, 67));
-	//	
-	//}
+	else if (description.getSize() > 116 && description.getSize() <= 160)
+	{
+		descriptionText1.setString(description.substring(0, 29));
+		descriptionText2.setString(description.substring(29, 43));
+		descriptionText3.setString(description.substring(72, 44));
+		descriptionText4.setString(description.substring(116, 161));
+	}
+	else if (description.getSize() > 160 && description.getSize() <= 203)
+	{
+		descriptionText1.setString(description.substring(0, 29));
+		descriptionText2.setString(description.substring(29, 43));
+		descriptionText3.setString(description.substring(72, 44));
+		descriptionText4.setString(description.substring(116, 44));
+		descriptionText5.setString(description.substring(160, 204));
+	}
+	else if (description.getSize() > 203 && description.getSize() <= 244)
+	{
+		descriptionText1.setString(description.substring(0, 29));
+		descriptionText2.setString(description.substring(29, 43));
+		descriptionText3.setString(description.substring(72, 44));
+		descriptionText4.setString(description.substring(116, 44));
+		descriptionText5.setString(description.substring(160, 43));
+		descriptionText6.setString(description.substring(203, 245));
+	}
+	else if (description.getSize() > 244 && description.getSize() <= 284)
+	{
+		descriptionText1.setString(description.substring(0, 29));
+		descriptionText2.setString(description.substring(29, 43));
+		descriptionText3.setString(description.substring(72, 44));
+		descriptionText4.setString(description.substring(116, 44));
+		descriptionText5.setString(description.substring(160, 43));
+		descriptionText6.setString(description.substring(203, 41));
+		descriptionText7.setString(description.substring(244, 285));
+	}
+	else if (description.getSize() > 284 && description.getSize() <= 317)
+	{
+		descriptionText1.setString(description.substring(0, 29));
+		descriptionText2.setString(description.substring(29, 43));
+		descriptionText3.setString(description.substring(72, 44));
+		descriptionText4.setString(description.substring(116, 44));
+		descriptionText5.setString(description.substring(160, 43));
+		descriptionText6.setString(description.substring(203, 41));
+		descriptionText7.setString(description.substring(244, 40));
+		descriptionText8.setString(description.substring(284, 317));
+	}
 }
-
+	
 void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage)
 {
 	while (window.pollEvent(event1))
