@@ -10,7 +10,16 @@ namespace ChoiceFlow
 	namespace EnterAnEvent
 	{
 
-		void onClickEventPage(sf::RenderWindow& window, sf::Event& event1, int& stage, int& box);
+		namespace inputData
+		{
+			static int box;
+			static sf::String title;
+			static sf::String year;
+			static sf::String topic;
+			static sf::String description;
+		}
+
+		void onClickEventPage(sf::RenderWindow& window, sf::Event& event1, int& stage, int& box, sf::String& title, sf::String& year, sf::String& topic, sf::String& description);
 
 		void inputEventData(sf::Event& event1, sf::String& text, int size, bool num);
 

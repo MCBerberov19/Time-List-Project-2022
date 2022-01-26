@@ -1,5 +1,5 @@
 #include "../Header Files/UserChoiceManagement.h"
-#include <iostream>
+#include "../Header Files/EnterAnEvent.h"
 
 void ChoiceFlow::MainMenu::onClickMainMenu(sf::RenderWindow& window, sf::Event& event1, int& stage)
 {
@@ -9,7 +9,7 @@ void ChoiceFlow::MainMenu::onClickMainMenu(sf::RenderWindow& window, sf::Event& 
 		{
 			window.close();
 		}
-		
+
 		if (event1.key.code == sf::Mouse::Left && event1.type == sf::Event::MouseButtonPressed)
 		{
 			if ((sf::Mouse::getPosition(window).x >= 260 && sf::Mouse::getPosition(window).x <= 560) &&
@@ -31,7 +31,7 @@ void ChoiceFlow::MainMenu::onClickMainMenu(sf::RenderWindow& window, sf::Event& 
 	}
 }
 
-void ChoiceFlow::EnterAnEvent::onClickEventPage(sf::RenderWindow& window, sf::Event& event1, int& stage, int& box)
+void ChoiceFlow::EnterAnEvent::onClickEventPage(sf::RenderWindow& window, sf::Event& event1, int& stage, int& box, sf::String& title, sf::String& year, sf::String& topic, sf::String& description)
 {
 	while (window.pollEvent(event1))
 	{
@@ -75,7 +75,17 @@ void ChoiceFlow::EnterAnEvent::onClickEventPage(sf::RenderWindow& window, sf::Ev
 			else if ((sf::Mouse::getPosition(window).x >= 285 && sf::Mouse::getPosition(window).x <= 525) && //enter
 				(sf::Mouse::getPosition(window).y >= 650 && sf::Mouse::getPosition(window).y <= 735))
 			{
-				
+				if (title.getSize() > 0 && topic.getSize() > 0 && description.getSize() > 0 && year.getSize() > 0)
+				{
+					EnterAnEventC* newEvent = new EnterAnEventC(title, stoi(year.toAnsiString()), topic, description);
+					delete newEvent;
+
+					stage = 0;
+					title = "";
+					topic = "";
+					description = "";
+					year = "";
+				}
 			}
 			else {
 				box = 0;
@@ -117,8 +127,6 @@ void ChoiceFlow::EnterAnEvent::inputEventData(sf::Event& event1, sf::String& tex
 
 void ChoiceFlow::EnterAnEvent::seperateLinesInDescription(sf::String& description, sf::Text& descriptionText1, sf::Text& descriptionText2, sf::Text& descriptionText3, sf::Text& descriptionText4, sf::Text& descriptionText5, sf::Text& descriptionText6, sf::Text& descriptionText7, sf::Text& descriptionText8)
 {
-	std::cout << description.getSize() << std::endl;
-
 	if (description.getSize() > 0 && description.getSize() <= 28)
 	{
 		descriptionText1.setString(description.substring(0, 29));
@@ -129,7 +137,7 @@ void ChoiceFlow::EnterAnEvent::seperateLinesInDescription(sf::String& descriptio
 		descriptionText2.setString(description.substring(29, 72));
 	}
 	else if (description.getSize() > 71 && description.getSize() <= 116)
-	{	
+	{
 		descriptionText1.setString(description.substring(0, 29));
 		descriptionText2.setString(description.substring(29, 43));
 		descriptionText3.setString(description.substring(72, 117));
@@ -180,7 +188,7 @@ void ChoiceFlow::EnterAnEvent::seperateLinesInDescription(sf::String& descriptio
 		descriptionText8.setString(description.substring(284, 317));
 	}
 }
-	
+
 void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage)
 {
 	while (window.pollEvent(event1))
