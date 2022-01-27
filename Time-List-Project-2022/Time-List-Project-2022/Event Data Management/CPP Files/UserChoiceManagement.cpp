@@ -1,5 +1,7 @@
 #include "../Header Files/UserChoiceManagement.h"
 #include "../Header Files/EnterAnEvent.h"
+#include "../Header Files/SearchAnEvent.h"
+#include "../Header Files/Event.h"
 
 void ChoiceFlow::MainMenu::onClickMainMenu(sf::RenderWindow& window, sf::Event& event1, int& stage)
 {
@@ -191,6 +193,14 @@ void ChoiceFlow::EnterAnEvent::seperateLinesInDescription(sf::String& descriptio
 
 void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage)
 {
+	Event* head = new Event;
+
+	head->takeDataFromFile(head);
+
+	head->printList(head);
+
+	exit(1);
+
 	while (window.pollEvent(event1))
 	{
 		if (event1.type == sf::Event::Closed)

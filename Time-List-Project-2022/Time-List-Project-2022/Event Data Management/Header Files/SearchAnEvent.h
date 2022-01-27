@@ -8,6 +8,8 @@ private:
 	sf::String topic;
 	int year;
 	bool sortVer = false;
-public:
+
 	
+public:
+	 //Event* head;
 };
