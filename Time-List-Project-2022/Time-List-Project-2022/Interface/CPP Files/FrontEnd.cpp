@@ -129,17 +129,28 @@ void printEnterAnEventPage(sf::RenderWindow& window)
 
 void printSearchAnEventPage(sf::RenderWindow& window)
 {
-	sf::Texture t1, t2;
+	sf::Texture t1, t2, t3, t4, t5;
 
 	t1.loadFromFile("Images and Fonts/background.jpg");
 	t2.loadFromFile("Images and Fonts/back.png");
+	t3.loadFromFile("Images and Fonts/search_box.png");
+	t4.loadFromFile("Images and Fonts/ascending_sort.png");
+	t5.loadFromFile("Images and Fonts/descending_sort.png");
 
 	sf::Sprite background(t1);
 	sf::Sprite backButton(t2);
+	sf::Sprite searchBox(t3);
+	sf::Sprite ascendingSort(t4);
+	sf::Sprite descendingSort(t5);
 
 	window.draw(background);
 	backButton.setPosition(30, 30);
 	window.draw(backButton);
+	searchBox.setPosition(-50, 50);
+	window.draw(searchBox);
+	ascendingSort.setPosition(333, 160);
+	descendingSort.setPosition(333, 160); // Create check for printing ascending or descending on click
+	window.draw(ascendingSort);
 }
 
 void printLastSearchedEventsPage(sf::RenderWindow& window)

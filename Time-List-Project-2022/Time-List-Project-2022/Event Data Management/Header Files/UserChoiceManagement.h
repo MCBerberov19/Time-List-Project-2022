@@ -28,6 +28,14 @@ namespace ChoiceFlow
 	}
 	namespace SearchedAnEvent
 	{
+		namespace inputData
+		{
+			static sf::String title;
+			static sf::String year;
+			static sf::String topic;
+			static bool sortVer = false;
+		}
+
 		void onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage);
 	}
 	namespace LastSearchedEvents
