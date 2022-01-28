@@ -194,12 +194,19 @@ void ChoiceFlow::EnterAnEvent::seperateLinesInDescription(sf::String& descriptio
 void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage)
 {
 	Event* head = new Event;
+	Event* tail = new Event;
 
 	head->takeDataFromFile(head);
 
-	head->printList(head);
+	head->mergeSortList(head);
 
-	exit(1);
+	tail = tail->getTail(head);
+
+	//head->printListAsc(head);
+
+	//head->printListDesc(tail);
+
+	//exit(1);
 
 	while (window.pollEvent(event1))
 	{
@@ -214,8 +221,10 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 				(sf::Mouse::getPosition(window).y >= 30 && sf::Mouse::getPosition(window).y <= 90))
 			{
 				stage = 0;
+				head->clearList(head);
 			}
-
+			//Create buttons for sorting methods => onClick sort by the argument
+			//Create buttons for sorting variant (asc, desc)
 		}
 	}
 }

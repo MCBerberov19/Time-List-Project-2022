@@ -2,20 +2,20 @@
 #include <string>
 #include <fstream>
 
-struct Event 
+struct Event
 {
 	std::string title;
 	int year;
 	std::string topic;
 	std::string description;
-	Event* nextEvent=NULL;
+	Event* nextEvent = NULL;
+	Event* prevEvent = NULL;
 
 	std::ifstream inputFile;
 
 	Event() {}
 
 	Event(std::string& title, int& year, std::string& topic, std::string& description);
-	
 
 	Event* getTail(Event* head);
 
@@ -25,6 +25,15 @@ struct Event
 
 	void takeDataFromFile(Event*& head);
 
-	void printList(Event* head);
+	Event* split(Event* head);
 
+	Event* merge(Event* f, Event* s);
+
+	Event* mergeSortList(Event*& head);
+
+	void printListAsc(Event* head);
+
+	void printListDesc(Event* head);
+
+	void clearList(Event* head);
 };
