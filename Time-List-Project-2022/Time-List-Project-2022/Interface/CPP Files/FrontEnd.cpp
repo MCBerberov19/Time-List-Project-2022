@@ -129,19 +129,25 @@ void printEnterAnEventPage(sf::RenderWindow& window)
 
 void printSearchAnEventPage(sf::RenderWindow& window)
 {
-	sf::Texture t1, t2, t3, t4, t5;
+	sf::Texture t1, t2, t3, t4, t5, t6, t7, t8;
 
 	t1.loadFromFile("Images and Fonts/background.jpg");
 	t2.loadFromFile("Images and Fonts/back.png");
 	t3.loadFromFile("Images and Fonts/search_box.png");
 	t4.loadFromFile("Images and Fonts/ascending_sort.png");
 	t5.loadFromFile("Images and Fonts/descending_sort.png");
+	t6.loadFromFile("Images and Fonts/sort_by_title.png");
+	t7.loadFromFile("Images and Fonts/sort_by_year.png");
+	t8.loadFromFile("Images and Fonts/sort_by_topic.png");
 
 	sf::Sprite background(t1);
 	sf::Sprite backButton(t2);
 	sf::Sprite searchBox(t3);
 	sf::Sprite ascendingSort(t4);
 	sf::Sprite descendingSort(t5);
+	sf::Sprite sortByTile(t6);
+	sf::Sprite sortByYear(t7);
+	sf::Sprite sortByTopic(t8);
 
 	window.draw(background);
 	backButton.setPosition(30, 30);
@@ -151,6 +157,10 @@ void printSearchAnEventPage(sf::RenderWindow& window)
 	ascendingSort.setPosition(333, 160);
 	descendingSort.setPosition(333, 160); // Create check for printing ascending or descending on click
 	window.draw(ascendingSort);
+	sortByTile.setPosition(-7, 77);
+	sortByYear.setPosition(-87, 10);
+	sortByTopic.setPosition(-87, 10); // Create check for print sorted by par
+	window.draw(sortByTile);
 }
 
 void printLastSearchedEventsPage(sf::RenderWindow& window)
