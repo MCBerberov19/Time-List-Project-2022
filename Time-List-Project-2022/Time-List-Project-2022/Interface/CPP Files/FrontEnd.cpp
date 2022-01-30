@@ -129,9 +129,11 @@ void printEnterAnEventPage(sf::RenderWindow& window)
 	window.draw(enter);
 }
 
-void printSearchAnEventPage(sf::RenderWindow& window)
+void printSearchAnEventPage(sf::RenderWindow& window, Event*& head, Event*& tail)
 {
-	sf::Texture t1, t2, t3, t4, t5, t6, t7, t8;
+	sf::Texture t1, t2, t3, t4, t5, t6, t7, t8, t9;
+	sf::Font font;
+	font.loadFromFile("Images and Fonts/arial.ttf");
 
 	t1.loadFromFile("Images and Fonts/background.jpg");
 	t2.loadFromFile("Images and Fonts/back.png");
@@ -141,6 +143,7 @@ void printSearchAnEventPage(sf::RenderWindow& window)
 	t6.loadFromFile("Images and Fonts/sort_by_title.png");
 	t7.loadFromFile("Images and Fonts/sort_by_year.png");
 	t8.loadFromFile("Images and Fonts/sort_by_topic.png");
+	t9.loadFromFile("Images and Fonts/event_board.png");
 
 	sf::Sprite background(t1);
 	sf::Sprite backButton(t2);
@@ -150,6 +153,7 @@ void printSearchAnEventPage(sf::RenderWindow& window)
 	sf::Sprite sortByTile(t6);
 	sf::Sprite sortByYear(t7);
 	sf::Sprite sortByTopic(t8);
+	sf::Sprite eventBoard(t9);
 
 	window.draw(background);
 	backButton.setPosition(30, 30);
@@ -158,7 +162,17 @@ void printSearchAnEventPage(sf::RenderWindow& window)
 	window.draw(searchBox);
 	ascendingSort.setPosition(333, 160);
 	descendingSort.setPosition(333, 160); // Create check for printing ascending or descending on click
-	window.draw(ascendingSort);
+	//eventBoard.setPosition(63, 220); <- these are the cordinates
+	if (ChoiceFlow::SearchedAnEvent::sortCheck)
+	{
+		window.draw(ascendingSort);
+		head->printList(window, head, eventBoard, font);
+	}
+	else
+	{
+		window.draw(descendingSort);
+		tail->printListReversed(window, tail, eventBoard, font);
+	}
 	sortByTile.setPosition(-7, 77);
 	sortByYear.setPosition(-87, 10);
 	sortByTopic.setPosition(-87, 10); // Create check for print sorted by par
@@ -187,6 +201,7 @@ void setMenu(int& stage)
 	window.setFramerateLimit(30);
 
 	Event* head = NULL;
+	Event* tail = NULL;
 
 	while (window.isOpen())
 	{
@@ -220,14 +235,14 @@ void setMenu(int& stage)
 		case 2:
 			if (ChoiceFlow::SearchedAnEvent::crCheck)
 			{
-				head = new Event; 
-				Event* tail = new Event;
+				head = new Event; tail = new Event;
 				head->takeDataFromFile(head);
 				head->mergeSortList(head);
+				tail = tail->getTail(head);
 				ChoiceFlow::SearchedAnEvent::crCheck = false;
 			}
-			printSearchAnEventPage(window);
-			ChoiceFlow::SearchedAnEvent::onClickSearchPage(window, event1, stage, head, ChoiceFlow::SearchedAnEvent::crCheck);
+			printSearchAnEventPage(window, head, tail);
+			ChoiceFlow::SearchedAnEvent::onClickSearchPage(window, event1, stage, head, tail, ChoiceFlow::SearchedAnEvent::crCheck, ChoiceFlow::SearchedAnEvent::sortCheck);
 			break;
 		case 3:
 			printLastSearchedEventsPage(window);

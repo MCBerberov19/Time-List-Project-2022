@@ -1,5 +1,4 @@
 #include "../Header Files/Event.h"
-#include <iostream>
 #include <regex>
 #include <algorithm>
 
@@ -26,11 +25,13 @@ void Event::appendNode(Event* head, std::string& title, int& year, std::string& 
 	Event* tail = getTail(head);
 
 	tail->nextEvent = new Event(title, year, topic, description);
+	tail->nextEvent->prevEvent = NULL;
 }
 
 Event* Event::removeHead(Event* head)
 {
 	Event* newHead = head->nextEvent;
+	newHead->prevEvent = NULL;
 	delete head;
 
 	return newHead;
@@ -93,11 +94,15 @@ Event* Event::merge(Event* f, Event* s)
 	if (f->year <= s->year)
 	{
 		f->nextEvent = merge(f->nextEvent, s);
+		f->nextEvent->prevEvent = f;
+		f->prevEvent = NULL;
 		return f;
 	}
 
 	{
 		s->nextEvent = merge(f, s->nextEvent);
+		s->nextEvent->prevEvent = s;
+		s->prevEvent = NULL;
 		return s;
 	}
 }
@@ -115,30 +120,32 @@ Event* Event::mergeSortList(Event*& head)
 	return merge(head, secondHalf);
 }
 
-void Event::reverseList(Event*& head)
+void Event::printList(sf::RenderWindow& window, Event* head, sf::Sprite& eventBoard, sf::Font& font)
 {
-	Event* prev = NULL, * curr = head, * next;
+	sf::Text text; text.setFont(font); text.setCharacterSize(28); text.setFillColor(sf::Color::Black);
+	int y = 220;
 
-	while (curr)
+	while (head != NULL)
 	{
-		next = curr->nextEvent;
-		curr->nextEvent = prev;
-		prev = curr;
-		curr = next;
+		text.setString(head->title); text.setPosition(100, y+58);
+		eventBoard.setPosition(63, y);
+		window.draw(eventBoard); window.draw(text);
+		head = head->nextEvent; y += 70;
 	}
-
-	head = prev;
 }
 
-void Event::printList(Event* head)
+void Event::printListReversed(sf::RenderWindow& window, Event* tail, sf::Sprite& eventBoard, sf::Font& font)
 {
-	if (head == NULL)
-	{
-		return;
-	}
+	sf::Text text; text.setFont(font); text.setCharacterSize(28); text.setFillColor(sf::Color::Black);
+	int y = 220;
 
-	std::cout << head->title << " " << head->year << " " << head->topic << " " << head->description << std::endl;
-	printList(head->nextEvent);
+	while (tail != NULL)
+	{
+		text.setString(tail->title); text.setPosition(100, y + 58);
+		eventBoard.setPosition(63, y);
+		window.draw(eventBoard); window.draw(text);
+		tail = tail->prevEvent; y += 70;
+	}
 }
 
 void Event::clearList(Event* head)

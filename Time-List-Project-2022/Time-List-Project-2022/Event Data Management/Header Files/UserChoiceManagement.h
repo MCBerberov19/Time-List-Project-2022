@@ -38,8 +38,9 @@ namespace ChoiceFlow
 		}
 
 		static bool crCheck = true;
+		static bool sortCheck = true;
 
-		void onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage, Event*& head, bool& crCheck);
+		void onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage, Event*& head, Event*& tail, bool& crCheck, bool& sortCheck);
 	}
 	namespace LastSearchedEvents
 	{

@@ -191,10 +191,8 @@ void ChoiceFlow::EnterAnEvent::seperateLinesInDescription(sf::String& descriptio
 	}
 }
 
-void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage, Event*& head, bool& crCheck)
+void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage, Event*& head, Event*& tail,bool& crCheck, bool& sortCheck)
 {
-	head->printList(head);
-
 	while (window.pollEvent(event1))
 	{
 		if (event1.type == sf::Event::Closed)
@@ -229,12 +227,12 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 			else if ((sf::Mouse::getPosition(window).x >= 470 && sf::Mouse::getPosition(window).x <= 590) &&
 				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 250))
 			{
-				head->mergeSortList(head);//After going to the des and back here it removes one node every time fix it!
+				sortCheck = true;
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 592 && sf::Mouse::getPosition(window).x <= 710) &&
 				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 250))
 			{
-				head->reverseList(head);
+				sortCheck = false;
 			}
 		}
 	}
