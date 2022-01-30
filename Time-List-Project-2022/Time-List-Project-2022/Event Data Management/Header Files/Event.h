@@ -37,4 +37,14 @@ struct Event
 	void printListReversed(sf::RenderWindow& window, Event* tail, sf::Sprite& eventBoard, sf::Font& font);
 
 	void clearList(Event* head);
+
+	void reverseList(Event*& head);
+
+	int takeNodeIndex(int cordinateY, int node);
+
+	int takeLastNodePos(Event* head);
+
+	void saveDataIntoFile(Event* head);
+
+	void removeNode(Event*& head, Event*& tail, int cordinateY, int node, bool& sortCheck);
 };

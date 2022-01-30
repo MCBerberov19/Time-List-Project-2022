@@ -191,7 +191,7 @@ void ChoiceFlow::EnterAnEvent::seperateLinesInDescription(sf::String& descriptio
 	}
 }
 
-void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage, Event*& head, Event*& tail,bool& crCheck, bool& sortCheck)
+void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage, Event*& head, Event*& tail, bool& crCheck, bool& sortCheck)
 {
 	while (window.pollEvent(event1))
 	{
@@ -234,7 +234,16 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 			{
 				sortCheck = false;
 			}
+			else if (sf::Mouse::getPosition(window).x >= 660 && sf::Mouse::getPosition(window).x <= 705)
+			{
+				head->removeNode(head, tail, sf::Mouse::getPosition(window).y, 1, sortCheck);
+			}
 		}
+
+		/*if (event1.type == sf::Event::MouseMoved)
+		{
+			std::cout << sf::Mouse::getPosition(window).x << " " << sf::Mouse::getPosition(window).y << std::endl;
+		}*/
 	}
 }
 

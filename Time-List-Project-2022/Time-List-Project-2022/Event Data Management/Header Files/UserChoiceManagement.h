@@ -39,6 +39,7 @@ namespace ChoiceFlow
 
 		static bool crCheck = true;
 		static bool sortCheck = true;
+		static int node = 0;
 
 		void onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage, Event*& head, Event*& tail, bool& crCheck, bool& sortCheck);
 	}

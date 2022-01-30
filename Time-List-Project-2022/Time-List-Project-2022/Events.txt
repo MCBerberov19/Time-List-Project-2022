@@ -1,4 +1,2 @@
-The war in aheloy 917 War Bulgaria wins.
-Test 376 test Test.
-NMZ 555 helo ne znam.
-NZM 666 KAK DOBRE
+TESTA 222 War NMZ
+TESTB 444 War NMZ

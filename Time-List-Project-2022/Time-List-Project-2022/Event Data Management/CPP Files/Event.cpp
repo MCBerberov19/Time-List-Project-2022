@@ -1,6 +1,8 @@
 #include "../Header Files/Event.h"
 #include <regex>
 #include <algorithm>
+#include <iostream>
+#include <fstream>
 
 Event::Event(std::string& title, int& year, std::string& topic, std::string& description)
 {
@@ -41,6 +43,7 @@ void Event::takeDataFromFile(Event*& head)
 {
 	inputFile.open("Events.txt", std::ios::in | std::ios::app);
 	std::string data;
+	int cur = 0;
 
 	std::smatch yearMatch;
 
@@ -63,10 +66,16 @@ void Event::takeDataFromFile(Event*& head)
 		description = data.substr(data.find(topic) + topic.size() + 1, std::string::npos);
 
 		appendNode(head, title, year, topic, description);
+		cur++;
 	}
 
 	inputFile.close();
-	head = removeHead(head);
+
+	if (cur > 0)
+	{
+		head = removeHead(head);
+	}
+
 }
 
 Event* Event::split(Event* head)
@@ -127,9 +136,10 @@ void Event::printList(sf::RenderWindow& window, Event* head, sf::Sprite& eventBo
 
 	while (head != NULL)
 	{
-		text.setString(head->title); text.setPosition(100, y+58);
+		text.setString(head->title); text.setPosition(100, y + 58);
 		eventBoard.setPosition(63, y);
 		window.draw(eventBoard); window.draw(text);
+		//std::cout << head->title << " " << head->year << " " << head->topic << " " << head->description << std::endl;
 		head = head->nextEvent; y += 70;
 	}
 }
@@ -144,6 +154,7 @@ void Event::printListReversed(sf::RenderWindow& window, Event* tail, sf::Sprite&
 		text.setString(tail->title); text.setPosition(100, y + 58);
 		eventBoard.setPosition(63, y);
 		window.draw(eventBoard); window.draw(text);
+		//std::cout << tail->title << " " << tail->year << " " << tail->topic << " " << tail->description << std::endl;
 		tail = tail->prevEvent; y += 70;
 	}
 }
@@ -158,4 +169,120 @@ void Event::clearList(Event* head)
 	Event* temp = head->nextEvent;
 	delete head;
 	clearList(temp);
+}
+
+int Event::takeNodeIndex(int cordinateY, int node)
+{
+	if (cordinateY >= 270 && cordinateY <= 320)
+	{
+		return node;
+	}
+	else if (cordinateY < 270)
+	{
+		return 0;
+	}
+	node++;
+	takeNodeIndex(cordinateY - 70, node);
+}
+
+int Event::takeLastNodePos(Event* head)
+{
+	int pos = 0;
+
+	while (head != NULL)
+	{
+		pos++;
+		head = head->nextEvent;
+	}
+
+	return pos;
+}
+
+void Event::saveDataIntoFile(Event* head)
+{
+	std::ofstream outputData; outputData.open("Events.txt", std::ios::out | std::ios::trunc);
+
+	while (head != NULL)
+	{
+		outputData << head->title << " " << std::to_string(head->year) << " " << head->topic << " " << head->description << std::endl;
+		head = head->nextEvent;
+	}
+
+	outputData.close();
+}
+
+void Event::removeNode(Event*& head, Event*& tail, int cordinateY, int node, bool& sortCheck)
+{
+	int nodeCur = 1;
+	Event* headCur = head;
+
+	int last = takeLastNodePos(head);
+
+	if (takeNodeIndex(cordinateY, node) != 0)
+	{
+		while (head != NULL)
+		{
+			if (nodeCur == takeNodeIndex(cordinateY, node))
+			{
+				if (takeNodeIndex(cordinateY, node) == 1)
+				{
+					if (head->nextEvent == NULL)
+					{
+						head->clearList(head);
+						head = NULL;
+						tail = NULL;
+					}
+					else {
+						if (sortCheck)
+						{
+							head->nextEvent->prevEvent = NULL;
+							head = head->nextEvent;
+						}
+						else {
+							tail->prevEvent->nextEvent = NULL;
+							tail = tail->prevEvent;
+						}
+
+
+					}
+					break;
+
+				}
+				else if (takeNodeIndex(cordinateY, node) == last)
+				{
+					if (sortCheck)
+					{
+						head->prevEvent->nextEvent = NULL;
+						delete head;
+					}
+					else
+					{
+						headCur = headCur->nextEvent;
+						delete headCur->prevEvent; headCur->prevEvent = NULL;
+					}
+					head = headCur;
+					break;
+				}
+				else
+				{
+					if (sortCheck)
+					{
+						head->prevEvent->nextEvent = head->nextEvent;
+						head->nextEvent->prevEvent = head->prevEvent;
+					}
+					else
+					{
+						//Do the reverse func and do the stuff then and then reverse it again
+					}
+					delete head;
+					head = headCur;
+					break;
+				}
+			}
+			nodeCur++;
+			head = head->nextEvent;
+		}
+	}
+
+	saveDataIntoFile(head);
 }
