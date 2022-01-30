@@ -1,5 +1,7 @@
 #include "../../Event Data Management/Header Files/UserChoiceManagement.h"
 #include "../Header Files/FrontEnd.h"
+#include "../../Event Data Management/Header Files/Event.h"
+#include <iostream>
 
 void printMainMenu(sf::RenderWindow& window)
 {
@@ -184,6 +186,8 @@ void setMenu(int& stage)
 	sf::RenderWindow window(sf::VideoMode(800, 800), "History Notes", sf::Style::Close);
 	window.setFramerateLimit(30);
 
+	Event* head = NULL;
+
 	while (window.isOpen())
 	{
 		sf::Event event1;
@@ -214,8 +218,16 @@ void setMenu(int& stage)
 			}
 			break;
 		case 2:
+			if (ChoiceFlow::SearchedAnEvent::crCheck)
+			{
+				head = new Event; 
+				Event* tail = new Event;
+				head->takeDataFromFile(head);
+				head->mergeSortList(head);
+				ChoiceFlow::SearchedAnEvent::crCheck = false;
+			}
 			printSearchAnEventPage(window);
-			ChoiceFlow::SearchedAnEvent::onClickSearchPage(window, event1, stage);
+			ChoiceFlow::SearchedAnEvent::onClickSearchPage(window, event1, stage, head, ChoiceFlow::SearchedAnEvent::crCheck);
 			break;
 		case 3:
 			printLastSearchedEventsPage(window);

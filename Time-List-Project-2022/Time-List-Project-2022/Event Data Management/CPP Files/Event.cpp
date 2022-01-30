@@ -26,13 +26,11 @@ void Event::appendNode(Event* head, std::string& title, int& year, std::string& 
 	Event* tail = getTail(head);
 
 	tail->nextEvent = new Event(title, year, topic, description);
-	tail->nextEvent->prevEvent = tail;
 }
 
 Event* Event::removeHead(Event* head)
 {
 	Event* newHead = head->nextEvent;
-	newHead->prevEvent = NULL;
 	delete head;
 
 	return newHead;
@@ -66,10 +64,9 @@ void Event::takeDataFromFile(Event*& head)
 		appendNode(head, title, year, topic, description);
 	}
 
+	inputFile.close();
 	head = removeHead(head);
 }
-
-//After escaping from the search page delete all the nodes
 
 Event* Event::split(Event* head)
 {
@@ -93,19 +90,14 @@ Event* Event::merge(Event* f, Event* s)
 	if (!s)
 		return f;
 
-
-	if (f->year < s->year)
+	if (f->year <= s->year)
 	{
 		f->nextEvent = merge(f->nextEvent, s);
-		f->nextEvent->prevEvent = f;
-		f->prevEvent = NULL;
 		return f;
 	}
-	else
+
 	{
 		s->nextEvent = merge(f, s->nextEvent);
-		s->nextEvent->prevEvent = s;
-		s->prevEvent = NULL;
 		return s;
 	}
 }
@@ -123,26 +115,30 @@ Event* Event::mergeSortList(Event*& head)
 	return merge(head, secondHalf);
 }
 
-void Event::printListAsc(Event* head)
+void Event::reverseList(Event*& head)
+{
+	Event* prev = NULL, * curr = head, * next;
+
+	while (curr)
+	{
+		next = curr->nextEvent;
+		curr->nextEvent = prev;
+		prev = curr;
+		curr = next;
+	}
+
+	head = prev;
+}
+
+void Event::printList(Event* head)
 {
 	if (head == NULL)
 	{
 		return;
 	}
 
-	std::cout << head->title<<" "<<head->year<<" "<<head->topic<<" "<<head->description << std::endl;
-	printListAsc(head->nextEvent);
-}
-
-void Event::printListDesc(Event* tail)
-{
-	if (tail == NULL)
-	{
-		return;
-	}
-	
-	std::cout << tail->title << " " << tail->year << " " << tail->topic << " " << tail->description << std::endl;
-	printListDesc(tail->prevEvent);
+	std::cout << head->title << " " << head->year << " " << head->topic << " " << head->description << std::endl;
+	printList(head->nextEvent);
 }
 
 void Event::clearList(Event* head)

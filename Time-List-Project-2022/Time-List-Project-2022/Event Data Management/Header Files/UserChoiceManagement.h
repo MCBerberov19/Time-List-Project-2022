@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "Event.h"
 
 namespace ChoiceFlow
 {
@@ -36,7 +37,9 @@ namespace ChoiceFlow
 			static bool sortVer = false;
 		}
 
-		void onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage);
+		static bool crCheck = true;
+
+		void onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage, Event*& head, bool& crCheck);
 	}
 	namespace LastSearchedEvents
 	{

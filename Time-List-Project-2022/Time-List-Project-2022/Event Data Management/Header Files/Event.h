@@ -9,7 +9,6 @@ struct Event
 	std::string topic;
 	std::string description;
 	Event* nextEvent = NULL;
-	Event* prevEvent = NULL;
 
 	std::ifstream inputFile;
 
@@ -31,9 +30,9 @@ struct Event
 
 	Event* mergeSortList(Event*& head);
 
-	void printListAsc(Event* head);
+	void reverseList(Event*& head);
 
-	void printListDesc(Event* head);
+	void printList(Event* head);
 
 	void clearList(Event* head);
 };
