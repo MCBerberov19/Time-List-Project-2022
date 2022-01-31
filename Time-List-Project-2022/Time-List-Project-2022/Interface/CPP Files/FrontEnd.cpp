@@ -242,11 +242,14 @@ void setMenu(int& stage)
 				ChoiceFlow::SearchedAnEvent::crCheck = false;
 			}
 			printSearchAnEventPage(window, head, tail);
-			ChoiceFlow::SearchedAnEvent::onClickSearchPage(window, event1, stage, head, tail, ChoiceFlow::SearchedAnEvent::crCheck, ChoiceFlow::SearchedAnEvent::sortCheck);
+			ChoiceFlow::SearchedAnEvent::onClickSearchPage(window, event1, stage, head, tail, ChoiceFlow::SearchedAnEvent::crCheck, ChoiceFlow::SearchedAnEvent::sortCheck, ChoiceFlow::SearchedAnEvent::inputData::title, ChoiceFlow::SearchedAnEvent::inputData::year, ChoiceFlow::SearchedAnEvent::inputData::topic, ChoiceFlow::SearchedAnEvent::inputData::description);
 			break;
 		case 3:
 			printLastSearchedEventsPage(window);
 			ChoiceFlow::LastSearchedEvents::onClickLastEventsPage(window, event1, stage);
+			break;
+		case 4:
+			std::cout << ChoiceFlow::SearchedAnEvent::inputData::title.toAnsiString();
 			break;
 		}
 		window.display();

@@ -34,6 +34,7 @@ namespace ChoiceFlow
 			static sf::String title;
 			static sf::String year;
 			static sf::String topic;
+			static sf::String description;
 			static bool sortVer = false;
 		}
 
@@ -41,7 +42,7 @@ namespace ChoiceFlow
 		static bool sortCheck = true;
 		static int node = 0;
 
-		void onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage, Event*& head, Event*& tail, bool& crCheck, bool& sortCheck);
+		void onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage, Event*& head, Event*& tail, bool& crCheck, bool& sortCheck, sf::String& title, sf::String& year, sf::String& topic, sf::String& description);
 	}
 	namespace LastSearchedEvents
 	{

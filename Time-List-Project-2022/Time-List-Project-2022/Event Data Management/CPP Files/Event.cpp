@@ -172,6 +172,18 @@ void Event::clearList(Event* head)
 	clearList(temp);
 }
 
+void Event::clearListTail(Event* tail)
+{
+	if (tail == NULL)
+	{
+		return;
+	}
+
+	Event* temp = tail->prevEvent;
+	delete tail;
+	clearList(temp);
+}
+
 void Event::reverseList(Event*& head)
 {
 	Event* current = head, * prev = NULL, * next = NULL;
@@ -227,10 +239,64 @@ void Event::saveDataIntoFile(Event* head)
 	outputData.close();
 }
 
+void Event::saveDataIntoFileTail(Event* tail)
+{
+	std::ofstream outputData; outputData.open("Events.txt", std::ios::out | std::ios::trunc);
+
+	while (tail != NULL)
+	{
+		outputData << tail->title << " " << std::to_string(tail->year) << " " << tail->topic << " " << tail->description << std::endl;
+		tail = tail->prevEvent;
+	}
+
+	outputData.close();
+}
+
+void Event::saveEventInfo(Event* head, Event* tail,int cordinateY, int node, sf::String& title, sf::String& year, sf::String& topic, sf::String& description, bool& sortCheck)
+{
+	int nodeCur = 1;
+	if (takeNodeIndex(cordinateY, node) != 0)
+	{
+		if (sortCheck)
+		{
+			while (head != NULL)
+			{
+				if (nodeCur == takeNodeIndex(cordinateY, node))
+				{
+					title = head->title;
+					year = std::to_string(head->year);
+					topic = head->topic;
+					description = head->description;
+					break;
+				}
+				head = head->nextEvent;
+				nodeCur++;
+			}
+		}
+		else
+		{
+			while (tail != NULL)
+			{
+				if (nodeCur == takeNodeIndex(cordinateY, node))
+				{
+					title = tail->title;
+					year = std::to_string(tail->year);
+					topic = tail->topic;
+					description = tail->description;
+					break;
+				}
+				tail = tail->prevEvent;
+				nodeCur++;
+			}
+		}
+	}
+}
+
 void Event::removeNode(Event*& head, Event*& tail,int cordinateY, int node, bool& sortCheck)
 {
 	int nodeCur = 1;
 	Event* headCur = head;
+	Event* tailCur = getTail(head);
 
 	int last = takeLastNodePos(head);
 
@@ -261,23 +327,71 @@ void Event::removeNode(Event*& head, Event*& tail,int cordinateY, int node, bool
 					else if (takeNodeIndex(cordinateY, node) == last)
 					{
 						head->prevEvent->nextEvent = NULL;
-						delete head;
+						tail->prevEvent->nextEvent = NULL;
 						head = headCur;
+						tailCur = tailCur->prevEvent;
+						tail = tailCur;
 						break;
 					}
 					else
 					{
 						head->prevEvent->nextEvent = head->nextEvent;
 						head->nextEvent->prevEvent = head->prevEvent;
-						delete head;
 						head = headCur;
+						tail = tailCur;
 						break;
 					}
 				}
 				nodeCur++;
 				head = head->nextEvent;
 			}
+			saveDataIntoFile(head);
 		}
-		saveDataIntoFile(head);
+		else
+		{
+			while (tail != NULL)
+			{
+				if (nodeCur == takeNodeIndex(cordinateY, node))
+				{
+					if (takeNodeIndex(cordinateY, node) == 1)
+					{
+						if (tail->prevEvent == NULL)
+						{
+							tail->clearListTail(tail);
+							head = NULL;
+							tail = NULL;
+						}
+						else
+						{
+							tail->prevEvent->nextEvent = NULL;
+							tail = tail->prevEvent;
+						}
+						break;
+
+					}
+					else if (takeNodeIndex(cordinateY, node) == last)
+					{
+						tail->nextEvent->prevEvent = NULL;
+						head->nextEvent->prevEvent = NULL;
+						headCur = headCur->nextEvent;
+						tail = tailCur;
+						head = headCur;
+						break;
+					}
+					else
+					{
+						tail->prevEvent->nextEvent = tail->nextEvent;
+						tail->nextEvent->prevEvent = tail->prevEvent;
+						delete tail;
+						tail = tailCur;
+						head = headCur;
+						break;
+					}
+				}
+				nodeCur++;
+				tail = tail->prevEvent;
+			}
+			saveDataIntoFileTail(tail);
+		}
 	}
 }

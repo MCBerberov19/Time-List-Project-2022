@@ -38,6 +38,8 @@ struct Event
 
 	void clearList(Event* head);
 
+	void clearListTail(Event* tail);
+
 	void reverseList(Event*& head);
 
 	int takeNodeIndex(int cordinateY, int node);
@@ -45,6 +47,10 @@ struct Event
 	int takeLastNodePos(Event* head);
 
 	void saveDataIntoFile(Event* head);
+
+	void saveDataIntoFileTail(Event* tail);
+
+	void saveEventInfo(Event* head, Event* tail,int cordinateY, int node, sf::String& title, sf::String& year, sf::String& topic, sf::String& description, bool& sortCheck);
 
 	void removeNode(Event*& head, Event*& tail, int cordinateY, int node, bool& sortCheck);
 };
