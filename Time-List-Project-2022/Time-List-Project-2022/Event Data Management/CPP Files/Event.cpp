@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <iostream>
 #include <fstream>
+#include <cmath>
 
 Event::Event(std::string& title, int& year, std::string& topic, std::string& description)
 {
@@ -171,6 +172,21 @@ void Event::clearList(Event* head)
 	clearList(temp);
 }
 
+void Event::reverseList(Event*& head)
+{
+	Event* current = head, * prev = NULL, * next = NULL;
+
+	while (current != NULL)
+	{
+		next = current->nextEvent;
+		current->prevEvent;
+		prev = current;
+		current = next;
+	}
+
+	head = prev;
+}
+
 int Event::takeNodeIndex(int cordinateY, int node)
 {
 	if (cordinateY >= 270 && cordinateY <= 320)
@@ -211,7 +227,7 @@ void Event::saveDataIntoFile(Event* head)
 	outputData.close();
 }
 
-void Event::removeNode(Event*& head, Event*& tail, int cordinateY, int node, bool& sortCheck)
+void Event::removeNode(Event*& head, Event*& tail,int cordinateY, int node, bool& sortCheck)
 {
 	int nodeCur = 1;
 	Event* headCur = head;
@@ -220,69 +236,48 @@ void Event::removeNode(Event*& head, Event*& tail, int cordinateY, int node, boo
 
 	if (takeNodeIndex(cordinateY, node) != 0)
 	{
-		while (head != NULL)
+		if (sortCheck)
 		{
-			if (nodeCur == takeNodeIndex(cordinateY, node))
+			while (head != NULL)
 			{
-				if (takeNodeIndex(cordinateY, node) == 1)
+				if (nodeCur == takeNodeIndex(cordinateY, node))
 				{
-					if (head->nextEvent == NULL)
+					if (takeNodeIndex(cordinateY, node) == 1)
 					{
-						head->clearList(head);
-						head = NULL;
-						tail = NULL;
-					}
-					else {
-						if (sortCheck)
+						if (head->nextEvent == NULL)
+						{
+							head->clearList(head);
+							head = NULL;
+							tail = NULL;
+						}
+						else
 						{
 							head->nextEvent->prevEvent = NULL;
 							head = head->nextEvent;
 						}
-						else {
-							tail->prevEvent->nextEvent = NULL;
-							tail = tail->prevEvent;
-						}
-
+						break;
 
 					}
-					break;
-
-				}
-				else if (takeNodeIndex(cordinateY, node) == last)
-				{
-					if (sortCheck)
+					else if (takeNodeIndex(cordinateY, node) == last)
 					{
 						head->prevEvent->nextEvent = NULL;
 						delete head;
+						head = headCur;
+						break;
 					}
 					else
-					{
-						headCur = headCur->nextEvent;
-						delete headCur->prevEvent; headCur->prevEvent = NULL;
-					}
-					head = headCur;
-					break;
-				}
-				else
-				{
-					if (sortCheck)
 					{
 						head->prevEvent->nextEvent = head->nextEvent;
 						head->nextEvent->prevEvent = head->prevEvent;
+						delete head;
+						head = headCur;
+						break;
 					}
-					else
-					{
-						//Do the reverse func and do the stuff then and then reverse it again
-					}
-					delete head;
-					head = headCur;
-					break;
 				}
+				nodeCur++;
+				head = head->nextEvent;
 			}
-			nodeCur++;
-			head = head->nextEvent;
 		}
+		saveDataIntoFile(head);
 	}
-
-	saveDataIntoFile(head);
 }
