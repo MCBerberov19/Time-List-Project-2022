@@ -131,7 +131,7 @@ void printEnterAnEventPage(sf::RenderWindow& window)
 
 void printSearchAnEventPage(sf::RenderWindow& window, Event*& head, Event*& tail)
 {
-	sf::Texture t1, t2, t3, t4, t5, t6 ,t7, t8, t9;
+	sf::Texture t1, t2, t3, t4, t5, t6 ,t7, t8, t9, t10;
 	sf::Font font;
 	font.loadFromFile("Images and Fonts/arial.ttf");
 
@@ -144,6 +144,7 @@ void printSearchAnEventPage(sf::RenderWindow& window, Event*& head, Event*& tail
 	t7.loadFromFile("Images and Fonts/sort_by_year.png");
 	t8.loadFromFile("Images and Fonts/sort_by_topic.png");
 	t9.loadFromFile("Images and Fonts/event_board.png");
+	t10.loadFromFile("Images and Fonts/search.png");
 
 	sf::Sprite background(t1);
 	sf::Sprite backButton(t2);
@@ -154,6 +155,7 @@ void printSearchAnEventPage(sf::RenderWindow& window, Event*& head, Event*& tail
 	sf::Sprite sortByYear(t7);
 	sf::Sprite sortByTopic(t8);
 	sf::Sprite eventBoard(t9);
+	sf::Sprite searchButton(t10);
 
 	window.draw(background);
 	backButton.setPosition(30, 30);
@@ -188,6 +190,8 @@ void printSearchAnEventPage(sf::RenderWindow& window, Event*& head, Event*& tail
 		window.draw(sortByTopic);
 		break;
 	}
+	searchButton.setPosition(252, 685);
+	window.draw(searchButton);
 }
 
 void printInfoPage(sf::RenderWindow& window)
@@ -381,7 +385,7 @@ void printEditPage(sf::RenderWindow& window)
 	window.draw(descriptionText6);
 	window.draw(descriptionText7);
 	window.draw(descriptionText8);
-	save.setPosition(275, 645);
+	save.setPosition(270, 645);
 	window.draw(save);
 }
 
@@ -450,6 +454,10 @@ void setMenu(int& stage)
 			}
 			printSearchAnEventPage(window, head, tail);
 			ChoiceFlow::SearchedAnEvent::onClickSearchPage(window, event1, stage, head, tail, ChoiceFlow::SearchedAnEvent::crCheck, ChoiceFlow::SearchedAnEvent::sortCheck, ChoiceFlow::SearchedAnEvent::inputData::title, ChoiceFlow::SearchedAnEvent::inputData::year, ChoiceFlow::SearchedAnEvent::inputData::topic, ChoiceFlow::SearchedAnEvent::inputData::description, ChoiceFlow::SearchedAnEvent::sortType);
+			if (ChoiceFlow::EnterAnEvent::inputData::box == 1)
+			{
+				//input
+			}
 			break;
 		case 3:
 			printLastSearchedEventsPage(window);

@@ -211,12 +211,18 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 				head->clearList(head);
 				crCheck = true;
 			}
+			else if ((sf::Mouse::getPosition(window).x >= 85 && sf::Mouse::getPosition(window).x <= 710) &&
+				(sf::Mouse::getPosition(window).y >= 125 && sf::Mouse::getPosition(window).y <= 182))
+			{
+				//Type
+			}
 			else if ((sf::Mouse::getPosition(window).x >= 85 && sf::Mouse::getPosition(window).x <= 178) &&
 				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 255))
 			{
 				sortType = 1;
 				head->mergeSortList(head, 1);
 				tail = tail->getTail(head);
+				head = head->getHead(tail);
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 179 && sf::Mouse::getPosition(window).x <= 290) &&
 				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 255))
@@ -241,6 +247,11 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 250))
 			{
 				sortCheck = false;
+			}
+			else if ((sf::Mouse::getPosition(window).x >= 255 && sf::Mouse::getPosition(window).x <= 555) &&
+				(sf::Mouse::getPosition(window).y >= 685 && sf::Mouse::getPosition(window).y <= 780))
+			{
+				//Search (Print only the first six found)
 			}
 			else if (sf::Mouse::getPosition(window).x >= 575 && sf::Mouse::getPosition(window).x <= 620)
 			{

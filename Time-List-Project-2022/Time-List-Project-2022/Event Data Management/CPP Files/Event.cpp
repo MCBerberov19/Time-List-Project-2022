@@ -187,14 +187,21 @@ void Event::printList(sf::RenderWindow& window, Event* head, sf::Sprite& eventBo
 {
 	sf::Text text; text.setFont(font); text.setCharacterSize(28); text.setFillColor(sf::Color::Black);
 	int y = 220;
+	int i = 0;
 
 	while (head != NULL)
 	{
+		if (i == 6)
+		{
+			return;
+		}
+
 		text.setString(head->title); text.setPosition(100, y + 58);
 		eventBoard.setPosition(63, y);
 		window.draw(eventBoard); window.draw(text);
 		//std::cout << head->title << " " << head->year << " " << head->topic << " " << head->description << std::endl;
 		head = head->nextEvent; y += 70;
+		i++;
 	}
 }
 
@@ -202,14 +209,21 @@ void Event::printListReversed(sf::RenderWindow& window, Event* tail, sf::Sprite&
 {
 	sf::Text text; text.setFont(font); text.setCharacterSize(28); text.setFillColor(sf::Color::Black);
 	int y = 220;
+	int i = 0;
 
 	while (tail != NULL)
 	{
+		if (i == 6)
+		{
+			return;
+		}
+
 		text.setString(tail->title); text.setPosition(100, y + 58);
 		eventBoard.setPosition(63, y);
 		window.draw(eventBoard); window.draw(text);
 		//std::cout << tail->title << " " << tail->year << " " << tail->topic << " " << tail->description << std::endl;
 		tail = tail->prevEvent; y += 70;
+		i++;
 	}
 }
 
