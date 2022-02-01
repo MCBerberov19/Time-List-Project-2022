@@ -211,21 +211,6 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 				head->clearList(head);
 				crCheck = true;
 			}
-			else if ((sf::Mouse::getPosition(window).x >= 90 && sf::Mouse::getPosition(window).x <= 180) &&
-				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 250))
-			{
-				//Title sort, sort the list
-			}
-			else if ((sf::Mouse::getPosition(window).x >= 181 && sf::Mouse::getPosition(window).x <= 295) &&
-				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 250))
-			{
-				//Year sort, sort the list
-			}
-			else if ((sf::Mouse::getPosition(window).x >= 296 && sf::Mouse::getPosition(window).x <= 390) &&
-				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 250))
-			{
-				//Topic sort, sort the list
-			}
 			else if ((sf::Mouse::getPosition(window).x >= 470 && sf::Mouse::getPosition(window).x <= 590) &&
 				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 250))
 			{

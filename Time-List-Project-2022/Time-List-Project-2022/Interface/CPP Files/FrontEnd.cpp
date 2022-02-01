@@ -131,7 +131,7 @@ void printEnterAnEventPage(sf::RenderWindow& window)
 
 void printSearchAnEventPage(sf::RenderWindow& window, Event*& head, Event*& tail)
 {
-	sf::Texture t1, t2, t3, t4, t5, t6, t7, t8, t9;
+	sf::Texture t1, t2, t3, t4, t5, t7, t9;
 	sf::Font font;
 	font.loadFromFile("Images and Fonts/arial.ttf");
 
@@ -140,9 +140,7 @@ void printSearchAnEventPage(sf::RenderWindow& window, Event*& head, Event*& tail
 	t3.loadFromFile("Images and Fonts/search_box.png");
 	t4.loadFromFile("Images and Fonts/ascending_sort.png");
 	t5.loadFromFile("Images and Fonts/descending_sort.png");
-	t6.loadFromFile("Images and Fonts/sort_by_title.png");
 	t7.loadFromFile("Images and Fonts/sort_by_year.png");
-	t8.loadFromFile("Images and Fonts/sort_by_topic.png");
 	t9.loadFromFile("Images and Fonts/event_board.png");
 
 	sf::Sprite background(t1);
@@ -150,9 +148,7 @@ void printSearchAnEventPage(sf::RenderWindow& window, Event*& head, Event*& tail
 	sf::Sprite searchBox(t3);
 	sf::Sprite ascendingSort(t4);
 	sf::Sprite descendingSort(t5);
-	sf::Sprite sortByTile(t6);
 	sf::Sprite sortByYear(t7);
-	sf::Sprite sortByTopic(t8);
 	sf::Sprite eventBoard(t9);
 
 	window.draw(background);
@@ -173,10 +169,8 @@ void printSearchAnEventPage(sf::RenderWindow& window, Event*& head, Event*& tail
 		window.draw(descendingSort);
 		tail->printListReversed(window, tail, eventBoard, font);
 	}
-	sortByTile.setPosition(-7, 77);
-	sortByYear.setPosition(-87, 10);
-	sortByTopic.setPosition(-87, 10); // Create check for print sorted by par
-	window.draw(sortByTile);
+	sortByYear.setPosition(90, 187);
+	window.draw(sortByYear);
 }
 
 void printInfoPage(sf::RenderWindow& window)
