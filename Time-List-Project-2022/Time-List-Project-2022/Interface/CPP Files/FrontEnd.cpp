@@ -428,6 +428,7 @@ void setMenu(int& stage)
 				head->takeDataFromFile(head);
 				head->mergeSortList(head);
 				tail = tail->getTail(head);
+				head = head->getHead(tail);
 				ChoiceFlow::SearchedAnEvent::crCheck = false;
 			}
 			printSearchAnEventPage(window, head, tail);

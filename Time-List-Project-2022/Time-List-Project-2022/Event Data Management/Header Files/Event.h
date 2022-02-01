@@ -20,6 +20,8 @@ struct Event
 
 	Event* getTail(Event* head);
 
+	Event* getHead(Event* tail);
+
 	void appendNode(Event* head, std::string& title, int& year, std::string& topic, std::string& description);
 
 	Event* removeHead(Event* head);

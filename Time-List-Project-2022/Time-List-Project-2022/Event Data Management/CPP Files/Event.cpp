@@ -23,6 +23,16 @@ Event* Event::getTail(Event* head)
 	return head;
 }
 
+Event* Event::getHead(Event* tail)
+{
+	while (tail->prevEvent != NULL)
+	{
+		tail = tail->prevEvent;
+	}
+
+	return tail;
+}
+
 void Event::appendNode(Event* head, std::string& title, int& year, std::string& topic, std::string& description)
 {
 	Event* tail = getTail(head);
@@ -108,7 +118,7 @@ Event* Event::merge(Event* f, Event* s)
 		f->prevEvent = NULL;
 		return f;
 	}
-
+	else
 	{
 		s->nextEvent = merge(f, s->nextEvent);
 		s->nextEvent->prevEvent = s;
