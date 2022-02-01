@@ -38,13 +38,14 @@ namespace ChoiceFlow
 			static sf::String topic;
 			static sf::String description;
 			static bool sortVer = false;
+			static sf::String searchData;
 		}
 
 		static bool crCheck = true;
 		static bool sortCheck = true;
 		static int sortType = 1;
 
-		void onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage, Event*& head, Event*& tail, bool& crCheck, bool& sortCheck, sf::String& title, sf::String& year, sf::String& topic, sf::String& description, int& sortType);
+		void onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage, Event*& head, Event*& tail, bool& crCheck, bool& sortCheck, sf::String& title, sf::String& year, sf::String& topic, sf::String& description, int& sortType, int& box, sf::String& searchData);
 
 		void onClickInfoPage(sf::RenderWindow& window, sf::Event& event1, int& stage);
 

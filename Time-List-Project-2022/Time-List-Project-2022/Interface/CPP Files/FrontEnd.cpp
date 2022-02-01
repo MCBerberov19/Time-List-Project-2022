@@ -131,9 +131,16 @@ void printEnterAnEventPage(sf::RenderWindow& window)
 
 void printSearchAnEventPage(sf::RenderWindow& window, Event*& head, Event*& tail)
 {
+	sf::Text searchData;
 	sf::Texture t1, t2, t3, t4, t5, t6 ,t7, t8, t9, t10;
 	sf::Font font;
 	font.loadFromFile("Images and Fonts/arial.ttf");
+
+	searchData.setCharacterSize(28);
+	searchData.setFont(font);
+	searchData.setFillColor(sf::Color::Black);
+	searchData.setPosition(332,139);
+	searchData.setString(ChoiceFlow::SearchedAnEvent::inputData::searchData);
 
 	t1.loadFromFile("Images and Fonts/background.jpg");
 	t2.loadFromFile("Images and Fonts/back.png");
@@ -162,6 +169,7 @@ void printSearchAnEventPage(sf::RenderWindow& window, Event*& head, Event*& tail
 	window.draw(backButton);
 	searchBox.setPosition(-50, 50);
 	window.draw(searchBox);
+	window.draw(searchData);
 	ascendingSort.setPosition(333, 160);
 	descendingSort.setPosition(333, 160); // Create check for printing ascending or descending on click
 	//eventBoard.setPosition(63, 220); <- these are the cordinates
@@ -453,10 +461,10 @@ void setMenu(int& stage)
 				ChoiceFlow::SearchedAnEvent::crCheck = false;
 			}
 			printSearchAnEventPage(window, head, tail);
-			ChoiceFlow::SearchedAnEvent::onClickSearchPage(window, event1, stage, head, tail, ChoiceFlow::SearchedAnEvent::crCheck, ChoiceFlow::SearchedAnEvent::sortCheck, ChoiceFlow::SearchedAnEvent::inputData::title, ChoiceFlow::SearchedAnEvent::inputData::year, ChoiceFlow::SearchedAnEvent::inputData::topic, ChoiceFlow::SearchedAnEvent::inputData::description, ChoiceFlow::SearchedAnEvent::sortType);
+			ChoiceFlow::SearchedAnEvent::onClickSearchPage(window, event1, stage, head, tail, ChoiceFlow::SearchedAnEvent::crCheck, ChoiceFlow::SearchedAnEvent::sortCheck, ChoiceFlow::SearchedAnEvent::inputData::title, ChoiceFlow::SearchedAnEvent::inputData::year, ChoiceFlow::SearchedAnEvent::inputData::topic, ChoiceFlow::SearchedAnEvent::inputData::description, ChoiceFlow::SearchedAnEvent::sortType, ChoiceFlow::EnterAnEvent::inputData::box, ChoiceFlow::SearchedAnEvent::inputData::searchData);
 			if (ChoiceFlow::EnterAnEvent::inputData::box == 1)
 			{
-				//input
+				ChoiceFlow::EnterAnEvent::inputEventData(event1, ChoiceFlow::SearchedAnEvent::inputData::searchData, 25, false);
 			}
 			break;
 		case 3:
