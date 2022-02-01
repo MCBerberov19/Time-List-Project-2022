@@ -42,15 +42,15 @@ namespace ChoiceFlow
 
 		static bool crCheck = true;
 		static bool sortCheck = true;
-		static int node = 0;
+		static int sortType = 1;
 
-		void onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage, Event*& head, Event*& tail, bool& crCheck, bool& sortCheck, sf::String& title, sf::String& year, sf::String& topic, sf::String& description);
+		void onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage, Event*& head, Event*& tail, bool& crCheck, bool& sortCheck, sf::String& title, sf::String& year, sf::String& topic, sf::String& description, int& sortType);
 
 		void onClickInfoPage(sf::RenderWindow& window, sf::Event& event1, int& stage);
 
 		void saveEditedEventData(sf::String& title, sf::String& year, sf::String& topic, sf::String& description);
 
-		void onClickEditPage(sf::RenderWindow& window, sf::Event& event1, int& stage, int& box, sf::String& title, sf::String& year, sf::String& topic, sf::String& description, bool& crCheck);
+		void onClickEditPage(sf::RenderWindow& window, sf::Event& event1, int& stage, int& box, sf::String& title, sf::String& year, sf::String& topic, sf::String& description, bool& crCheck, int& sortType);
 	}
 	namespace LastSearchedEvents
 	{

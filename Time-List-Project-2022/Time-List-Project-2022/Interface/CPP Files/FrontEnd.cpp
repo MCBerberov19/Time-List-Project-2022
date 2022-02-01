@@ -131,7 +131,7 @@ void printEnterAnEventPage(sf::RenderWindow& window)
 
 void printSearchAnEventPage(sf::RenderWindow& window, Event*& head, Event*& tail)
 {
-	sf::Texture t1, t2, t3, t4, t5, t7, t9;
+	sf::Texture t1, t2, t3, t4, t5, t6 ,t7, t8, t9;
 	sf::Font font;
 	font.loadFromFile("Images and Fonts/arial.ttf");
 
@@ -140,7 +140,9 @@ void printSearchAnEventPage(sf::RenderWindow& window, Event*& head, Event*& tail
 	t3.loadFromFile("Images and Fonts/search_box.png");
 	t4.loadFromFile("Images and Fonts/ascending_sort.png");
 	t5.loadFromFile("Images and Fonts/descending_sort.png");
+	t6.loadFromFile("Images and Fonts/sort_by_title.png");
 	t7.loadFromFile("Images and Fonts/sort_by_year.png");
+	t8.loadFromFile("Images and Fonts/sort_by_topic.png");
 	t9.loadFromFile("Images and Fonts/event_board.png");
 
 	sf::Sprite background(t1);
@@ -148,7 +150,9 @@ void printSearchAnEventPage(sf::RenderWindow& window, Event*& head, Event*& tail
 	sf::Sprite searchBox(t3);
 	sf::Sprite ascendingSort(t4);
 	sf::Sprite descendingSort(t5);
+	sf::Sprite sortByTitle(t6);
 	sf::Sprite sortByYear(t7);
+	sf::Sprite sortByTopic(t8);
 	sf::Sprite eventBoard(t9);
 
 	window.draw(background);
@@ -169,8 +173,21 @@ void printSearchAnEventPage(sf::RenderWindow& window, Event*& head, Event*& tail
 		window.draw(descendingSort);
 		tail->printListReversed(window, tail, eventBoard, font);
 	}
-	sortByYear.setPosition(90, 187);
-	window.draw(sortByYear);
+	sortByTitle.setPosition(-10, 78);
+	sortByYear.setPosition(-90, 10);
+	sortByTopic.setPosition(-90, 10);
+	switch (ChoiceFlow::SearchedAnEvent::sortType)
+	{
+	case 1:
+		window.draw(sortByTitle);
+		break;
+	case 2:
+		window.draw(sortByYear);
+		break;
+	case 3:
+		window.draw(sortByTopic);
+		break;
+	}
 }
 
 void printInfoPage(sf::RenderWindow& window)
@@ -426,13 +443,13 @@ void setMenu(int& stage)
 			{
 				head = new Event; tail = new Event;
 				head->takeDataFromFile(head);
-				head->mergeSortList(head);
+				head->mergeSortList(head,1);
 				tail = tail->getTail(head);
 				head = head->getHead(tail);
 				ChoiceFlow::SearchedAnEvent::crCheck = false;
 			}
 			printSearchAnEventPage(window, head, tail);
-			ChoiceFlow::SearchedAnEvent::onClickSearchPage(window, event1, stage, head, tail, ChoiceFlow::SearchedAnEvent::crCheck, ChoiceFlow::SearchedAnEvent::sortCheck, ChoiceFlow::SearchedAnEvent::inputData::title, ChoiceFlow::SearchedAnEvent::inputData::year, ChoiceFlow::SearchedAnEvent::inputData::topic, ChoiceFlow::SearchedAnEvent::inputData::description);
+			ChoiceFlow::SearchedAnEvent::onClickSearchPage(window, event1, stage, head, tail, ChoiceFlow::SearchedAnEvent::crCheck, ChoiceFlow::SearchedAnEvent::sortCheck, ChoiceFlow::SearchedAnEvent::inputData::title, ChoiceFlow::SearchedAnEvent::inputData::year, ChoiceFlow::SearchedAnEvent::inputData::topic, ChoiceFlow::SearchedAnEvent::inputData::description, ChoiceFlow::SearchedAnEvent::sortType);
 			break;
 		case 3:
 			printLastSearchedEventsPage(window);
@@ -444,7 +461,7 @@ void setMenu(int& stage)
 			break;
 		case 5:
 			printEditPage(window);
-			ChoiceFlow::SearchedAnEvent::onClickEditPage(window, event1, stage, ChoiceFlow::EnterAnEvent::inputData::box, ChoiceFlow::SearchedAnEvent::inputData::title, ChoiceFlow::SearchedAnEvent::inputData::year, ChoiceFlow::SearchedAnEvent::inputData::topic, ChoiceFlow::SearchedAnEvent::inputData::description, ChoiceFlow::SearchedAnEvent::crCheck);
+			ChoiceFlow::SearchedAnEvent::onClickEditPage(window, event1, stage, ChoiceFlow::EnterAnEvent::inputData::box, ChoiceFlow::SearchedAnEvent::inputData::title, ChoiceFlow::SearchedAnEvent::inputData::year, ChoiceFlow::SearchedAnEvent::inputData::topic, ChoiceFlow::SearchedAnEvent::inputData::description, ChoiceFlow::SearchedAnEvent::crCheck, ChoiceFlow::SearchedAnEvent::sortType);
 			switch (ChoiceFlow::EnterAnEvent::inputData::box)
 			{
 			case 1:

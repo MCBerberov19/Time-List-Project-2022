@@ -193,7 +193,7 @@ void ChoiceFlow::EnterAnEvent::seperateLinesInDescription(sf::String& descriptio
 	}
 }
 
-void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage, Event*& head, Event*& tail, bool& crCheck, bool& sortCheck, sf::String& title, sf::String& year, sf::String& topic, sf::String& description)
+void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage, Event*& head, Event*& tail, bool& crCheck, bool& sortCheck, sf::String& title, sf::String& year, sf::String& topic, sf::String& description, int& sortType)
 {
 	while (window.pollEvent(event1))
 	{
@@ -210,6 +210,27 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 				stage = 0;
 				head->clearList(head);
 				crCheck = true;
+			}
+			else if ((sf::Mouse::getPosition(window).x >= 85 && sf::Mouse::getPosition(window).x <= 178) &&
+				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 255))
+			{
+				sortType = 1;
+				head->mergeSortList(head, 1);
+				tail = tail->getTail(head);
+			}
+			else if ((sf::Mouse::getPosition(window).x >= 179 && sf::Mouse::getPosition(window).x <= 290) &&
+				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 255))
+			{
+				sortType = 2;
+				head->mergeSortList(head, 2);
+				tail = tail->getTail(head);
+			}
+			else if ((sf::Mouse::getPosition(window).x >= 291 && sf::Mouse::getPosition(window).x <= 387) &&
+				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 255))
+			{
+				sortType = 3;
+				head->mergeSortList(head, 3);
+				tail = tail->getTail(head);
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 470 && sf::Mouse::getPosition(window).x <= 590) &&
 				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 250))
@@ -310,7 +331,7 @@ void ChoiceFlow::SearchedAnEvent::saveEditedEventData(sf::String& title, sf::Str
 	newData.close();
 }
 
-void ChoiceFlow::SearchedAnEvent::onClickEditPage(sf::RenderWindow& window, sf::Event& event1, int& stage, int& box, sf::String& title, sf::String& year, sf::String& topic, sf::String& description, bool& crCheck)
+void ChoiceFlow::SearchedAnEvent::onClickEditPage(sf::RenderWindow& window, sf::Event& event1, int& stage, int& box, sf::String& title, sf::String& year, sf::String& topic, sf::String& description, bool& crCheck,int& sortType)
 {
 	if (inputData::oldTitleCheck)
 	{
@@ -364,14 +385,15 @@ void ChoiceFlow::SearchedAnEvent::onClickEditPage(sf::RenderWindow& window, sf::
 				{
 					saveEditedEventData(title, year, topic, description);
 
-					stage = 0;
 					inputData::oldTitleCheck = true;
 					crCheck = true;
 					title = "";
 					topic = "";
 					description = "";
 					year = "";
+					sortType = 1;
 					stage = 0;
+
 				}
 			}
 			else {

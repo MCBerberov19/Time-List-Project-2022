@@ -30,9 +30,9 @@ struct Event
 
 	Event* split(Event* head);
 
-	Event* merge(Event* f, Event* s);
+	Event* merge(Event* f, Event* s, int sortType);
 
-	Event* mergeSortList(Event*& head);
+	Event* mergeSortList(Event*& head, int sortType);
 
 	void printList(sf::RenderWindow& window, Event* head, sf::Sprite& eventBoard, sf::Font& font);
 

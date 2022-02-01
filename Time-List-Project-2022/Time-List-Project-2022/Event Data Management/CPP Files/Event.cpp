@@ -15,6 +15,11 @@ Event::Event(std::string& title, int& year, std::string& topic, std::string& des
 
 Event* Event::getTail(Event* head)
 {
+	if (head == NULL)
+	{
+		return head;
+	}
+
 	while (head->nextEvent != NULL)
 	{
 		head = head->nextEvent;
@@ -103,7 +108,7 @@ Event* Event::split(Event* head)
 	return temp;
 }
 
-Event* Event::merge(Event* f, Event* s)
+Event* Event::merge(Event* f, Event* s, int sortType)
 {
 	if (!f)
 		return s;
@@ -111,33 +116,71 @@ Event* Event::merge(Event* f, Event* s)
 	if (!s)
 		return f;
 
-	if (f->year <= s->year)
+	switch (sortType)
 	{
-		f->nextEvent = merge(f->nextEvent, s);
-		f->nextEvent->prevEvent = f;
-		f->prevEvent = NULL;
-		return f;
+	case 1:
+		if (f->title <= s->title)
+		{
+			f->nextEvent = merge(f->nextEvent, s, sortType);
+			f->nextEvent->prevEvent = f;
+			f->prevEvent = NULL;
+			return f;
+		}
+		else
+		{
+			s->nextEvent = merge(f, s->nextEvent, sortType);
+			s->nextEvent->prevEvent = s;
+			s->prevEvent = NULL;
+			return s;
+		}
+		break;
+	case 2:
+		if (f->year <= s->year)
+		{
+			f->nextEvent = merge(f->nextEvent, s, sortType);
+			f->nextEvent->prevEvent = f;
+			f->prevEvent = NULL;
+			return f;
+		}
+		else
+		{
+			s->nextEvent = merge(f, s->nextEvent, sortType);
+			s->nextEvent->prevEvent = s;
+			s->prevEvent = NULL;
+			return s;
+		}
+		break;
+	case 3:
+		if (f->topic <= s->topic)
+		{
+			f->nextEvent = merge(f->nextEvent, s, sortType);
+			f->nextEvent->prevEvent = f;
+			f->prevEvent = NULL;
+			return f;
+		}
+		else
+		{
+			s->nextEvent = merge(f, s->nextEvent, sortType);
+			s->nextEvent->prevEvent = s;
+			s->prevEvent = NULL;
+			return s;
+		}
+		break;
 	}
-	else
-	{
-		s->nextEvent = merge(f, s->nextEvent);
-		s->nextEvent->prevEvent = s;
-		s->prevEvent = NULL;
-		return s;
-	}
+	
 }
 
-Event* Event::mergeSortList(Event*& head)
+Event* Event::mergeSortList(Event*& head, int sortType)
 {
 	if (!head || !head->nextEvent)
 		return head;
 
 	Event* secondHalf = split(head);
 
-	head = mergeSortList(head);
-	secondHalf = mergeSortList(secondHalf);
+	head = mergeSortList(head, sortType);
+	secondHalf = mergeSortList(secondHalf, sortType);
 
-	return merge(head, secondHalf);
+	return merge(head, secondHalf, sortType);
 }
 
 void Event::printList(sf::RenderWindow& window, Event* head, sf::Sprite& eventBoard, sf::Font& font)
