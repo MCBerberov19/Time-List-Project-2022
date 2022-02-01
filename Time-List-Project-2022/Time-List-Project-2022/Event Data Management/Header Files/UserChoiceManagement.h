@@ -32,6 +32,8 @@ namespace ChoiceFlow
 		namespace inputData
 		{
 			static sf::String title;
+			static sf::String oldTitle;
+			static bool oldTitleCheck = true;
 			static sf::String year;
 			static sf::String topic;
 			static sf::String description;
@@ -45,6 +47,10 @@ namespace ChoiceFlow
 		void onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage, Event*& head, Event*& tail, bool& crCheck, bool& sortCheck, sf::String& title, sf::String& year, sf::String& topic, sf::String& description);
 
 		void onClickInfoPage(sf::RenderWindow& window, sf::Event& event1, int& stage);
+
+		void saveEditedEventData(sf::String& title, sf::String& year, sf::String& topic, sf::String& description);
+
+		void onClickEditPage(sf::RenderWindow& window, sf::Event& event1, int& stage, int& box, sf::String& title, sf::String& year, sf::String& topic, sf::String& description, bool& crCheck);
 	}
 	namespace LastSearchedEvents
 	{
