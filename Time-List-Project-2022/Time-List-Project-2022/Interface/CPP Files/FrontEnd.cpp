@@ -418,7 +418,7 @@ void setMenu(int& stage)
 	sf::RenderWindow window(sf::VideoMode(800, 800), "History Notes", sf::Style::Close);
 	window.setFramerateLimit(30);
 
-	Event* head = NULL;
+	Event* head = NULL, *entireFile = NULL;
 	Event* tail = NULL;
 
 	while (window.isOpen())
@@ -453,15 +453,16 @@ void setMenu(int& stage)
 		case 2:
 			if (ChoiceFlow::SearchedAnEvent::crCheck)
 			{
-				head = new Event; tail = new Event;
+				head = new Event; tail = new Event; entireFile = new Event;
 				head->takeDataFromFile(head);
+				entireFile->takeDataFromFile(entireFile);
 				head->mergeSortList(head,1);
 				tail = tail->getTail(head);
 				head = head->getHead(tail);
 				ChoiceFlow::SearchedAnEvent::crCheck = false;
 			}
 			printSearchAnEventPage(window, head, tail);
-			ChoiceFlow::SearchedAnEvent::onClickSearchPage(window, event1, stage, head, tail, ChoiceFlow::SearchedAnEvent::crCheck, ChoiceFlow::SearchedAnEvent::sortCheck, ChoiceFlow::SearchedAnEvent::inputData::title, ChoiceFlow::SearchedAnEvent::inputData::year, ChoiceFlow::SearchedAnEvent::inputData::topic, ChoiceFlow::SearchedAnEvent::inputData::description, ChoiceFlow::SearchedAnEvent::sortType, ChoiceFlow::EnterAnEvent::inputData::box, ChoiceFlow::SearchedAnEvent::inputData::searchData);
+			ChoiceFlow::SearchedAnEvent::onClickSearchPage(window, event1, stage, head, tail, ChoiceFlow::SearchedAnEvent::crCheck, ChoiceFlow::SearchedAnEvent::sortCheck, ChoiceFlow::SearchedAnEvent::inputData::title, ChoiceFlow::SearchedAnEvent::inputData::year, ChoiceFlow::SearchedAnEvent::inputData::topic, ChoiceFlow::SearchedAnEvent::inputData::description, ChoiceFlow::SearchedAnEvent::sortType, ChoiceFlow::EnterAnEvent::inputData::box, ChoiceFlow::SearchedAnEvent::inputData::searchData, entireFile);
 			if (ChoiceFlow::EnterAnEvent::inputData::box == 1)
 			{
 				ChoiceFlow::EnterAnEvent::inputEventData(event1, ChoiceFlow::SearchedAnEvent::inputData::searchData, 25, false);

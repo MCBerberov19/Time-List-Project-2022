@@ -51,7 +51,7 @@ void Event::appendNode(Event* head, std::string& title, int& year, std::string& 
 	{
 		tail->nextEvent->prevEvent = tail;
 	}
-	
+
 }
 
 Event* Event::removeHead(Event* head)
@@ -175,7 +175,7 @@ Event* Event::merge(Event* f, Event* s, int sortType)
 		}
 		break;
 	}
-	
+
 }
 
 Event* Event::mergeSortList(Event*& head, int sortType)
@@ -239,19 +239,32 @@ Event* Event::printFoundData(Event* head, sf::String searchData)
 {
 	Event* newHead = new Event;
 	int cur = 0;
+	std::string year;
 	while (head != NULL)
 	{
-		if (head->title == searchData.toAnsiString() || head->topic == searchData.toAnsiString())
-		{
-			appendNode(newHead, head->title, head->year, head->topic, head->description);
-			cur++;
-		}
+		//if (std::regex_match(searchData.toAnsiString(), std::regex("^[A-Za-z]+$")))
+		//{
+			if (head->title == searchData.toAnsiString() || head->topic == searchData.toAnsiString())
+			{
+				appendNode(newHead, head->title, head->year, head->topic, head->description);
+				cur++;
+			}
+		//}
+		//else
+		//{
+		//	year = searchData.toAnsiString();
+		//	if (head->year == stoi(year))
+		//	{
+		//		appendNode(newHead, head->title, head->year, head->topic, head->description);
+		//		cur++;
+		//	}
+		//}
 		head = head->nextEvent;
 	}
 
 	if (cur > 0)
 	{
-		newHead=newHead->removeHead(newHead);
+		newHead = newHead->removeHead(newHead);
 	}
 
 	return newHead;
@@ -349,7 +362,7 @@ void Event::saveDataIntoFileTail(Event* tail)
 	outputData.close();
 }
 
-void Event::saveEventInfo(Event* head, Event* tail,int cordinateY, int node, sf::String& title, sf::String& year, sf::String& topic, sf::String& description, bool& sortCheck)
+void Event::saveEventInfo(Event* head, Event* tail, int cordinateY, int node, sf::String& title, sf::String& year, sf::String& topic, sf::String& description, bool& sortCheck)
 {
 	int nodeCur = 1;
 	if (takeNodeIndex(cordinateY, node) != 0)
@@ -389,7 +402,7 @@ void Event::saveEventInfo(Event* head, Event* tail,int cordinateY, int node, sf:
 	}
 }
 
-void Event::removeNode(Event*& head, Event*& tail,int cordinateY, int node, bool& sortCheck)
+void Event::removeNode(Event*& head, Event*& tail, int cordinateY, int node, bool& sortCheck)
 {
 	int nodeCur = 1;
 	Event* headCur = head;

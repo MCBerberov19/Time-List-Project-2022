@@ -192,11 +192,8 @@ void ChoiceFlow::EnterAnEvent::seperateLinesInDescription(sf::String& descriptio
 	}
 }
 
-void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage, Event*& head, Event*& tail, bool& crCheck, bool& sortCheck, sf::String& title, sf::String& year, sf::String& topic, sf::String& description, int& sortType, int& box, sf::String& searchData)
+void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage, Event*& head, Event*& tail, bool& crCheck, bool& sortCheck, sf::String& title, sf::String& year, sf::String& topic, sf::String& description, int& sortType, int& box, sf::String& searchData, Event*& entireFile)
 {
-	Event* curHead = NULL, * curTail = NULL;
-	curHead = curHead->getHead(tail);
-	curTail = curTail->getTail(curHead);
 	while (window.pollEvent(event1))
 	{
 		if (event1.type == sf::Event::Closed)
@@ -265,9 +262,11 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 				if (searchData.getSize() > 0)
 				{
 					sortCheck = true;
-					head = head->printFoundData(curHead, searchData);
+					head = head->printFoundData(entireFile, searchData);
 					box = 0;
+					lastSearched = searchData;
 					searchData = "";
+					ChoiceFlow::SearchedAnEvent::ifSearched = true;
 				}
 			}
 			else if (sf::Mouse::getPosition(window).x >= 575 && sf::Mouse::getPosition(window).x <= 620)
@@ -284,7 +283,16 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 			}
 			else if (sf::Mouse::getPosition(window).x >= 660 && sf::Mouse::getPosition(window).x <= 705)
 			{
-				head->removeNode(head, tail, sf::Mouse::getPosition(window).y, 1, sortCheck);
+				if (ChoiceFlow::SearchedAnEvent::ifSearched)
+				{
+					entireFile->removeNode(entireFile, tail, sf::Mouse::getPosition(window).y, 1, sortCheck);
+					head = head->printFoundData(entireFile, lastSearched);
+				}
+				else
+				{
+					head->removeNode(head, tail, sf::Mouse::getPosition(window).y, 1, sortCheck);
+					entireFile->removeNode(entireFile, tail, sf::Mouse::getPosition(window).y, 1, sortCheck);
+				}
 				box = 0;
 			}
 			else
