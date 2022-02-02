@@ -210,6 +210,8 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 				head->clearList(head);
 				crCheck = true;
 				box = 0;
+				searchData = "";
+
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 85 && sf::Mouse::getPosition(window).x <= 710) &&
 				(sf::Mouse::getPosition(window).y >= 125 && sf::Mouse::getPosition(window).y <= 182))
@@ -285,13 +287,13 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 			{
 				if (ChoiceFlow::SearchedAnEvent::ifSearched)
 				{
-					entireFile->removeNode(entireFile, tail, sf::Mouse::getPosition(window).y, 1, sortCheck);
+					//head->removeNode(entireFile, tail, sf::Mouse::getPosition(window).y, 1, sortCheck); - new func for deleting a node when searched
 					head = head->printFoundData(entireFile, lastSearched);
 				}
 				else
 				{
 					head->removeNode(head, tail, sf::Mouse::getPosition(window).y, 1, sortCheck);
-					entireFile->removeNode(entireFile, tail, sf::Mouse::getPosition(window).y, 1, sortCheck);
+					entireFile->takeDataFromFile(entireFile);
 				}
 				box = 0;
 			}
