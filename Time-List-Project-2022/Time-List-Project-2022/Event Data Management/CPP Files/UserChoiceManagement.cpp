@@ -1,6 +1,5 @@
 #include "../Header Files/UserChoiceManagement.h"
 #include "../Header Files/EnterAnEvent.h"
-#include "../Header Files/SearchAnEvent.h"
 #include <iostream>
 #include <vector>
 #include <regex>
@@ -195,6 +194,9 @@ void ChoiceFlow::EnterAnEvent::seperateLinesInDescription(sf::String& descriptio
 
 void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage, Event*& head, Event*& tail, bool& crCheck, bool& sortCheck, sf::String& title, sf::String& year, sf::String& topic, sf::String& description, int& sortType, int& box, sf::String& searchData)
 {
+	Event* curHead = NULL, * curTail = NULL;
+	curHead = curHead->getHead(tail);
+	curTail = curTail->getTail(curHead);
 	while (window.pollEvent(event1))
 	{
 		if (event1.type == sf::Event::Closed)
@@ -232,6 +234,7 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 				sortType = 2;
 				head->mergeSortList(head, 2);
 				tail = tail->getTail(head);
+				head = head->getHead(tail);
 				box = 0;
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 291 && sf::Mouse::getPosition(window).x <= 387) &&
@@ -240,6 +243,7 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 				sortType = 3;
 				head->mergeSortList(head, 3);
 				tail = tail->getTail(head);
+				head = head->getHead(tail);
 				box = 0;
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 470 && sf::Mouse::getPosition(window).x <= 590) &&
@@ -252,14 +256,19 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 250))
 			{
 				sortCheck = false;
+				tail = tail->getTail(head);
 				box = 0;
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 255 && sf::Mouse::getPosition(window).x <= 555) &&
 				(sf::Mouse::getPosition(window).y >= 685 && sf::Mouse::getPosition(window).y <= 780))
 			{
-				//Search (Print only the first six found) searchData=""
-				box = 0;
-				searchData = "";
+				if (searchData.getSize() > 0)
+				{
+					sortCheck = true;
+					head = head->printFoundData(curHead, searchData);
+					box = 0;
+					searchData = "";
+				}
 			}
 			else if (sf::Mouse::getPosition(window).x >= 575 && sf::Mouse::getPosition(window).x <= 620)
 			{

@@ -43,7 +43,15 @@ void Event::appendNode(Event* head, std::string& title, int& year, std::string& 
 	Event* tail = getTail(head);
 
 	tail->nextEvent = new Event(title, year, topic, description);
-	tail->nextEvent->prevEvent = NULL;
+	if (tail == NULL)
+	{
+		tail->nextEvent->prevEvent = NULL;
+	}
+	else
+	{
+		tail->nextEvent->prevEvent = tail;
+	}
+	
 }
 
 Event* Event::removeHead(Event* head)
@@ -225,6 +233,28 @@ void Event::printListReversed(sf::RenderWindow& window, Event* tail, sf::Sprite&
 		tail = tail->prevEvent; y += 70;
 		i++;
 	}
+}
+
+Event* Event::printFoundData(Event* head, sf::String searchData)
+{
+	Event* newHead = new Event;
+	int cur = 0;
+	while (head != NULL)
+	{
+		if (head->title == searchData.toAnsiString() || head->topic == searchData.toAnsiString())
+		{
+			appendNode(newHead, head->title, head->year, head->topic, head->description);
+			cur++;
+		}
+		head = head->nextEvent;
+	}
+
+	if (cur > 0)
+	{
+		newHead=newHead->removeHead(newHead);
+	}
+
+	return newHead;
 }
 
 void Event::clearList(Event* head)

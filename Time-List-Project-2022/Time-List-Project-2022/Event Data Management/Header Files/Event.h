@@ -38,6 +38,8 @@ struct Event
 
 	void printListReversed(sf::RenderWindow& window, Event* tail, sf::Sprite& eventBoard, sf::Font& font);
 
+	Event* printFoundData(Event* head, sf::String searchData);
+
 	void clearList(Event* head);
 
 	void clearListTail(Event* tail);
