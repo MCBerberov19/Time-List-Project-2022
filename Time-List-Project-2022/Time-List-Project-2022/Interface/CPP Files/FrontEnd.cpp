@@ -1,6 +1,7 @@
 #include "../../Event Data Management/Header Files/UserChoiceManagement.h"
 #include "../Header Files/FrontEnd.h"
 #include "../../Event Data Management/Header Files/Event.h"
+#include "../../Event Data Management/Header Files/SearchAnEvent.h"
 #include <iostream>
 
 void printMainMenu(sf::RenderWindow& window)
@@ -176,12 +177,12 @@ void printSearchAnEventPage(sf::RenderWindow& window, Event*& head, Event*& tail
 	if (ChoiceFlow::SearchedAnEvent::sortCheck)
 	{
 		window.draw(ascendingSort);
-		head->printList(window, head, eventBoard, font);
+		SearchAnEventNodes::PrintList::printList(window, head, eventBoard, font);
 	}
 	else
 	{
 		window.draw(descendingSort);
-		tail->printListReversed(window, tail, eventBoard, font);
+		SearchAnEventNodes::PrintList::printListReversed(window, tail, eventBoard, font);
 	}
 	sortByTitle.setPosition(-10, 78);
 	sortByYear.setPosition(-90, 10);
@@ -414,7 +415,6 @@ void printLastSearchedEventsPage(sf::RenderWindow& window)
 
 void setMenu(int& stage)
 {
-
 	sf::RenderWindow window(sf::VideoMode(800, 800), "History Notes", sf::Style::Close);
 	window.setFramerateLimit(30);
 
@@ -454,8 +454,8 @@ void setMenu(int& stage)
 			if (ChoiceFlow::SearchedAnEvent::crCheck)
 			{
 				head = new Event; tail = new Event; entireFile = new Event;
-				head->takeDataFromFile(head);
-				entireFile->takeDataFromFile(entireFile);
+				SearchAnEventNodes::TakeNodes::takeDataFromFile(head, &Event::appendNode, &Event::removeHead);
+				SearchAnEventNodes::TakeNodes::takeDataFromFile(entireFile, &Event::appendNode, &Event::removeHead);
 				head->mergeSortList(head,1);
 				tail = tail->getTail(head);
 				head = head->getHead(tail);

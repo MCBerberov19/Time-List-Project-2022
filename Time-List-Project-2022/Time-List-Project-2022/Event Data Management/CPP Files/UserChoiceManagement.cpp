@@ -1,6 +1,6 @@
 #include "../Header Files/UserChoiceManagement.h"
 #include "../Header Files/EnterAnEvent.h"
-#include <iostream>
+#include "../Header Files/SearchAnEvent.h"
 #include <vector>
 #include <regex>
 
@@ -207,7 +207,7 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 				(sf::Mouse::getPosition(window).y >= 30 && sf::Mouse::getPosition(window).y <= 90))
 			{
 				stage = 0;
-				head->clearList(head);
+				SearchAnEventNodes::ClearList::clearList(head);
 				crCheck = true;
 				box = 0;
 				searchData = "";
@@ -264,7 +264,7 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 				if (searchData.getSize() > 0)
 				{
 					sortCheck = true;
-					head = head->printFoundData(entireFile, searchData);
+					head = SearchAnEventNodes::PrintList::printFoundData(entireFile, searchData, &Event::appendNode);
 					box = 0;
 					lastSearched = searchData;
 					searchData = "";
@@ -274,13 +274,13 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 			else if (sf::Mouse::getPosition(window).x >= 575 && sf::Mouse::getPosition(window).x <= 620)
 			{
 				stage = 4;
-				head->saveEventInfo(head, tail, sf::Mouse::getPosition(window).y, 1, title, year, topic, description, sortCheck);
+				SearchAnEventNodes::SaveList::saveEventInfo(head, tail, sf::Mouse::getPosition(window).y, 1, title, year, topic, description, sortCheck);
 				box = 0;
 			}
 			else if (sf::Mouse::getPosition(window).x >= 621 && sf::Mouse::getPosition(window).x <= 659)
 			{
 				stage = 5;
-				head->saveEventInfo(head, tail, sf::Mouse::getPosition(window).y, 1, title, year, topic, description, sortCheck);
+				SearchAnEventNodes::SaveList::saveEventInfo(head, tail, sf::Mouse::getPosition(window).y, 1, title, year, topic, description, sortCheck);
 				box = 0;
 			}
 			else if (sf::Mouse::getPosition(window).x >= 660 && sf::Mouse::getPosition(window).x <= 705)
@@ -288,15 +288,15 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 				if (ChoiceFlow::SearchedAnEvent::ifSearched)
 				{
 					head->removeAfterSearch(head, tail, sf::Mouse::getPosition(window).y, 1, sortCheck, deletedTitle);
-					entireFile->saveAfterRemoveWhenSearched(entireFile, deletedTitle);
-					entireFile->clearList(entireFile);
+					SearchAnEventNodes::SaveList::saveAfterRemoveWhenSearched(entireFile, deletedTitle);
+					SearchAnEventNodes::ClearList::clearList(entireFile);
 					entireFile = new Event;
-					entireFile->takeDataFromFile(entireFile);
+					SearchAnEventNodes::TakeNodes::takeDataFromFile(entireFile, &Event::appendNode, &Event::removeHead);
 				}
 				else
 				{
 					head->removeNode(head, tail, sf::Mouse::getPosition(window).y, 1, sortCheck);
-					entireFile->takeDataFromFile(entireFile);
+					SearchAnEventNodes::TakeNodes::takeDataFromFile(entireFile, &Event::appendNode, &Event::removeHead);
 				}
 				box = 0;
 			}
@@ -360,7 +360,7 @@ void ChoiceFlow::SearchedAnEvent::saveEditedEventData(sf::String& title, sf::Str
 	curData.close();
 
 	std::ofstream newData; newData.open("Events.txt", std::ios::out | std::ios::trunc);
-	
+
 	for (size_t i = 0; i < lines.size(); i++)
 	{
 		if (i == pos)
@@ -375,14 +375,14 @@ void ChoiceFlow::SearchedAnEvent::saveEditedEventData(sf::String& title, sf::Str
 	newData.close();
 }
 
-void ChoiceFlow::SearchedAnEvent::onClickEditPage(sf::RenderWindow& window, sf::Event& event1, int& stage, int& box, sf::String& title, sf::String& year, sf::String& topic, sf::String& description, bool& crCheck,int& sortType)
+void ChoiceFlow::SearchedAnEvent::onClickEditPage(sf::RenderWindow& window, sf::Event& event1, int& stage, int& box, sf::String& title, sf::String& year, sf::String& topic, sf::String& description, bool& crCheck, int& sortType)
 {
 	if (inputData::oldTitleCheck)
 	{
 		inputData::oldTitle = title;
 		inputData::oldTitleCheck = false;
 	}
-	
+
 	while (window.pollEvent(event1))
 	{
 		if (event1.type == sf::Event::Closed)
