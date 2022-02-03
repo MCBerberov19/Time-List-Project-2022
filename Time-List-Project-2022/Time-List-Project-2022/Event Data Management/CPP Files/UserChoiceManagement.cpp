@@ -287,8 +287,11 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 			{
 				if (ChoiceFlow::SearchedAnEvent::ifSearched)
 				{
-					//head->removeNode(entireFile, tail, sf::Mouse::getPosition(window).y, 1, sortCheck); - new func for deleting a node when searched
-					head = head->printFoundData(entireFile, lastSearched);
+					head->removeAfterSearch(head, tail, sf::Mouse::getPosition(window).y, 1, sortCheck, deletedTitle);
+					entireFile->saveAfterRemoveWhenSearched(entireFile, deletedTitle);
+					entireFile->clearList(entireFile);
+					entireFile = new Event;
+					entireFile->takeDataFromFile(entireFile);
 				}
 				else
 				{
@@ -303,10 +306,6 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 			}
 		}
 
-		/*if (event1.type == sf::Event::MouseMoved)
-		{
-			std::cout << sf::Mouse::getPosition(window).x << " " << sf::Mouse::getPosition(window).y << std::endl;
-		}*/
 	}
 }
 

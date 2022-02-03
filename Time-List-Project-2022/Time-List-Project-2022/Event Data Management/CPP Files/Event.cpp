@@ -30,6 +30,11 @@ Event* Event::getTail(Event* head)
 
 Event* Event::getHead(Event* tail)
 {
+	if (tail == NULL)
+	{
+		return tail;
+	}
+
 	while (tail->prevEvent != NULL)
 	{
 		tail = tail->prevEvent;
@@ -65,9 +70,12 @@ Event* Event::removeHead(Event* head)
 
 void Event::takeDataFromFile(Event*& head)
 {
-	inputFile.open("Events.txt", std::ios::in | std::ios::app);
+	std::ifstream inputFile; inputFile.open("Events.txt", std::ios::in | std::ios::app);
 	std::string data;
 	int cur = 0;
+
+	std::string title, topic, description;
+	int year;
 
 	std::smatch yearMatch;
 
@@ -242,23 +250,23 @@ Event* Event::printFoundData(Event* head, sf::String searchData)
 	std::string year;
 	while (head != NULL)
 	{
-		//if (std::regex_match(searchData.toAnsiString(), std::regex("^[A-Za-z]+$")))
-		//{
+		if (std::regex_match(searchData.toAnsiString(), std::regex(R"(^^\s*[-+]?((\d+(\.\d+)?)|(\d+\.)|(\.\d+))(e[-+]?\d+)?\s*$)")))
+		{
+			year = searchData.toAnsiString();
+			if (head->year == stoi(year))
+			{
+				appendNode(newHead, head->title, head->year, head->topic, head->description);
+				cur++;
+			}
+		}
+		else
+		{
 			if (head->title == searchData.toAnsiString() || head->topic == searchData.toAnsiString())
 			{
 				appendNode(newHead, head->title, head->year, head->topic, head->description);
 				cur++;
 			}
-		//}
-		//else
-		//{
-		//	year = searchData.toAnsiString();
-		//	if (head->year == stoi(year))
-		//	{
-		//		appendNode(newHead, head->title, head->year, head->topic, head->description);
-		//		cur++;
-		//	}
-		//}
+		}
 		head = head->nextEvent;
 	}
 
@@ -504,4 +512,137 @@ void Event::removeNode(Event*& head, Event*& tail, int cordinateY, int node, boo
 			saveDataIntoFileTail(tail);
 		}
 	}
+}
+
+void Event::removeAfterSearch(Event*& head, Event*& tail, int cordinateY, int node, bool& sortCheck, std::string& title)
+{
+	int nodeCur = 1;
+	Event* headCur = head;
+	Event* tailCur = getTail(head);
+
+	int last = takeLastNodePos(head);
+
+	if (takeNodeIndex(cordinateY, node) != 0)
+	{
+		if (sortCheck)
+		{
+			while (head != NULL)
+			{
+				if (nodeCur == takeNodeIndex(cordinateY, node))
+				{
+					if (takeNodeIndex(cordinateY, node) == 1)
+					{
+						if (head->nextEvent == NULL)
+						{
+							title = head->title;
+							head->clearList(head);
+							head = NULL;
+							tail = NULL;
+						}
+						else
+						{
+							head->nextEvent->prevEvent = NULL;
+							title = head->title;
+							head = head->nextEvent;
+						}
+						break;
+
+					}
+					else if (takeNodeIndex(cordinateY, node) == last)
+					{
+						title = head->title;
+						head->prevEvent->nextEvent = NULL;
+						tail->prevEvent->nextEvent = NULL;
+						head = headCur;
+						tailCur = tailCur->prevEvent;
+						tail = tailCur;
+						break;
+					}
+					else
+					{
+						title = head->title;
+						head->prevEvent->nextEvent = head->nextEvent;
+						head->nextEvent->prevEvent = head->prevEvent;
+						head = headCur;
+						tail = tailCur;
+						break;
+					}
+				}
+				nodeCur++;
+				head = head->nextEvent;
+			}
+		}
+		else
+		{
+			while (tail != NULL)
+			{
+				if (nodeCur == takeNodeIndex(cordinateY, node))
+				{
+					if (takeNodeIndex(cordinateY, node) == 1)
+					{
+						if (tail->prevEvent == NULL)
+						{
+							title = tail->title;
+							tail->clearListTail(tail);
+							head = NULL;
+							tail = NULL;
+						}
+						else
+						{
+							title = tail->title;
+							tail->prevEvent->nextEvent = NULL;
+							tail = tail->prevEvent;
+						}
+						break;
+
+					}
+					else if (takeNodeIndex(cordinateY, node) == last)
+					{
+						title = tail->title;
+						tail->nextEvent->prevEvent = NULL;
+						head->nextEvent->prevEvent = NULL;
+						headCur = headCur->nextEvent;
+						tail = tailCur;
+						head = headCur;
+						break;
+					}
+					else
+					{
+						title = tail->title;
+						tail->prevEvent->nextEvent = tail->nextEvent;
+						tail->nextEvent->prevEvent = tail->prevEvent;
+						delete tail;
+						tail = tailCur;
+						head = headCur;
+						break;
+					}
+				}
+				nodeCur++;
+				tail = tail->prevEvent;
+			}
+		}
+	}
+}
+
+void Event::saveAfterRemoveWhenSearched(Event* entireFile, std::string& title)
+{
+	std::vector<std::string> dataV;
+	std::string data;
+	
+	while (entireFile != NULL)
+	{
+		if (title != entireFile->title)
+		{
+			data = entireFile->title + " " + std::to_string(entireFile->year) + " " + entireFile->topic + " " + entireFile->description;
+			dataV.push_back(data);
+		}
+		entireFile = entireFile->nextEvent;
+	}
+
+	std::ofstream dataOut; dataOut.open("Events.txt", std::ios::out | std::ios::trunc);
+	for (std::string i : dataV)
+	{
+		dataOut << i << std::endl;
+	}
+	dataOut.close();
 }

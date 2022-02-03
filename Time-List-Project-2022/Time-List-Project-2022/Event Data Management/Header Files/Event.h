@@ -12,8 +12,6 @@ struct Event
 	Event* nextEvent = NULL;
 	Event* prevEvent = NULL;
 
-	std::ifstream inputFile;
-
 	Event() {}
 
 	Event(std::string& title, int& year, std::string& topic, std::string& description);
@@ -57,4 +55,8 @@ struct Event
 	void saveEventInfo(Event* head, Event* tail,int cordinateY, int node, sf::String& title, sf::String& year, sf::String& topic, sf::String& description, bool& sortCheck);
 
 	void removeNode(Event*& head, Event*& tail, int cordinateY, int node, bool& sortCheck);
+
+	void removeAfterSearch(Event*& head, Event*& tail, int cordinateY, int node, bool& sortCheck, std::string& title);
+	
+	void saveAfterRemoveWhenSearched(Event* entireFile ,std::string& title);
 };

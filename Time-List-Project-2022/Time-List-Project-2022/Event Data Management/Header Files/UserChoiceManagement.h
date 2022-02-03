@@ -46,6 +46,7 @@ namespace ChoiceFlow
 		static int sortType = 1;
 		static bool ifSearched = false;
 		static sf::String lastSearched;
+		static std::string deletedTitle;
 
 		void onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage, Event*& head, Event*& tail, bool& crCheck, bool& sortCheck, sf::String& title, sf::String& year, sf::String& topic, sf::String& description, int& sortType, int& box, sf::String& searchData, Event*& entireFile);
 
