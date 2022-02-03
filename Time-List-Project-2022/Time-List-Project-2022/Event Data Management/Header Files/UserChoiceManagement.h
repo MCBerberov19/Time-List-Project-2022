@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "Event.h"
 
 namespace ChoiceFlow
 {
@@ -28,7 +29,32 @@ namespace ChoiceFlow
 	}
 	namespace SearchedAnEvent
 	{
-		void onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage);
+		namespace inputData
+		{
+			static sf::String title;
+			static sf::String oldTitle;
+			static bool oldTitleCheck = true;
+			static sf::String year;
+			static sf::String topic;
+			static sf::String description;
+			static bool sortVer = false;
+			static sf::String searchData;
+		}
+
+		static bool crCheck = true;
+		static bool sortCheck = true;
+		static int sortType = 1;
+		static bool ifSearched = false;
+		static sf::String lastSearched;
+		static std::string deletedTitle;
+
+		void onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage, Event*& head, Event*& tail, bool& crCheck, bool& sortCheck, sf::String& title, sf::String& year, sf::String& topic, sf::String& description, int& sortType, int& box, sf::String& searchData, Event*& entireFile);
+
+		void onClickInfoPage(sf::RenderWindow& window, sf::Event& event1, int& stage);
+
+		void saveEditedEventData(sf::String& title, sf::String& year, sf::String& topic, sf::String& description);
+
+		void onClickEditPage(sf::RenderWindow& window, sf::Event& event1, int& stage, int& box, sf::String& title, sf::String& year, sf::String& topic, sf::String& description, bool& crCheck, int& sortType);
 	}
 	namespace LastSearchedEvents
 	{
