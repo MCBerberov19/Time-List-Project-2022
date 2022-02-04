@@ -448,7 +448,7 @@ void ChoiceFlow::SearchedAnEvent::onClickEditPage(sf::RenderWindow& window, sf::
 	}
 }
 
-void ChoiceFlow::LastSearchedEvents::onClickLastEventsPage(sf::RenderWindow& window, sf::Event& event1, int& stage)
+void ChoiceFlow::TestKnowledge::onClickTestPage(sf::RenderWindow& window, sf::Event& event1, int& stage)
 {
 	while (window.pollEvent(event1))
 	{

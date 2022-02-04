@@ -56,8 +56,8 @@ namespace ChoiceFlow
 
 		void onClickEditPage(sf::RenderWindow& window, sf::Event& event1, int& stage, int& box, sf::String& title, sf::String& year, sf::String& topic, sf::String& description, bool& crCheck, int& sortType);
 	}
-	namespace LastSearchedEvents
+	namespace TestKnowledge
 	{
-		void onClickLastEventsPage(sf::RenderWindow& window, sf::Event& event1, int& stage);
+		void onClickTestPage(sf::RenderWindow& window, sf::Event& event1, int& stage);
 	}
 }

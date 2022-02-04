@@ -12,7 +12,7 @@ void printMainMenu(sf::RenderWindow& window)
 	t2.loadFromFile("Images and Fonts/logo.png");
 	t3.loadFromFile("Images and Fonts/enter_button.png");
 	t4.loadFromFile("Images and Fonts/search_button.png");
-	t5.loadFromFile("Images and Fonts/last_button.png");
+	t5.loadFromFile("Images and Fonts/test_knowledge_button.png");
 
 	sf::Sprite background(t1);
 	sf::Sprite logo(t2);
@@ -398,7 +398,7 @@ void printEditPage(sf::RenderWindow& window)
 	window.draw(save);
 }
 
-void printLastSearchedEventsPage(sf::RenderWindow& window)
+void printTestKnowledgePage(sf::RenderWindow& window)
 {
 	sf::Texture t1, t2;
 
@@ -469,8 +469,8 @@ void setMenu(int& stage)
 			}
 			break;
 		case 3:
-			printLastSearchedEventsPage(window);
-			ChoiceFlow::LastSearchedEvents::onClickLastEventsPage(window, event1, stage);
+			printTestKnowledgePage(window);
+			ChoiceFlow::TestKnowledge::onClickTestPage(window, event1, stage);
 			break;
 		case 4:
 			printInfoPage(window);

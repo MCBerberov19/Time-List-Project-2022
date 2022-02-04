@@ -8,6 +8,6 @@ void printEnterAnEventPage(sf::RenderWindow& window);
 
 void printSearchAnEventPage(sf::RenderWindow& window, Event*& head, Event*& tail);
 
-void printLastSearchedEventsPage(sf::RenderWindow& window);
+void printTestKnowledgePage(sf::RenderWindow& window);
 
 void setMenu(int& stage);
