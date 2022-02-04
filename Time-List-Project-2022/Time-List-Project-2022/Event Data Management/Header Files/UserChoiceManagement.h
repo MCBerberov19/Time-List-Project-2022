@@ -1,12 +1,15 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "Event.h"
 
 namespace ChoiceFlow
 {
 	namespace MainMenu
 	{
-		void onClickMainMenu(sf::RenderWindow& window, sf::Event& event1, int& stage);
+		void playSound(sf::SoundBuffer& buffer, sf::Sound& sound);
+
+		void onClickMainMenu(sf::RenderWindow& window, sf::Event& event1, int& stage, sf::SoundBuffer &buffer, sf::Sound &sound);
 	}
 	namespace EnterAnEvent
 	{

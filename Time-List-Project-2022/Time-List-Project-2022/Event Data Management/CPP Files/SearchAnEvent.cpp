@@ -63,7 +63,22 @@ Event* SearchAnEventNodes::PrintList::printFoundData(Event* head, sf::String sea
 		}
 		else
 		{
-			if (head->title == searchData.toAnsiString() || head->topic == searchData.toAnsiString())
+			std::string dataTitle = head->title;
+			std::for_each(dataTitle.begin(), dataTitle.end(), [](char& c) {
+				c = ::tolower(c);
+				});
+
+			std::string dataTopic = head->topic;
+			std::for_each(dataTopic.begin(), dataTopic.end(), [](char& c) {
+				c = ::tolower(c);
+				});
+
+			std::string input = searchData.toAnsiString();
+			std::for_each(input.begin(), input.end(), [](char& c) {
+				c = ::tolower(c);
+				});
+
+			if (dataTitle == input || dataTopic == input)
 			{
 				head->appendNode(newHead, head->title, head->year, head->topic, head->description);
 				cur++;
