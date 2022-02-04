@@ -423,11 +423,11 @@ void printTestKnowledgePage(sf::RenderWindow& window)
 	window.draw(background);
 	backButton.setPosition(30, 30);
 	window.draw(backButton);
-	year.setPosition(135, 160);
+	year.setPosition(135, 310);
 	window.draw(year);
-	topic.setPosition(445, 157);
+	topic.setPosition(445, 307);
 	window.draw(topic);
-	title.setPosition(-40, 150);
+	title.setPosition(-45, -15);
 	window.draw(title);
 	generateButton.setPosition(230, 475);
 	window.draw(generateButton);
