@@ -497,7 +497,13 @@ void setMenu(int& stage)
 			break;
 		case 3:
 			printTestKnowledgePage(window);
-			ChoiceFlow::TestKnowledge::onClickTestPage(window, event1, stage);
+			if (ChoiceFlow::TestKnowledge::crCheck)
+			{
+				entireFile = new Event;
+				SearchAnEventNodes::TakeNodes::takeDataFromFile(entireFile, &Event::appendNode, &Event::removeHead);
+				ChoiceFlow::TestKnowledge::crCheck = false;
+			}
+			ChoiceFlow::TestKnowledge::onClickTestPage(window, event1, stage, entireFile, ChoiceFlow::TestKnowledge::crCheck);
 			break;
 		case 4:
 			printInfoPage(window);

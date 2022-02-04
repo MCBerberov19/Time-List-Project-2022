@@ -61,6 +61,9 @@ namespace ChoiceFlow
 	}
 	namespace TestKnowledge
 	{
-		void onClickTestPage(sf::RenderWindow& window, sf::Event& event1, int& stage);
+		void onClickTestPage(sf::RenderWindow& window, sf::Event& event1, int& stage, Event*& entireFile, bool& crCheck);
+
+		static bool generated = false;
+		static bool crCheck = true;
 	}
 }

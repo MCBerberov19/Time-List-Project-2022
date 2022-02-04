@@ -1,15 +1,18 @@
 #pragma once
 #include "Event.h"
 #include <string>
+#include <map>
 
 class EventGenerator
 {
 private:
-	std::string answer;
 	int lastNodePos;
-public:
 	int year;
+public:
+	std::string title;
 	std::string topic;
 
 	EventGenerator(Event* entireFile, int(*takeLastNodePos)(Event*));
+
+	std::map<int,std::string> generateRandomNode(Event* entireFile, int(*takeLastNodePos)(Event*));
 };

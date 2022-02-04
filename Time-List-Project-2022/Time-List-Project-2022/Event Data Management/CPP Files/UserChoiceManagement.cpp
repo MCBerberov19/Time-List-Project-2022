@@ -4,6 +4,7 @@
 #include "../Header Files/TestsGenerator.h"
 #include <vector>
 #include <regex>
+#include <iostream>
 
 void ChoiceFlow::MainMenu::playSound(sf::SoundBuffer& buffer, sf::Sound& sound)
 {
@@ -459,7 +460,7 @@ void ChoiceFlow::SearchedAnEvent::onClickEditPage(sf::RenderWindow& window, sf::
 	}
 }
 
-void ChoiceFlow::TestKnowledge::onClickTestPage(sf::RenderWindow& window, sf::Event& event1, int& stage)
+void ChoiceFlow::TestKnowledge::onClickTestPage(sf::RenderWindow& window, sf::Event& event1, int& stage, Event*& entireFile, bool& crCheck)
 {
 	while (window.pollEvent(event1))
 	{
@@ -474,6 +475,8 @@ void ChoiceFlow::TestKnowledge::onClickTestPage(sf::RenderWindow& window, sf::Ev
 				(sf::Mouse::getPosition(window).y >= 30 && sf::Mouse::getPosition(window).y <= 90))
 			{
 				stage = 0;
+				crCheck = true;
+				SearchAnEventNodes::ClearList::clearList(entireFile);
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 190 && sf::Mouse::getPosition(window).x <= 615) &&
 				(sf::Mouse::getPosition(window).y >= 320 && sf::Mouse::getPosition(window).y <= 360))
@@ -483,7 +486,12 @@ void ChoiceFlow::TestKnowledge::onClickTestPage(sf::RenderWindow& window, sf::Ev
 			else if ((sf::Mouse::getPosition(window).x >= 240 && sf::Mouse::getPosition(window).x <= 565) &&
 				(sf::Mouse::getPosition(window).y >= 485 && sf::Mouse::getPosition(window).y <= 575))
 			{
-				//generate
+				if (SearchAnEventNodes::TakeNodes::takeLastNodePos(entireFile) > 1)
+				{
+					EventGenerator* eventG = new EventGenerator(entireFile, &SearchAnEventNodes::TakeNodes::takeLastNodePos);
+					std::cout << eventG->title << " " << eventG->topic << std::endl;
+					delete eventG;
+				}
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 35 && sf::Mouse::getPosition(window).x <= 275) &&
 				(sf::Mouse::getPosition(window).y >= 695 && sf::Mouse::getPosition(window).y <= 775))
