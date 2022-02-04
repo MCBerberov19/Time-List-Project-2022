@@ -5,7 +5,14 @@
 #include <regex>
 #include <iostream>
 
-void ChoiceFlow::MainMenu::onClickMainMenu(sf::RenderWindow& window, sf::Event& event1, int& stage)
+void ChoiceFlow::MainMenu::playSound(sf::SoundBuffer& buffer, sf::Sound& sound)
+{
+	buffer.loadFromFile("Sounds/click.wav");
+	sound.setBuffer(buffer);
+	sound.play();
+}
+
+void ChoiceFlow::MainMenu::onClickMainMenu(sf::RenderWindow& window, sf::Event& event1, int& stage, sf::SoundBuffer &buffer, sf::Sound &sound)
 {
 	while (window.pollEvent(event1))
 	{
@@ -19,16 +26,19 @@ void ChoiceFlow::MainMenu::onClickMainMenu(sf::RenderWindow& window, sf::Event& 
 			if ((sf::Mouse::getPosition(window).x >= 260 && sf::Mouse::getPosition(window).x <= 560) &&
 				(sf::Mouse::getPosition(window).y >= 305 && sf::Mouse::getPosition(window).y <= 390))
 			{
+				playSound(buffer, sound);
 				stage = 1;
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 260 && sf::Mouse::getPosition(window).x <= 560) &&
 				(sf::Mouse::getPosition(window).y >= 455 && sf::Mouse::getPosition(window).y <= 540))
 			{
+				playSound(buffer, sound);
 				stage = 2;
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 260 && sf::Mouse::getPosition(window).x <= 560) &&
 				(sf::Mouse::getPosition(window).y >= 605 && sf::Mouse::getPosition(window).y <= 690))
 			{
+				playSound(buffer, sound);
 				stage = 3;
 			}
 		}

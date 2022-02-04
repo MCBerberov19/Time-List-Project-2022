@@ -442,6 +442,9 @@ void setMenu(int& stage)
 	sf::RenderWindow window(sf::VideoMode(800, 800), "History Notes", sf::Style::Close);
 	window.setFramerateLimit(30);
 
+	sf::SoundBuffer buffer;
+	sf::Sound sound;
+
 	Event* head = NULL, * entireFile = NULL;
 	Event* tail = NULL;
 
@@ -453,7 +456,7 @@ void setMenu(int& stage)
 		{
 		case 0:
 			printMainMenu(window);
-			ChoiceFlow::MainMenu::onClickMainMenu(window, event1, stage);
+			ChoiceFlow::MainMenu::onClickMainMenu(window, event1, stage, buffer, sound);
 			break;
 		case 1:
 			ChoiceFlow::EnterAnEvent::onClickEventPage(window, event1, stage, ChoiceFlow::EnterAnEvent::inputData::box, ChoiceFlow::EnterAnEvent::inputData::title, ChoiceFlow::EnterAnEvent::inputData::year, ChoiceFlow::EnterAnEvent::inputData::topic, ChoiceFlow::EnterAnEvent::inputData::description);
