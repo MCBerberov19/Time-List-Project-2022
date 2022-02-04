@@ -10,6 +10,8 @@ void printSearchAnEventPage(sf::RenderWindow& window, Event*& head, Event*& tail
 
 void printInfoPage(sf::RenderWindow& window);
 
+void printEditPage(sf::RenderWindow& window);
+
 void printTestKnowledgePage(sf::RenderWindow& window);
 
 void setMenu(int& stage);
