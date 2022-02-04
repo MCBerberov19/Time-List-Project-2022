@@ -3,6 +3,7 @@
 #include "../Header Files/SearchAnEvent.h"
 #include <vector>
 #include <regex>
+#include <iostream>
 
 void ChoiceFlow::MainMenu::onClickMainMenu(sf::RenderWindow& window, sf::Event& event1, int& stage)
 {
@@ -464,7 +465,26 @@ void ChoiceFlow::TestKnowledge::onClickTestPage(sf::RenderWindow& window, sf::Ev
 			{
 				stage = 0;
 			}
-
+			else if ((sf::Mouse::getPosition(window).x >= 190 && sf::Mouse::getPosition(window).x <= 615) &&
+				(sf::Mouse::getPosition(window).y >= 320 && sf::Mouse::getPosition(window).y <= 360))
+			{
+				//title
+			}
+			else if ((sf::Mouse::getPosition(window).x >= 240 && sf::Mouse::getPosition(window).x <= 565) &&
+				(sf::Mouse::getPosition(window).y >= 485 && sf::Mouse::getPosition(window).y <= 575))
+			{
+				//generate
+			}
+			else if ((sf::Mouse::getPosition(window).x >= 35 && sf::Mouse::getPosition(window).x <= 275) &&
+				(sf::Mouse::getPosition(window).y >= 695 && sf::Mouse::getPosition(window).y <= 775))
+			{
+				//reveal
+			}
+			else if ((sf::Mouse::getPosition(window).x >= 525 && sf::Mouse::getPosition(window).x <= 765) &&
+				(sf::Mouse::getPosition(window).y >= 700 && sf::Mouse::getPosition(window).y <= 775))
+			{
+				//check
+			}
 		}
 	}
 }
