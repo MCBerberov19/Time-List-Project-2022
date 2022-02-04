@@ -14,5 +14,5 @@ public:
 
 	EventGenerator(Event* entireFile, int(*takeLastNodePos)(Event*));
 
-	std::map<int,std::string> generateRandomNode(Event* entireFile, int(*takeLastNodePos)(Event*));
+	std::map<std::string, std::string> generateRandomNode(Event* entireFile, int(*takeLastNodePos)(Event*));
 };

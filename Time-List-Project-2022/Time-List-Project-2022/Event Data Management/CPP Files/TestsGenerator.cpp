@@ -4,25 +4,27 @@
 
 EventGenerator::EventGenerator(Event* entireFile, int(*takeLastNodePos)(Event*))
 {
-	std::map<int, std::string> data = generateRandomNode(entireFile, takeLastNodePos);
+	std::map<std::string, std::string> data = generateRandomNode(entireFile, takeLastNodePos);
 
-	this->title = data[1]; this->topic = data[2]; this->year = stoi(data[3]);//gray code
+	this->title = data["Title"]; 
+	this->topic = data["Topic"]; 
+	this->year = stoi(data["Year"]); //gray code
 }
 
-std::map<int, std::string> EventGenerator::generateRandomNode(Event* entireFile, int(*takeLastNodePos)(Event*))
+std::map<std::string, std::string> EventGenerator::generateRandomNode(Event* entireFile, int(*takeLastNodePos)(Event*))
 {
 	int node = rand() % takeLastNodePos(entireFile);
 	int i = 0;
-	std::map<int, std::string> data;
+	std::map<std::string, std::string> data;
 
 	while (entireFile != NULL)
 	{
 		if (node == i)
 		{
 			data = {
-				{1, entireFile->title},
-				{2, entireFile->topic},
-				{3, std::to_string(entireFile->year)}
+				{"Title", entireFile->title},
+				{"Topic", entireFile->topic},
+				{"Year", std::to_string(entireFile->year)}
 				};
 
 			break;
