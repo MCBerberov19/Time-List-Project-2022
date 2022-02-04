@@ -133,14 +133,14 @@ void printEnterAnEventPage(sf::RenderWindow& window)
 void printSearchAnEventPage(sf::RenderWindow& window, Event*& head, Event*& tail)
 {
 	sf::Text searchData;
-	sf::Texture t1, t2, t3, t4, t5, t6 ,t7, t8, t9, t10;
+	sf::Texture t1, t2, t3, t4, t5, t6, t7, t8, t9, t10;
 	sf::Font font;
 	font.loadFromFile("Images and Fonts/arial.ttf");
 
 	searchData.setCharacterSize(28);
 	searchData.setFont(font);
 	searchData.setFillColor(sf::Color::Black);
-	searchData.setPosition(332,139);
+	searchData.setPosition(332, 139);
 	searchData.setString(ChoiceFlow::SearchedAnEvent::inputData::searchData);
 
 	t1.loadFromFile("Images and Fonts/background.jpg");
@@ -400,17 +400,41 @@ void printEditPage(sf::RenderWindow& window)
 
 void printTestKnowledgePage(sf::RenderWindow& window)
 {
-	sf::Texture t1, t2;
+	sf::Texture t1, t2, t3, t4, t5, t6, t7, t8;
 
 	t1.loadFromFile("Images and Fonts/background.jpg");
 	t2.loadFromFile("Images and Fonts/back.png");
+	t3.loadFromFile("Images and Fonts/year.png");
+	t4.loadFromFile("Images and Fonts/topic.png");
+	t5.loadFromFile("Images and Fonts/title.png");
+	t6.loadFromFile("Images and Fonts/generate_button.png");
+	t7.loadFromFile("Images and Fonts/reveal_button.png");
+	t8.loadFromFile("Images and Fonts/check_button.png");
 
 	sf::Sprite background(t1);
 	sf::Sprite backButton(t2);
+	sf::Sprite year(t3);
+	sf::Sprite topic(t4);
+	sf::Sprite title(t5);
+	sf::Sprite generateButton(t6);
+	sf::Sprite revealButton(t7);
+	sf::Sprite checkButton(t8);
 
 	window.draw(background);
 	backButton.setPosition(30, 30);
 	window.draw(backButton);
+	year.setPosition(135, 160);
+	window.draw(year);
+	topic.setPosition(445, 157);
+	window.draw(topic);
+	title.setPosition(-40, 150);
+	window.draw(title);
+	generateButton.setPosition(230, 475);
+	window.draw(generateButton);
+	revealButton.setPosition(25, 685);
+	window.draw(revealButton);
+	checkButton.setPosition(520, 683);
+	window.draw(checkButton);
 }
 
 void setMenu(int& stage)
@@ -418,7 +442,7 @@ void setMenu(int& stage)
 	sf::RenderWindow window(sf::VideoMode(800, 800), "History Notes", sf::Style::Close);
 	window.setFramerateLimit(30);
 
-	Event* head = NULL, *entireFile = NULL;
+	Event* head = NULL, * entireFile = NULL;
 	Event* tail = NULL;
 
 	while (window.isOpen())
@@ -456,7 +480,7 @@ void setMenu(int& stage)
 				head = new Event; tail = new Event; entireFile = new Event;
 				SearchAnEventNodes::TakeNodes::takeDataFromFile(head, &Event::appendNode, &Event::removeHead);
 				SearchAnEventNodes::TakeNodes::takeDataFromFile(entireFile, &Event::appendNode, &Event::removeHead);
-				head->mergeSortList(head,1);
+				head->mergeSortList(head, 1);
 				tail = tail->getTail(head);
 				head = head->getHead(tail);
 				ChoiceFlow::SearchedAnEvent::crCheck = false;
