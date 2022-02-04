@@ -2,7 +2,7 @@
 #include "../Header Files/FrontEnd.h"
 #include "../../Event Data Management/Header Files/Event.h"
 #include "../../Event Data Management/Header Files/SearchAnEvent.h"
-#include <iostream>
+#include "../../Event Data Management/Header Files/TestsGenerator.h"
 
 void printMainMenu(sf::RenderWindow& window)
 {

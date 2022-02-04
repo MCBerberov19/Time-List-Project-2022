@@ -1,9 +1,9 @@
 #include "../Header Files/UserChoiceManagement.h"
 #include "../Header Files/EnterAnEvent.h"
 #include "../Header Files/SearchAnEvent.h"
+#include "../Header Files/TestsGenerator.h"
 #include <vector>
 #include <regex>
-#include <iostream>
 
 void ChoiceFlow::MainMenu::onClickMainMenu(sf::RenderWindow& window, sf::Event& event1, int& stage)
 {

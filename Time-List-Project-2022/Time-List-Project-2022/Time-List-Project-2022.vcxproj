@@ -145,6 +145,7 @@
     <ClCompile Include="Event Data Management\CPP Files\EnterAnEvent.cpp" />
     <ClCompile Include="Event Data Management\CPP Files\Event.cpp" />
     <ClCompile Include="Event Data Management\CPP Files\SearchAnEvent.cpp" />
+    <ClCompile Include="Event Data Management\CPP Files\TestsGenerator.cpp" />
     <ClCompile Include="Event Data Management\CPP Files\UserChoiceManagement.cpp" />
     <ClCompile Include="Interface\CPP Files\FrontEnd.cpp" />
     <ClCompile Include="main.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="Event Data Management\Header Files\EnterAnEvent.h" />
     <ClInclude Include="Event Data Management\Header Files\Event.h" />
     <ClInclude Include="Event Data Management\Header Files\SearchAnEvent.h" />
+    <ClInclude Include="Event Data Management\Header Files\TestsGenerator.h" />
     <ClInclude Include="Event Data Management\Header Files\UserChoiceManagement.h" />
     <ClInclude Include="Interface\Header Files\FrontEnd.h" />
   </ItemGroup>
