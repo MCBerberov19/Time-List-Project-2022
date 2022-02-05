@@ -10,7 +10,7 @@ namespace SearchAnEventNodes
 
 		void printListReversed(sf::RenderWindow& window, Event* tail, sf::Sprite& eventBoard, sf::Font& font);
 
-		Event* printFoundData(Event* head, sf::String searchData, void(Event::*appendNode)(Event*, std::string&, int&, std::string&, std::string&));
+		Event* printFoundData(Event* head, sf::String searchData, void(Event::* appendNode)(Event*, std::string&, int&, std::string&, std::string&));
 	}
 
 	namespace ClearList

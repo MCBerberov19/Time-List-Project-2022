@@ -33,6 +33,9 @@
     <ClCompile Include="Event Data Management\CPP Files\SearchAnEvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Event Data Management\CPP Files\TestsGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Interface\Header Files\FrontEnd.h">
@@ -48,6 +51,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Event Data Management\Header Files\SearchAnEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Event Data Management\Header Files\TestsGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

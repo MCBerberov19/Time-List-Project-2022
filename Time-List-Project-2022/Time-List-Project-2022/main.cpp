@@ -2,6 +2,8 @@
 
 int main()
 {
+	srand(time(NULL));
+
 	int stage = 0;
 
 	setMenu(stage);
