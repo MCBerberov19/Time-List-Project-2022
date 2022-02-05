@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include "Event.h"
+#include "TestsGenerator.h"
 
 namespace ChoiceFlow
 {
@@ -61,9 +62,17 @@ namespace ChoiceFlow
 	}
 	namespace TestKnowledge
 	{
-		void onClickTestPage(sf::RenderWindow& window, sf::Event& event1, int& stage, Event*& entireFile, bool& crCheck);
+		namespace inputData
+		{
+			static bool generated = false;
+			static bool crCheck = true;
+			static sf::String yearAnswer;
+			static sf::String titleText;
+			static sf::String topicText;
+			static bool revealed = false;
+			static bool checked = false;
+		}
 
-		static bool generated = false;
-		static bool crCheck = true;
+		void onClickTestPage(sf::RenderWindow& window, sf::Event& event1, int& stage, Event*& entireFile, bool& crCheck, int& box, sf::String& yearAnswer, sf::String& titleText, sf::String& topicText, EventGenerator*& eventG, bool& revealed, bool& generated, bool& checked);
 	}
 }

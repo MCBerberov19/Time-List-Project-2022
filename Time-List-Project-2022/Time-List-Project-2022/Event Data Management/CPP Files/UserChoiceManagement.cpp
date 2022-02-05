@@ -13,7 +13,7 @@ void ChoiceFlow::MainMenu::playSound(sf::SoundBuffer& buffer, sf::Sound& sound)
 	sound.play();
 }
 
-void ChoiceFlow::MainMenu::onClickMainMenu(sf::RenderWindow& window, sf::Event& event1, int& stage, sf::SoundBuffer &buffer, sf::Sound &sound)
+void ChoiceFlow::MainMenu::onClickMainMenu(sf::RenderWindow& window, sf::Event& event1, int& stage, sf::SoundBuffer& buffer, sf::Sound& sound)
 {
 	while (window.pollEvent(event1))
 	{
@@ -223,7 +223,8 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 				crCheck = true;
 				box = 0;
 				searchData = "";
-
+				sortType = 1;
+				sortCheck = true;
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 85 && sf::Mouse::getPosition(window).x <= 710) &&
 				(sf::Mouse::getPosition(window).y >= 125 && sf::Mouse::getPosition(window).y <= 182))
@@ -460,7 +461,7 @@ void ChoiceFlow::SearchedAnEvent::onClickEditPage(sf::RenderWindow& window, sf::
 	}
 }
 
-void ChoiceFlow::TestKnowledge::onClickTestPage(sf::RenderWindow& window, sf::Event& event1, int& stage, Event*& entireFile, bool& crCheck)
+void ChoiceFlow::TestKnowledge::onClickTestPage(sf::RenderWindow& window, sf::Event& event1, int& stage, Event*& entireFile, bool& crCheck, int& box, sf::String& yearAnswer, sf::String& titleText, sf::String& topicText, EventGenerator*& eventG, bool& revealed, bool& generated, bool& checked)
 {
 	while (window.pollEvent(event1))
 	{
@@ -477,31 +478,50 @@ void ChoiceFlow::TestKnowledge::onClickTestPage(sf::RenderWindow& window, sf::Ev
 				stage = 0;
 				crCheck = true;
 				SearchAnEventNodes::ClearList::clearList(entireFile);
+				box = 0;
+				titleText = ""; topicText = ""; yearAnswer = ""; revealed = false; generated = false; checked = false;
+				if(generated)
+				delete eventG;
 			}
-			else if ((sf::Mouse::getPosition(window).x >= 190 && sf::Mouse::getPosition(window).x <= 615) &&
-				(sf::Mouse::getPosition(window).y >= 320 && sf::Mouse::getPosition(window).y <= 360))
+			else if ((sf::Mouse::getPosition(window).x >= 135 && sf::Mouse::getPosition(window).x <= 290) &&
+				(sf::Mouse::getPosition(window).y >= 310 && sf::Mouse::getPosition(window).y <= 355))
 			{
-				//title
+				box = 1;
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 240 && sf::Mouse::getPosition(window).x <= 565) &&
 				(sf::Mouse::getPosition(window).y >= 485 && sf::Mouse::getPosition(window).y <= 575))
 			{
 				if (SearchAnEventNodes::TakeNodes::takeLastNodePos(entireFile) > 1)
 				{
-					EventGenerator* eventG = new EventGenerator(entireFile, &SearchAnEventNodes::TakeNodes::takeLastNodePos);
-					std::cout << eventG->title << " " << eventG->topic << std::endl;
-					delete eventG;
+					if(generated) delete eventG;
+					eventG = new EventGenerator(entireFile, &SearchAnEventNodes::TakeNodes::takeLastNodePos);
+					titleText = eventG->title; topicText = eventG->topic;
+					box = 0;
+					yearAnswer = "";
+					revealed = false; generated = true; checked = false;
 				}
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 35 && sf::Mouse::getPosition(window).x <= 275) &&
 				(sf::Mouse::getPosition(window).y >= 695 && sf::Mouse::getPosition(window).y <= 775))
 			{
-				//reveal
+				if (generated)
+				{
+					yearAnswer = std::to_string(eventG->convertToDecimalFromBinary());
+					revealed = true;
+				}
+				box = 0;
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 525 && sf::Mouse::getPosition(window).x <= 765) &&
 				(sf::Mouse::getPosition(window).y >= 700 && sf::Mouse::getPosition(window).y <= 775))
 			{
-				//check
+				checked = true;
+				box = 0;
+				titleText = ""; topicText = ""; yearAnswer = "";
+				revealed = false;
+			}
+			else
+			{
+				box = 0;
 			}
 		}
 	}

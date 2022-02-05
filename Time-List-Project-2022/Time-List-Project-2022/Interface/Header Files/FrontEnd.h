@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "../../Event Data Management/Header Files/Event.h"
+#include "../../Event Data Management/Header Files/TestsGenerator.h"
 
 void printMainMenu(sf::RenderWindow& window);
 
@@ -12,6 +13,6 @@ void printInfoPage(sf::RenderWindow& window);
 
 void printEditPage(sf::RenderWindow& window);
 
-void printTestKnowledgePage(sf::RenderWindow& window);
+void printTestKnowledgePage(sf::RenderWindow& window, EventGenerator* answer);
 
 void setMenu(int& stage);
