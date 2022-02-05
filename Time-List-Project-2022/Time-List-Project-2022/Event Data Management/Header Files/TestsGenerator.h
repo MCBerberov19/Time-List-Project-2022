@@ -21,6 +21,6 @@ public:
 	std::vector<int> convertToGrayCode(int decNum);
 
 	std::vector<int> convertToBinaryFromGray();
-	
+
 	int convertToDecimalFromBinary();
 };

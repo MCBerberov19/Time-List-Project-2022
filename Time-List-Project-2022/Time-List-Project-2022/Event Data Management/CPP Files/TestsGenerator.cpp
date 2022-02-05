@@ -7,8 +7,8 @@ EventGenerator::EventGenerator(Event* entireFile, int(*takeLastNodePos)(Event*))
 {
 	std::map<std::string, std::string> data = generateRandomNode(entireFile, takeLastNodePos);
 
-	this->title = data["Title"]; 
-	this->topic = data["Topic"]; 
+	this->title = data["Title"];
+	this->topic = data["Topic"];
 	this->grayYear = convertToGrayCode(stoi(data["Year"]));
 }
 
@@ -26,7 +26,7 @@ std::map<std::string, std::string> EventGenerator::generateRandomNode(Event* ent
 				{"Title", entireFile->title},
 				{"Topic", entireFile->topic},
 				{"Year", std::to_string(entireFile->year)}
-				};
+			};
 
 			break;
 		}
@@ -63,15 +63,6 @@ std::vector<int> EventGenerator::convertToGrayCode(int decNum)
 	}
 
 	return gray;
-}
-
-void printV(std::vector<int> v1)
-{
-	for (int i : v1)
-	{
-		std::cout << i;
-	}
-	std::cout << std::endl;
 }
 
 std::vector<int> EventGenerator::convertToBinaryFromGray()

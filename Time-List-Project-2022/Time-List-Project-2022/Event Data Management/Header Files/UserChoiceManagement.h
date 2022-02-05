@@ -10,7 +10,7 @@ namespace ChoiceFlow
 	{
 		void playSound(sf::SoundBuffer& buffer, sf::Sound& sound);
 
-		void onClickMainMenu(sf::RenderWindow& window, sf::Event& event1, int& stage, sf::SoundBuffer &buffer, sf::Sound &sound);
+		void onClickMainMenu(sf::RenderWindow& window, sf::Event& event1, int& stage, sf::SoundBuffer& buffer, sf::Sound& sound);
 	}
 	namespace EnterAnEvent
 	{

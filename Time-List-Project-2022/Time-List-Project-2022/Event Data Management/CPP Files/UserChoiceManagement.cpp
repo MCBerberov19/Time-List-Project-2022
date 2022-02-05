@@ -480,8 +480,8 @@ void ChoiceFlow::TestKnowledge::onClickTestPage(sf::RenderWindow& window, sf::Ev
 				SearchAnEventNodes::ClearList::clearList(entireFile);
 				box = 0;
 				titleText = ""; topicText = ""; yearAnswer = ""; revealed = false; generated = false; checked = false;
-				if(generated)
-				delete eventG;
+				if (generated)
+					delete eventG;
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 135 && sf::Mouse::getPosition(window).x <= 290) &&
 				(sf::Mouse::getPosition(window).y >= 310 && sf::Mouse::getPosition(window).y <= 355))
@@ -493,7 +493,7 @@ void ChoiceFlow::TestKnowledge::onClickTestPage(sf::RenderWindow& window, sf::Ev
 			{
 				if (SearchAnEventNodes::TakeNodes::takeLastNodePos(entireFile) > 1)
 				{
-					if(generated) delete eventG;
+					if (generated) delete eventG;
 					eventG = new EventGenerator(entireFile, &SearchAnEventNodes::TakeNodes::takeLastNodePos);
 					titleText = eventG->title; topicText = eventG->topic;
 					box = 0;
@@ -508,16 +508,19 @@ void ChoiceFlow::TestKnowledge::onClickTestPage(sf::RenderWindow& window, sf::Ev
 				{
 					yearAnswer = std::to_string(eventG->convertToDecimalFromBinary());
 					revealed = true;
+					checked = false;
 				}
 				box = 0;
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 525 && sf::Mouse::getPosition(window).x <= 765) &&
 				(sf::Mouse::getPosition(window).y >= 700 && sf::Mouse::getPosition(window).y <= 775))
 			{
-				checked = true;
+				if (generated && yearAnswer.getSize() > 0)
+				{
+					checked = true;
+					revealed = false;
+				}
 				box = 0;
-				titleText = ""; topicText = ""; yearAnswer = "";
-				revealed = false;
 			}
 			else
 			{

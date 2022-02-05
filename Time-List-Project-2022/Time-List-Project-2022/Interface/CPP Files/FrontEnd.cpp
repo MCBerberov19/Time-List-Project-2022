@@ -428,6 +428,9 @@ void printTestKnowledgePage(sf::RenderWindow& window, EventGenerator* answer)
 	topicText.setFillColor(sf::Color::Black);
 	topicText.setPosition(510, 318);
 	topicText.setString(ChoiceFlow::TestKnowledge::inputData::topicText);
+	message.setFont(font);
+	message.setCharacterSize(25);
+	message.setPosition(335, 400);
 
 	sf::Sprite background(t1);
 	sf::Sprite backButton(t2);
@@ -450,14 +453,24 @@ void printTestKnowledgePage(sf::RenderWindow& window, EventGenerator* answer)
 	title.setPosition(-45, -15);
 	window.draw(title);
 	window.draw(titleText);
-	message.setPosition(250, 400);
-	/*if (ChoiceFlow::TestKnowledge::inputData::checked)
+	if (ChoiceFlow::TestKnowledge::inputData::checked)
 	{
-		if (ChoiceFlow::TestKnowledge::inputData::yearAnswer.toAnsiString() == answer->)
+		if (ChoiceFlow::TestKnowledge::inputData::yearAnswer.toAnsiString() == std::to_string(answer->convertToDecimalFromBinary()))
 		{
-
+			message.setFillColor(sf::Color::Green);
+			message.setString("Correct!");
 		}
-	}*/
+		else
+		{
+			message.setFillColor(sf::Color::Red);
+			message.setString("Wrong!");
+		}
+	}
+	else
+	{
+		message.setString("");
+	}
+	window.draw(message);
 	generateButton.setPosition(230, 475);
 	window.draw(generateButton);
 	revealButton.setPosition(25, 685);
@@ -470,17 +483,16 @@ void setMenu(int& stage)
 {
 	sf::RenderWindow window(sf::VideoMode(800, 800), "History Notes", sf::Style::Close);
 	window.setFramerateLimit(30);
+	sf::Event event1;
 
 	sf::SoundBuffer buffer;
 	sf::Sound sound;
 
-	Event* head = NULL, * entireFile = NULL;
-	Event* tail = NULL; EventGenerator* eventG = NULL;
+	Event* head = NULL, * entireFile = NULL, * tail = NULL;
+	EventGenerator* eventG = NULL;
 
 	while (window.isOpen())
 	{
-		sf::Event event1;
-
 		switch (stage)
 		{
 		case 0:
@@ -533,7 +545,7 @@ void setMenu(int& stage)
 				ChoiceFlow::TestKnowledge::inputData::crCheck = false;
 			}
 			ChoiceFlow::TestKnowledge::onClickTestPage(window, event1, stage, entireFile, ChoiceFlow::TestKnowledge::inputData::crCheck, ChoiceFlow::EnterAnEvent::inputData::box, ChoiceFlow::TestKnowledge::inputData::yearAnswer, ChoiceFlow::TestKnowledge::inputData::titleText, ChoiceFlow::TestKnowledge::inputData::topicText, eventG, ChoiceFlow::TestKnowledge::inputData::revealed, ChoiceFlow::TestKnowledge::inputData::generated, ChoiceFlow::TestKnowledge::inputData::checked);
-			if (ChoiceFlow::EnterAnEvent::inputData::box == 1 && !ChoiceFlow::TestKnowledge::inputData::revealed && !ChoiceFlow::TestKnowledge::inputData::generated)
+			if (ChoiceFlow::EnterAnEvent::inputData::box == 1 && !ChoiceFlow::TestKnowledge::inputData::revealed && ChoiceFlow::TestKnowledge::inputData::generated && !ChoiceFlow::TestKnowledge::inputData::checked)
 			{
 				ChoiceFlow::EnterAnEvent::inputEventData(event1, ChoiceFlow::TestKnowledge::inputData::yearAnswer, 4, true);
 			}
@@ -565,5 +577,4 @@ void setMenu(int& stage)
 		window.display();
 		window.clear();
 	}
-
 }

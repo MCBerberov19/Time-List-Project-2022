@@ -120,7 +120,7 @@ void SearchAnEventNodes::ClearList::clearListTail(Event* tail)
 }
 
 void SearchAnEventNodes::TakeNodes::takeDataFromFile(Event*& head, void(Event::* appendNode)(Event*, std::string&,
-	int&, std::string&, std::string&), Event*(Event::*removeHead)(Event*))
+	int&, std::string&, std::string&), Event* (Event::* removeHead)(Event*))
 {
 	std::ifstream inputFile; inputFile.open("Events.txt", std::ios::in | std::ios::app);
 	std::string data;
