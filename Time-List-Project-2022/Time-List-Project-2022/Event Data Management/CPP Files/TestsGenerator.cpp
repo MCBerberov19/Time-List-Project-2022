@@ -64,3 +64,30 @@ std::vector<int> EventGenerator::convertToGrayCode(int decNum)
 	return gray;
 }
 
+std::vector<int> EventGenerator::convertToBinaryFromGray()
+{
+	std::vector<int> bin;
+	bin.push_back(this->grayYear[0]);
+
+	for (size_t i = 1; i < this->grayYear.size(); i++)
+	{
+		bin.push_back(grayYear[i - 1] ^ grayYear[i]);
+	}
+
+	reverse(bin.begin(), bin.end());
+
+	return bin;
+}
+
+int EventGenerator::convertToDecimalFromBinary()
+{
+	std::vector<int> bin = convertToBinaryFromGray();
+	int decimal = 0;
+
+	for (size_t i = 0; i < bin.size(); i++)
+	{
+		decimal += bin[i] * pow(2, i);
+	}
+
+	return decimal;
+}
