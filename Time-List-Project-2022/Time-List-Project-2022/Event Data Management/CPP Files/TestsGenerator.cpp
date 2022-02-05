@@ -1,6 +1,7 @@
 #include "../Header Files/TestsGenerator.h"
 #include "../Header Files/SearchAnEvent.h"
 #include <stdlib.h>
+#include <iostream>
 
 EventGenerator::EventGenerator(Event* entireFile, int(*takeLastNodePos)(Event*))
 {
@@ -64,6 +65,15 @@ std::vector<int> EventGenerator::convertToGrayCode(int decNum)
 	return gray;
 }
 
+void printV(std::vector<int> v1)
+{
+	for (int i : v1)
+	{
+		std::cout << i;
+	}
+	std::cout << std::endl;
+}
+
 std::vector<int> EventGenerator::convertToBinaryFromGray()
 {
 	std::vector<int> bin;
@@ -71,11 +81,10 @@ std::vector<int> EventGenerator::convertToBinaryFromGray()
 
 	for (size_t i = 1; i < this->grayYear.size(); i++)
 	{
-		bin.push_back(grayYear[i - 1] ^ grayYear[i]);
+		bin.push_back(bin[i - 1] ^ grayYear[i]);
 	}
 
 	reverse(bin.begin(), bin.end());
-
 	return bin;
 }
 
