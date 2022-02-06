@@ -24,7 +24,7 @@ namespace ChoiceFlow
 			static sf::String description;
 		}
 
-		void onClickEventPage(sf::RenderWindow& window, sf::Event& event1, int& stage, int& box, sf::String& title, sf::String& year, sf::String& topic, sf::String& description);
+		void onClickEventPage(sf::RenderWindow& window, sf::Event& event1, int& stage, int& box, sf::String& title, sf::String& year, sf::String& topic, sf::String& description, sf::SoundBuffer& buffer, sf::Sound& sound);
 
 		void inputEventData(sf::Event& event1, sf::String& text, int size, bool num);
 
@@ -54,11 +54,11 @@ namespace ChoiceFlow
 
 		void onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage, Event*& head, Event*& tail, bool& crCheck, bool& sortCheck, sf::String& title, sf::String& year, sf::String& topic, sf::String& description, int& sortType, int& box, sf::String& searchData, Event*& entireFile, sf::SoundBuffer& buffer, sf::Sound& sound);
 
-		void onClickInfoPage(sf::RenderWindow& window, sf::Event& event1, int& stage);
+		void onClickInfoPage(sf::RenderWindow& window, sf::Event& event1, int& stage, sf::SoundBuffer& buffer, sf::Sound& sound);
 
 		void saveEditedEventData(sf::String& title, sf::String& year, sf::String& topic, sf::String& description);
 
-		void onClickEditPage(sf::RenderWindow& window, sf::Event& event1, int& stage, int& box, sf::String& title, sf::String& year, sf::String& topic, sf::String& description, bool& crCheck, int& sortType);
+		void onClickEditPage(sf::RenderWindow& window, sf::Event& event1, int& stage, int& box, sf::String& title, sf::String& year, sf::String& topic, sf::String& description, bool& crCheck, int& sortType, sf::SoundBuffer& buffer, sf::Sound& sound);
 	}
 	namespace TestKnowledge
 	{
@@ -73,6 +73,6 @@ namespace ChoiceFlow
 			static bool checked = false;
 		}
 
-		void onClickTestPage(sf::RenderWindow& window, sf::Event& event1, int& stage, Event*& entireFile, bool& crCheck, int& box, sf::String& yearAnswer, sf::String& titleText, sf::String& topicText, EventGenerator*& eventG, bool& revealed, bool& generated, bool& checked);
+		void onClickTestPage(sf::RenderWindow& window, sf::Event& event1, int& stage, Event*& entireFile, bool& crCheck, int& box, sf::String& yearAnswer, sf::String& titleText, sf::String& topicText, EventGenerator*& eventG, bool& revealed, bool& generated, bool& checked, sf::SoundBuffer& buffer, sf::Sound& sound);
 	}
 }

@@ -500,7 +500,7 @@ void setMenu(int& stage)
 			ChoiceFlow::MainMenu::onClickMainMenu(window, event1, stage, buffer, sound);
 			break;
 		case 1:
-			ChoiceFlow::EnterAnEvent::onClickEventPage(window, event1, stage, ChoiceFlow::EnterAnEvent::inputData::box, ChoiceFlow::EnterAnEvent::inputData::title, ChoiceFlow::EnterAnEvent::inputData::year, ChoiceFlow::EnterAnEvent::inputData::topic, ChoiceFlow::EnterAnEvent::inputData::description);
+			ChoiceFlow::EnterAnEvent::onClickEventPage(window, event1, stage, ChoiceFlow::EnterAnEvent::inputData::box, ChoiceFlow::EnterAnEvent::inputData::title, ChoiceFlow::EnterAnEvent::inputData::year, ChoiceFlow::EnterAnEvent::inputData::topic, ChoiceFlow::EnterAnEvent::inputData::description, buffer, sound);
 			printEnterAnEventPage(window);
 			switch (ChoiceFlow::EnterAnEvent::inputData::box)
 			{
@@ -544,7 +544,7 @@ void setMenu(int& stage)
 				SearchAnEventNodes::TakeNodes::takeDataFromFile(entireFile, &Event::appendNode, &Event::removeHead);
 				ChoiceFlow::TestKnowledge::inputData::crCheck = false;
 			}
-			ChoiceFlow::TestKnowledge::onClickTestPage(window, event1, stage, entireFile, ChoiceFlow::TestKnowledge::inputData::crCheck, ChoiceFlow::EnterAnEvent::inputData::box, ChoiceFlow::TestKnowledge::inputData::yearAnswer, ChoiceFlow::TestKnowledge::inputData::titleText, ChoiceFlow::TestKnowledge::inputData::topicText, eventG, ChoiceFlow::TestKnowledge::inputData::revealed, ChoiceFlow::TestKnowledge::inputData::generated, ChoiceFlow::TestKnowledge::inputData::checked);
+			ChoiceFlow::TestKnowledge::onClickTestPage(window, event1, stage, entireFile, ChoiceFlow::TestKnowledge::inputData::crCheck, ChoiceFlow::EnterAnEvent::inputData::box, ChoiceFlow::TestKnowledge::inputData::yearAnswer, ChoiceFlow::TestKnowledge::inputData::titleText, ChoiceFlow::TestKnowledge::inputData::topicText, eventG, ChoiceFlow::TestKnowledge::inputData::revealed, ChoiceFlow::TestKnowledge::inputData::generated, ChoiceFlow::TestKnowledge::inputData::checked, buffer, sound);
 			if (ChoiceFlow::EnterAnEvent::inputData::box == 1 && !ChoiceFlow::TestKnowledge::inputData::revealed && ChoiceFlow::TestKnowledge::inputData::generated && !ChoiceFlow::TestKnowledge::inputData::checked)
 			{
 				ChoiceFlow::EnterAnEvent::inputEventData(event1, ChoiceFlow::TestKnowledge::inputData::yearAnswer, 4, true);
@@ -552,11 +552,11 @@ void setMenu(int& stage)
 			break;
 		case 4:
 			printInfoPage(window);
-			ChoiceFlow::SearchedAnEvent::onClickInfoPage(window, event1, stage);
+			ChoiceFlow::SearchedAnEvent::onClickInfoPage(window, event1, stage, buffer, sound);
 			break;
 		case 5:
 			printEditPage(window);
-			ChoiceFlow::SearchedAnEvent::onClickEditPage(window, event1, stage, ChoiceFlow::EnterAnEvent::inputData::box, ChoiceFlow::SearchedAnEvent::inputData::title, ChoiceFlow::SearchedAnEvent::inputData::year, ChoiceFlow::SearchedAnEvent::inputData::topic, ChoiceFlow::SearchedAnEvent::inputData::description, ChoiceFlow::SearchedAnEvent::crCheck, ChoiceFlow::SearchedAnEvent::sortType);
+			ChoiceFlow::SearchedAnEvent::onClickEditPage(window, event1, stage, ChoiceFlow::EnterAnEvent::inputData::box, ChoiceFlow::SearchedAnEvent::inputData::title, ChoiceFlow::SearchedAnEvent::inputData::year, ChoiceFlow::SearchedAnEvent::inputData::topic, ChoiceFlow::SearchedAnEvent::inputData::description, ChoiceFlow::SearchedAnEvent::crCheck, ChoiceFlow::SearchedAnEvent::sortType, buffer, sound);
 			switch (ChoiceFlow::EnterAnEvent::inputData::box)
 			{
 			case 1:
