@@ -2,7 +2,7 @@
 
 int main()
 {
-	srand(time(NULL));
+	srand((unsigned int)time(0));
 
 	int stage = 0;
 

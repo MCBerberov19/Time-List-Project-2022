@@ -83,7 +83,7 @@ int EventGenerator::convertToDecimalFromBinary()
 
 	for (size_t i = 0; i < bin.size(); i++)
 	{
-		decimal += bin[i] * pow(2, i);
+		decimal += int(bin[i] * pow(2, i));
 	}
 
 	return decimal;

@@ -4,7 +4,7 @@
 void SearchAnEventNodes::PrintList::printList(sf::RenderWindow& window, Event* head, sf::Sprite& eventBoard, sf::Font& font)
 {
 	sf::Text text; text.setFont(font); text.setCharacterSize(28); text.setFillColor(sf::Color::Black);
-	int y = 220;
+	float y = 220;
 	int i = 0;
 
 	while (head != NULL)
@@ -26,7 +26,7 @@ void SearchAnEventNodes::PrintList::printList(sf::RenderWindow& window, Event* h
 void SearchAnEventNodes::PrintList::printListReversed(sf::RenderWindow& window, Event* tail, sf::Sprite& eventBoard, sf::Font& font)
 {
 	sf::Text text; text.setFont(font); text.setCharacterSize(28); text.setFillColor(sf::Color::Black);
-	int y = 220;
+	float y = 220;
 	int i = 0;
 
 	while (tail != NULL)
@@ -171,8 +171,8 @@ int SearchAnEventNodes::TakeNodes::takeNodeIndex(int cordinateY, int node)
 	{
 		return 0;
 	}
-	node++;
-	takeNodeIndex(cordinateY - 70, node);
+
+	return takeNodeIndex(cordinateY - 70, ++node);
 }
 
 int SearchAnEventNodes::TakeNodes::takeLastNodePos(Event* head)

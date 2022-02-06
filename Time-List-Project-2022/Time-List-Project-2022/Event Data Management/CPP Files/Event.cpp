@@ -52,7 +52,6 @@ void Event::appendNode(Event* head, std::string& title, int& year, std::string& 
 	{
 		tail->nextEvent->prevEvent = tail;
 	}
-
 }
 
 Event* Event::removeHead(Event* head)
@@ -137,7 +136,6 @@ Event* Event::merge(Event* f, Event* s, int sortType)
 		}
 		break;
 	}
-
 }
 
 Event* Event::mergeSortList(Event*& head, int sortType)
