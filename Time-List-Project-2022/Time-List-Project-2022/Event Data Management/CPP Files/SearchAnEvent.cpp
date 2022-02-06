@@ -78,10 +78,7 @@ Event* SearchAnEventNodes::PrintList::printFoundData(Event* head, sf::String sea
 				c = ::tolower(c);
 				});
 
-			std::size_t foundInTitle = dataTitle.find(input);
-			std::size_t foundInTopic = dataTopic.find(input);
-
-			if (foundInTitle != std::string::npos || foundInTopic != std::string::npos)
+			if (dataTitle.find(input) != std::string::npos || dataTopic.find(input) != std::string::npos)
 			{
 				head->appendNode(newHead, head->title, head->year, head->topic, head->description);
 				cur++;
