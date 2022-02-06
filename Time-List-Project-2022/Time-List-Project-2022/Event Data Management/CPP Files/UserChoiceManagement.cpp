@@ -6,9 +6,27 @@
 #include <regex>
 #include <iostream>
 
-void ChoiceFlow::MainMenu::playSound(sf::SoundBuffer& buffer, sf::Sound& sound)
+void ChoiceFlow::MainMenu::playSound(sf::SoundBuffer& buffer, sf::Sound& sound, int soundType)
 {
-	buffer.loadFromFile("Sounds/click.wav");
+	switch (soundType) 
+	{
+		case 1:
+			buffer.loadFromFile("Sounds/click.wav");
+			break;
+		case 2:
+			buffer.loadFromFile("Sounds/click.wav");
+			break;
+		case 3:
+			buffer.loadFromFile("Sounds/click.wav");
+			break;
+		case 4:
+			buffer.loadFromFile("Sounds/click.wav");
+			break;
+		case 5:
+			buffer.loadFromFile("Sounds/click.wav");
+			break;
+	}
+
 	sound.setBuffer(buffer);
 	sound.play();
 }
@@ -27,19 +45,19 @@ void ChoiceFlow::MainMenu::onClickMainMenu(sf::RenderWindow& window, sf::Event& 
 			if ((sf::Mouse::getPosition(window).x >= 260 && sf::Mouse::getPosition(window).x <= 560) &&
 				(sf::Mouse::getPosition(window).y >= 305 && sf::Mouse::getPosition(window).y <= 390))
 			{
-				playSound(buffer, sound);
+				playSound(buffer, sound, 1);
 				stage = 1;
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 260 && sf::Mouse::getPosition(window).x <= 560) &&
 				(sf::Mouse::getPosition(window).y >= 455 && sf::Mouse::getPosition(window).y <= 540))
 			{
-				playSound(buffer, sound);
+				playSound(buffer, sound, 1);
 				stage = 2;
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 260 && sf::Mouse::getPosition(window).x <= 560) &&
 				(sf::Mouse::getPosition(window).y >= 605 && sf::Mouse::getPosition(window).y <= 690))
 			{
-				playSound(buffer, sound);
+				playSound(buffer, sound, 1);
 				stage = 3;
 			}
 		}
@@ -204,7 +222,7 @@ void ChoiceFlow::EnterAnEvent::seperateLinesInDescription(sf::String& descriptio
 	}
 }
 
-void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage, Event*& head, Event*& tail, bool& crCheck, bool& sortCheck, sf::String& title, sf::String& year, sf::String& topic, sf::String& description, int& sortType, int& box, sf::String& searchData, Event*& entireFile)
+void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage, Event*& head, Event*& tail, bool& crCheck, bool& sortCheck, sf::String& title, sf::String& year, sf::String& topic, sf::String& description, int& sortType, int& box, sf::String& searchData, Event*& entireFile, sf::SoundBuffer& buffer, sf::Sound& sound)
 {
 	while (window.pollEvent(event1))
 	{
@@ -298,6 +316,7 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 			}
 			else if (sf::Mouse::getPosition(window).x >= 660 && sf::Mouse::getPosition(window).x <= 705)
 			{
+				ChoiceFlow::MainMenu::playSound(buffer, sound, 2);
 				if (ChoiceFlow::SearchedAnEvent::ifSearched)
 				{
 					head->removeAfterSearch(head, tail, sf::Mouse::getPosition(window).y, 1, sortCheck, deletedTitle);

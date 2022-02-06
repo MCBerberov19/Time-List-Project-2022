@@ -8,7 +8,7 @@ namespace ChoiceFlow
 {
 	namespace MainMenu
 	{
-		void playSound(sf::SoundBuffer& buffer, sf::Sound& sound);
+		void playSound(sf::SoundBuffer& buffer, sf::Sound& sound, int soundType);
 
 		void onClickMainMenu(sf::RenderWindow& window, sf::Event& event1, int& stage, sf::SoundBuffer& buffer, sf::Sound& sound);
 	}
@@ -52,7 +52,7 @@ namespace ChoiceFlow
 		static sf::String lastSearched;
 		static std::string deletedTitle;
 
-		void onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage, Event*& head, Event*& tail, bool& crCheck, bool& sortCheck, sf::String& title, sf::String& year, sf::String& topic, sf::String& description, int& sortType, int& box, sf::String& searchData, Event*& entireFile);
+		void onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage, Event*& head, Event*& tail, bool& crCheck, bool& sortCheck, sf::String& title, sf::String& year, sf::String& topic, sf::String& description, int& sortType, int& box, sf::String& searchData, Event*& entireFile, sf::SoundBuffer& buffer, sf::Sound& sound);
 
 		void onClickInfoPage(sf::RenderWindow& window, sf::Event& event1, int& stage);
 

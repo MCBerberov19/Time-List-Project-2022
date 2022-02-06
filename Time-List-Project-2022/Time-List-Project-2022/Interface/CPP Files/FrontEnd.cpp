@@ -530,7 +530,7 @@ void setMenu(int& stage)
 				ChoiceFlow::SearchedAnEvent::crCheck = false;
 			}
 			printSearchAnEventPage(window, head, tail);
-			ChoiceFlow::SearchedAnEvent::onClickSearchPage(window, event1, stage, head, tail, ChoiceFlow::SearchedAnEvent::crCheck, ChoiceFlow::SearchedAnEvent::sortCheck, ChoiceFlow::SearchedAnEvent::inputData::title, ChoiceFlow::SearchedAnEvent::inputData::year, ChoiceFlow::SearchedAnEvent::inputData::topic, ChoiceFlow::SearchedAnEvent::inputData::description, ChoiceFlow::SearchedAnEvent::sortType, ChoiceFlow::EnterAnEvent::inputData::box, ChoiceFlow::SearchedAnEvent::inputData::searchData, entireFile);
+			ChoiceFlow::SearchedAnEvent::onClickSearchPage(window, event1, stage, head, tail, ChoiceFlow::SearchedAnEvent::crCheck, ChoiceFlow::SearchedAnEvent::sortCheck, ChoiceFlow::SearchedAnEvent::inputData::title, ChoiceFlow::SearchedAnEvent::inputData::year, ChoiceFlow::SearchedAnEvent::inputData::topic, ChoiceFlow::SearchedAnEvent::inputData::description, ChoiceFlow::SearchedAnEvent::sortType, ChoiceFlow::EnterAnEvent::inputData::box, ChoiceFlow::SearchedAnEvent::inputData::searchData, entireFile, buffer, sound);
 			if (ChoiceFlow::EnterAnEvent::inputData::box == 1)
 			{
 				ChoiceFlow::EnterAnEvent::inputEventData(event1, ChoiceFlow::SearchedAnEvent::inputData::searchData, 25, false);
