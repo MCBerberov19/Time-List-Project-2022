@@ -78,6 +78,7 @@ void ChoiceFlow::EnterAnEvent::onClickEventPage(sf::RenderWindow& window, sf::Ev
 			if ((sf::Mouse::getPosition(window).x >= 30 && sf::Mouse::getPosition(window).x <= 90) && //Back
 				(sf::Mouse::getPosition(window).y >= 30 && sf::Mouse::getPosition(window).y <= 90))
 			{
+				//Going back to the main menu
 				stage = 0;
 			}
 
@@ -110,6 +111,7 @@ void ChoiceFlow::EnterAnEvent::onClickEventPage(sf::RenderWindow& window, sf::Ev
 			{
 				if (title.getSize() > 0 && topic.getSize() > 0 && description.getSize() > 0 && year.getSize() > 0)
 				{
+					//Enter an event button
 					EnterAnEventC* newEvent = new EnterAnEventC(title, stoi(year.toAnsiString()), topic, description);
 					delete newEvent;
 
@@ -236,6 +238,7 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 			if ((sf::Mouse::getPosition(window).x >= 30 && sf::Mouse::getPosition(window).x <= 90) &&
 				(sf::Mouse::getPosition(window).y >= 30 && sf::Mouse::getPosition(window).y <= 90))
 			{
+				//Going back to the main menu
 				stage = 0;
 				SearchAnEventNodes::ClearList::clearList(head);
 				crCheck = true;
@@ -247,11 +250,13 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 			else if ((sf::Mouse::getPosition(window).x >= 85 && sf::Mouse::getPosition(window).x <= 710) &&
 				(sf::Mouse::getPosition(window).y >= 125 && sf::Mouse::getPosition(window).y <= 182))
 			{
+				//Type box
 				box = 1;
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 85 && sf::Mouse::getPosition(window).x <= 178) &&
 				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 255))
 			{
+				//Sort by title
 				sortType = 1;
 				head->mergeSortList(head, 1);
 				tail = tail->getTail(head);
@@ -261,6 +266,7 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 			else if ((sf::Mouse::getPosition(window).x >= 179 && sf::Mouse::getPosition(window).x <= 290) &&
 				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 255))
 			{
+				//Sort by year
 				sortType = 2;
 				head->mergeSortList(head, 2);
 				tail = tail->getTail(head);
@@ -270,6 +276,7 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 			else if ((sf::Mouse::getPosition(window).x >= 291 && sf::Mouse::getPosition(window).x <= 387) &&
 				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 255))
 			{
+				//Sort by topic
 				sortType = 3;
 				head->mergeSortList(head, 3);
 				tail = tail->getTail(head);
@@ -279,12 +286,14 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 			else if ((sf::Mouse::getPosition(window).x >= 470 && sf::Mouse::getPosition(window).x <= 590) &&
 				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 250))
 			{
+				//Sort ascending
 				sortCheck = true;
 				box = 0;
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 592 && sf::Mouse::getPosition(window).x <= 710) &&
 				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 250))
 			{
+				//Sort descending
 				sortCheck = false;
 				tail = tail->getTail(head);
 				box = 0;
@@ -292,6 +301,7 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 			else if ((sf::Mouse::getPosition(window).x >= 255 && sf::Mouse::getPosition(window).x <= 555) &&
 				(sf::Mouse::getPosition(window).y >= 685 && sf::Mouse::getPosition(window).y <= 780))
 			{
+				//Search button
 				if (searchData.getSize() > 0)
 				{
 					sortCheck = true;
@@ -304,18 +314,21 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 			}
 			else if (sf::Mouse::getPosition(window).x >= 575 && sf::Mouse::getPosition(window).x <= 620)
 			{
+				//Info button
 				stage = 4;
 				SearchAnEventNodes::SaveList::saveEventInfo(head, tail, sf::Mouse::getPosition(window).y, 1, title, year, topic, description, sortCheck);
 				box = 0;
 			}
 			else if (sf::Mouse::getPosition(window).x >= 621 && sf::Mouse::getPosition(window).x <= 659)
 			{
+				//Edit button
 				stage = 5;
 				SearchAnEventNodes::SaveList::saveEventInfo(head, tail, sf::Mouse::getPosition(window).y, 1, title, year, topic, description, sortCheck);
 				box = 0;
 			}
 			else if (sf::Mouse::getPosition(window).x >= 660 && sf::Mouse::getPosition(window).x <= 705)
 			{
+				//Remove an event
 				ChoiceFlow::MainMenu::playSound(buffer, sound, 2);
 				if (ChoiceFlow::SearchedAnEvent::ifSearched)
 				{
@@ -355,6 +368,7 @@ void ChoiceFlow::SearchedAnEvent::onClickInfoPage(sf::RenderWindow& window, sf::
 			if ((sf::Mouse::getPosition(window).x >= 30 && sf::Mouse::getPosition(window).x <= 90) &&
 				(sf::Mouse::getPosition(window).y >= 30 && sf::Mouse::getPosition(window).y <= 90))
 			{
+				//Going back to the search menu
 				stage = 2;
 			}
 		}
@@ -427,6 +441,7 @@ void ChoiceFlow::SearchedAnEvent::onClickEditPage(sf::RenderWindow& window, sf::
 			if ((sf::Mouse::getPosition(window).x >= 30 && sf::Mouse::getPosition(window).x <= 90) &&
 				(sf::Mouse::getPosition(window).y >= 30 && sf::Mouse::getPosition(window).y <= 90))
 			{
+				//Going back to the search menu
 				stage = 2;
 				inputData::oldTitleCheck = true;
 			}
@@ -457,6 +472,7 @@ void ChoiceFlow::SearchedAnEvent::onClickEditPage(sf::RenderWindow& window, sf::
 			else if ((sf::Mouse::getPosition(window).x >= 277 && sf::Mouse::getPosition(window).x <= 577) && //enter
 				(sf::Mouse::getPosition(window).y >= 650 && sf::Mouse::getPosition(window).y <= 750))
 			{
+				//Save edited an event data
 				if (title.getSize() > 0 && topic.getSize() > 0 && description.getSize() > 0 && year.getSize() > 0)
 				{
 					saveEditedEventData(title, year, topic, description);
@@ -494,6 +510,7 @@ void ChoiceFlow::TestKnowledge::onClickTestPage(sf::RenderWindow& window, sf::Ev
 			if ((sf::Mouse::getPosition(window).x >= 30 && sf::Mouse::getPosition(window).x <= 90) &&
 				(sf::Mouse::getPosition(window).y >= 30 && sf::Mouse::getPosition(window).y <= 90))
 			{
+				//Going back to the main menu
 				stage = 0;
 				crCheck = true;
 				SearchAnEventNodes::ClearList::clearList(entireFile);
@@ -505,11 +522,13 @@ void ChoiceFlow::TestKnowledge::onClickTestPage(sf::RenderWindow& window, sf::Ev
 			else if ((sf::Mouse::getPosition(window).x >= 135 && sf::Mouse::getPosition(window).x <= 290) &&
 				(sf::Mouse::getPosition(window).y >= 310 && sf::Mouse::getPosition(window).y <= 355))
 			{
+				//Type box
 				box = 1;
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 240 && sf::Mouse::getPosition(window).x <= 565) &&
 				(sf::Mouse::getPosition(window).y >= 485 && sf::Mouse::getPosition(window).y <= 575))
 			{
+				//Generate an event
 				if (SearchAnEventNodes::TakeNodes::takeLastNodePos(entireFile) > 1)
 				{
 					if (generated) delete eventG;
@@ -523,6 +542,7 @@ void ChoiceFlow::TestKnowledge::onClickTestPage(sf::RenderWindow& window, sf::Ev
 			else if ((sf::Mouse::getPosition(window).x >= 35 && sf::Mouse::getPosition(window).x <= 275) &&
 				(sf::Mouse::getPosition(window).y >= 695 && sf::Mouse::getPosition(window).y <= 775))
 			{
+				//Reveal the answer of the event
 				if (generated)
 				{
 					yearAnswer = std::to_string(eventG->convertToDecimalFromBinary());
@@ -534,6 +554,7 @@ void ChoiceFlow::TestKnowledge::onClickTestPage(sf::RenderWindow& window, sf::Ev
 			else if ((sf::Mouse::getPosition(window).x >= 525 && sf::Mouse::getPosition(window).x <= 765) &&
 				(sf::Mouse::getPosition(window).y >= 700 && sf::Mouse::getPosition(window).y <= 775))
 			{
+				//Check user answer
 				if (generated && yearAnswer.getSize() > 0)
 				{
 					checked = true;
