@@ -1,10 +1,8 @@
 #include "../Header Files/UserChoiceManagement.h"
 #include "../Header Files/EnterAnEvent.h"
 #include "../Header Files/SearchAnEvent.h"
-#include "../Header Files/TestsGenerator.h"
 #include <vector>
 #include <regex>
-#include <iostream>
 
 void ChoiceFlow::MainMenu::playSound(sf::SoundBuffer& buffer, sf::Sound& sound, int soundType)
 {

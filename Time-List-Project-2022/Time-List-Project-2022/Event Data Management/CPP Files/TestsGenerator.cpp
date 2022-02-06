@@ -1,7 +1,4 @@
 #include "../Header Files/TestsGenerator.h"
-#include "../Header Files/SearchAnEvent.h"
-#include <stdlib.h>
-#include <iostream>
 
 EventGenerator::EventGenerator(Event* entireFile, int(*takeLastNodePos)(Event*))
 {

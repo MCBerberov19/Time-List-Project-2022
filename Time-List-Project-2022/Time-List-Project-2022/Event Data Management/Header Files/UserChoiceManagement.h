@@ -1,7 +1,5 @@
 #pragma once
-#include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-#include "Event.h"
 #include "TestsGenerator.h"
 
 namespace ChoiceFlow

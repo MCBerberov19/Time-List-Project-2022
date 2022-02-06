@@ -1,6 +1,5 @@
 #include "../Header Files/Event.h"
 #include "../Header Files/SearchAnEvent.h"
-#include <fstream>
 
 Event::Event(std::string& title, int& year, std::string& topic, std::string& description)
 {

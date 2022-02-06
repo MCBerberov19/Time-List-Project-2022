@@ -1,6 +1,4 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include "../../Event Data Management/Header Files/Event.h"
 #include "../../Event Data Management/Header Files/TestsGenerator.h"
 
 void printMainMenu(sf::RenderWindow& window);
