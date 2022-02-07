@@ -90,6 +90,10 @@ Event* SearchAnEventNodes::PrintList::printFoundData(Event* head, sf::String sea
 	{
 		newHead = newHead->removeHead(newHead);
 	}
+	else
+	{
+		newHead = NULL;
+	}
 
 	return newHead;
 }
