@@ -45,6 +45,16 @@ void SearchAnEventNodes::PrintList::printListReversed(sf::RenderWindow& window, 
 	}
 }
 
+std::string toLower(std::string text)
+{
+	std::string data = text;
+	std::for_each(data.begin(), data.end(), [&](char& c) {
+		c = ::tolower(c);
+		});
+
+	return data;
+}
+
 Event* SearchAnEventNodes::PrintList::printFoundData(Event* head, sf::String searchData, void(Event::* appendNode)(Event*, std::string&, int&, std::string&, std::string&))
 {
 	Event* newHead = new Event;
@@ -63,20 +73,9 @@ Event* SearchAnEventNodes::PrintList::printFoundData(Event* head, sf::String sea
 		}
 		else
 		{
-			std::string dataTitle = head->title;
-			std::for_each(dataTitle.begin(), dataTitle.end(), [](char& c) {
-				c = ::tolower(c);
-				});
-
-			std::string dataTopic = head->topic;
-			std::for_each(dataTopic.begin(), dataTopic.end(), [](char& c) {
-				c = ::tolower(c);
-				});
-
-			std::string input = searchData.toAnsiString();
-			std::for_each(input.begin(), input.end(), [](char& c) {
-				c = ::tolower(c);
-				});
+			std::string dataTitle = toLower(head->title);
+			std::string dataTopic = toLower(head->topic);
+			std::string input = toLower(searchData.toAnsiString());
 
 			if (dataTitle.find(input) != std::string::npos || dataTopic.find(input) != std::string::npos)
 			{
