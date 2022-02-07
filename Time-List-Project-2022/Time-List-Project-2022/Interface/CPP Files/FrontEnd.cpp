@@ -31,7 +31,8 @@ void printMainMenu(sf::RenderWindow& window)
 
 void printEnterAnEventPage(sf::RenderWindow& window)
 {
-	sf::Text titleText, yearText, topicText, descriptionText1, descriptionText2, descriptionText3, descriptionText4, descriptionText5, descriptionText6, descriptionText7, descriptionText8;
+	sf::Text titleText, yearText, topicText, descriptionText1, descriptionText2, descriptionText3, 
+	descriptionText4, descriptionText5, descriptionText6, descriptionText7, descriptionText8;
 	sf::Texture t1, t2, t3, t4, t5, t6, t7;
 	sf::Font font;
 	font.loadFromFile("Images and Fonts/arial.ttf");
@@ -114,7 +115,9 @@ void printEnterAnEventPage(sf::RenderWindow& window)
 	description.setPosition(10, 280);
 	window.draw(description);
 
-	ChoiceFlow::EnterAnEvent::seperateLinesInDescription(ChoiceFlow::EnterAnEvent::inputData::description, descriptionText1, descriptionText2, descriptionText3, descriptionText4, descriptionText5, descriptionText6, descriptionText7, descriptionText8);
+	ChoiceFlow::EnterAnEvent::seperateLinesInDescription(ChoiceFlow::EnterAnEvent::inputData::description, 
+	descriptionText1, descriptionText2, descriptionText3, descriptionText4, descriptionText5, 
+	descriptionText6, descriptionText7, descriptionText8);
 
 	window.draw(descriptionText1);
 	window.draw(descriptionText2);
@@ -203,7 +206,8 @@ void printSearchAnEventPage(sf::RenderWindow& window, Event*& head, Event*& tail
 
 void printInfoPage(sf::RenderWindow& window)
 {
-	sf::Text titleText, yearText, topicText, descriptionText1, descriptionText2, descriptionText3, descriptionText4, descriptionText5, descriptionText6, descriptionText7, descriptionText8;
+	sf::Text titleText, yearText, topicText, descriptionText1, descriptionText2, descriptionText3, 
+	descriptionText4, descriptionText5, descriptionText6, descriptionText7, descriptionText8;
 	sf::Texture t1, t2, t3, t4, t5, t6;
 	sf::Font font;
 	font.loadFromFile("Images and Fonts/arial.ttf");
@@ -285,7 +289,9 @@ void printInfoPage(sf::RenderWindow& window)
 	description.setPosition(10, 280);
 	window.draw(description);
 
-	ChoiceFlow::EnterAnEvent::seperateLinesInDescription(ChoiceFlow::SearchedAnEvent::inputData::description, descriptionText1, descriptionText2, descriptionText3, descriptionText4, descriptionText5, descriptionText6, descriptionText7, descriptionText8);
+	ChoiceFlow::EnterAnEvent::seperateLinesInDescription(ChoiceFlow::SearchedAnEvent::inputData::description, 
+	descriptionText1, descriptionText2, descriptionText3, descriptionText4, descriptionText5, descriptionText6, 
+	descriptionText7, descriptionText8);
 
 	window.draw(descriptionText1);
 	window.draw(descriptionText2);
@@ -299,7 +305,9 @@ void printInfoPage(sf::RenderWindow& window)
 
 void printEditPage(sf::RenderWindow& window)
 {
-	sf::Text titleText, yearText, topicText, descriptionText1, descriptionText2, descriptionText3, descriptionText4, descriptionText5, descriptionText6, descriptionText7, descriptionText8;
+	sf::Text titleText, yearText, topicText, descriptionText1, descriptionText2, descriptionText3, descriptionText4,
+	descriptionText5, descriptionText6, descriptionText7, descriptionText8;
+
 	sf::Texture t1, t2, t3, t4, t5, t6, t7;
 	sf::Font font;
 	font.loadFromFile("Images and Fonts/arial.ttf");
@@ -382,7 +390,9 @@ void printEditPage(sf::RenderWindow& window)
 	description.setPosition(10, 280);
 	window.draw(description);
 
-	ChoiceFlow::EnterAnEvent::seperateLinesInDescription(ChoiceFlow::SearchedAnEvent::inputData::description, descriptionText1, descriptionText2, descriptionText3, descriptionText4, descriptionText5, descriptionText6, descriptionText7, descriptionText8);
+	ChoiceFlow::EnterAnEvent::seperateLinesInDescription(ChoiceFlow::SearchedAnEvent::inputData::description,
+	descriptionText1, descriptionText2, descriptionText3, descriptionText4, descriptionText5, descriptionText6,
+	descriptionText7, descriptionText8);
 
 	window.draw(descriptionText1);
 	window.draw(descriptionText2);
@@ -453,7 +463,8 @@ void printTestKnowledgePage(sf::RenderWindow& window, EventGenerator* answer)
 	window.draw(titleText);
 	if (ChoiceFlow::TestKnowledge::inputData::checked)
 	{
-		if (ChoiceFlow::TestKnowledge::inputData::yearAnswer.toAnsiString() == std::to_string(answer->convertToDecimalFromBinary()))
+		if (ChoiceFlow::TestKnowledge::inputData::yearAnswer.toAnsiString() == 
+			std::to_string(answer->convertToDecimalFromBinary()))
 		{
 			message.setFillColor(sf::Color::Green);
 			message.setString("Correct!");
@@ -480,7 +491,6 @@ void printTestKnowledgePage(sf::RenderWindow& window, EventGenerator* answer)
 void setMenu(int& stage)
 {
 	sf::RenderWindow window(sf::VideoMode(800, 800), "History Notes", sf::Style::Close);
-	window.setFramerateLimit(30);
 	sf::Event event1;
 
 	sf::SoundBuffer buffer;
@@ -498,7 +508,9 @@ void setMenu(int& stage)
 			ChoiceFlow::MainMenu::onClickMainMenu(window, event1, stage, buffer, sound);
 			break;
 		case 1:
-			ChoiceFlow::EnterAnEvent::onClickEventPage(window, event1, stage, ChoiceFlow::EnterAnEvent::inputData::box, ChoiceFlow::EnterAnEvent::inputData::title, ChoiceFlow::EnterAnEvent::inputData::year, ChoiceFlow::EnterAnEvent::inputData::topic, ChoiceFlow::EnterAnEvent::inputData::description, buffer, sound);
+			ChoiceFlow::EnterAnEvent::onClickEventPage(window, event1, stage, ChoiceFlow::EnterAnEvent::inputData::box, 
+			ChoiceFlow::EnterAnEvent::inputData::title, ChoiceFlow::EnterAnEvent::inputData::year, 
+			ChoiceFlow::EnterAnEvent::inputData::topic, ChoiceFlow::EnterAnEvent::inputData::description, buffer, sound);
 			printEnterAnEventPage(window);
 			switch (ChoiceFlow::EnterAnEvent::inputData::box)
 			{
@@ -528,7 +540,14 @@ void setMenu(int& stage)
 				ChoiceFlow::SearchedAnEvent::crCheck = false;
 			}
 			printSearchAnEventPage(window, head, tail);
-			ChoiceFlow::SearchedAnEvent::onClickSearchPage(window, event1, stage, head, tail, ChoiceFlow::SearchedAnEvent::crCheck, ChoiceFlow::SearchedAnEvent::sortCheck, ChoiceFlow::SearchedAnEvent::inputData::title, ChoiceFlow::SearchedAnEvent::inputData::year, ChoiceFlow::SearchedAnEvent::inputData::topic, ChoiceFlow::SearchedAnEvent::inputData::description, ChoiceFlow::SearchedAnEvent::sortType, ChoiceFlow::EnterAnEvent::inputData::box, ChoiceFlow::SearchedAnEvent::inputData::searchData, entireFile, buffer, sound);
+
+			ChoiceFlow::SearchedAnEvent::onClickSearchPage(window, event1, stage, head, tail, 
+			ChoiceFlow::SearchedAnEvent::crCheck, ChoiceFlow::SearchedAnEvent::sortCheck, 
+			ChoiceFlow::SearchedAnEvent::inputData::title, ChoiceFlow::SearchedAnEvent::inputData::year, 
+			ChoiceFlow::SearchedAnEvent::inputData::topic, ChoiceFlow::SearchedAnEvent::inputData::description, 
+			ChoiceFlow::SearchedAnEvent::sortType, ChoiceFlow::EnterAnEvent::inputData::box,
+			ChoiceFlow::SearchedAnEvent::inputData::searchData, entireFile, buffer, sound);
+
 			if (ChoiceFlow::EnterAnEvent::inputData::box == 1)
 			{
 				ChoiceFlow::EnterAnEvent::inputEventData(event1, ChoiceFlow::SearchedAnEvent::inputData::searchData, 25, false);
@@ -542,8 +561,15 @@ void setMenu(int& stage)
 				SearchAnEventNodes::TakeNodes::takeDataFromFile(entireFile, &Event::appendNode, &Event::removeHead);
 				ChoiceFlow::TestKnowledge::inputData::crCheck = false;
 			}
-			ChoiceFlow::TestKnowledge::onClickTestPage(window, event1, stage, entireFile, ChoiceFlow::TestKnowledge::inputData::crCheck, ChoiceFlow::EnterAnEvent::inputData::box, ChoiceFlow::TestKnowledge::inputData::yearAnswer, ChoiceFlow::TestKnowledge::inputData::titleText, ChoiceFlow::TestKnowledge::inputData::topicText, eventG, ChoiceFlow::TestKnowledge::inputData::revealed, ChoiceFlow::TestKnowledge::inputData::generated, ChoiceFlow::TestKnowledge::inputData::checked, buffer, sound);
-			if (ChoiceFlow::EnterAnEvent::inputData::box == 1 && !ChoiceFlow::TestKnowledge::inputData::revealed && ChoiceFlow::TestKnowledge::inputData::generated && !ChoiceFlow::TestKnowledge::inputData::checked)
+
+			ChoiceFlow::TestKnowledge::onClickTestPage(window, event1, stage, entireFile, 
+			ChoiceFlow::TestKnowledge::inputData::crCheck, ChoiceFlow::EnterAnEvent::inputData::box, 
+			ChoiceFlow::TestKnowledge::inputData::yearAnswer, ChoiceFlow::TestKnowledge::inputData::titleText, 
+			ChoiceFlow::TestKnowledge::inputData::topicText, eventG, ChoiceFlow::TestKnowledge::inputData::revealed, 
+			ChoiceFlow::TestKnowledge::inputData::generated, ChoiceFlow::TestKnowledge::inputData::checked, buffer, sound);
+
+			if (ChoiceFlow::EnterAnEvent::inputData::box == 1 && !ChoiceFlow::TestKnowledge::inputData::revealed && 
+			ChoiceFlow::TestKnowledge::inputData::generated && !ChoiceFlow::TestKnowledge::inputData::checked)
 			{
 				ChoiceFlow::EnterAnEvent::inputEventData(event1, ChoiceFlow::TestKnowledge::inputData::yearAnswer, 4, true);
 			}
@@ -554,7 +580,12 @@ void setMenu(int& stage)
 			break;
 		case 5:
 			printEditPage(window);
-			ChoiceFlow::SearchedAnEvent::onClickEditPage(window, event1, stage, ChoiceFlow::EnterAnEvent::inputData::box, ChoiceFlow::SearchedAnEvent::inputData::title, ChoiceFlow::SearchedAnEvent::inputData::year, ChoiceFlow::SearchedAnEvent::inputData::topic, ChoiceFlow::SearchedAnEvent::inputData::description, ChoiceFlow::SearchedAnEvent::crCheck, ChoiceFlow::SearchedAnEvent::sortType, buffer, sound);
+
+			ChoiceFlow::SearchedAnEvent::onClickEditPage(window, event1, stage, ChoiceFlow::EnterAnEvent::inputData::box, 
+			ChoiceFlow::SearchedAnEvent::inputData::title, ChoiceFlow::SearchedAnEvent::inputData::year, 
+			ChoiceFlow::SearchedAnEvent::inputData::topic, ChoiceFlow::SearchedAnEvent::inputData::description, 
+			ChoiceFlow::SearchedAnEvent::crCheck, ChoiceFlow::SearchedAnEvent::sortType, buffer, sound);
+
 			switch (ChoiceFlow::EnterAnEvent::inputData::box)
 			{
 			case 1:

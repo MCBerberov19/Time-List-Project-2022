@@ -9,7 +9,8 @@ namespace SearchAnEventNodes
 
 		void printListReversed(sf::RenderWindow& window, Event* tail, sf::Sprite& eventBoard, sf::Font& font);
 
-		Event* printFoundData(Event* head, sf::String searchData, void(Event::* appendNode)(Event*, std::string&, int&, std::string&, std::string&));
+		Event* printFoundData(Event* head, sf::String searchData, 
+		void(Event::* appendNode)(Event*, std::string&, int&, std::string&, std::string&));
 	}
 
 	namespace ClearList
@@ -21,7 +22,8 @@ namespace SearchAnEventNodes
 
 	namespace TakeNodes
 	{
-		void takeDataFromFile(Event*& head, void(Event::* appendNode)(Event*, std::string&, int&, std::string&, std::string&), Event* (Event::* removeHead)(Event*));
+		void takeDataFromFile(Event*& head, void(Event::* appendNode)(Event*, std::string&, int&, std::string&, std::string&), 
+		Event* (Event::* removeHead)(Event*));
 
 		int takeNodeIndex(int cordinateY, int node);
 
@@ -34,7 +36,8 @@ namespace SearchAnEventNodes
 
 		void saveDataIntoFileTail(Event* tail);
 
-		void saveEventInfo(Event* head, Event* tail, int cordinateY, int node, sf::String& title, sf::String& year, sf::String& topic, sf::String& description, bool& sortCheck);
+		void saveEventInfo(Event* head, Event* tail, int cordinateY, int node, sf::String& title, sf::String& year,
+		sf::String& topic, sf::String& description, bool& sortCheck);
 
 		void saveAfterRemoveWhenSearched(Event* entireFile, std::string& title);
 	}

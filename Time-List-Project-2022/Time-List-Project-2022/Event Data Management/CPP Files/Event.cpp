@@ -255,7 +255,8 @@ void Event::removeNode(Event*& head, Event*& tail, int cordinateY, int node, boo
 	}
 }
 
-void Event::removeAfterSearch(Event*& head, Event*& tail, int cordinateY, int node, bool& sortCheck, std::string& title)
+void Event::removeAfterSearch(Event*& head, Event*& tail, int cordinateY, int node, bool& sortCheck, 
+	std::string& title)
 {
 	int nodeCur = 1;
 	Event* headCur = head;

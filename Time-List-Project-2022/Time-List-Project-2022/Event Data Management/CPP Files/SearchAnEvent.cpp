@@ -1,7 +1,8 @@
 #include "../Header Files/SearchAnEvent.h"
 #include <regex>
 
-void SearchAnEventNodes::PrintList::printList(sf::RenderWindow& window, Event* head, sf::Sprite& eventBoard, sf::Font& font)
+void SearchAnEventNodes::PrintList::printList(sf::RenderWindow& window, Event* head, sf::Sprite& eventBoard, 
+	sf::Font& font)
 {
 	sf::Text text; text.setFont(font); text.setCharacterSize(28); text.setFillColor(sf::Color::Black);
 	float y = 220;
@@ -17,13 +18,13 @@ void SearchAnEventNodes::PrintList::printList(sf::RenderWindow& window, Event* h
 		text.setString(head->title); text.setPosition(100, y + 58);
 		eventBoard.setPosition(63, y);
 		window.draw(eventBoard); window.draw(text);
-		//std::cout << head->title << " " << head->year << " " << head->topic << " " << head->description << std::endl;
 		head = head->nextEvent; y += 70;
 		i++;
 	}
 }
 
-void SearchAnEventNodes::PrintList::printListReversed(sf::RenderWindow& window, Event* tail, sf::Sprite& eventBoard, sf::Font& font)
+void SearchAnEventNodes::PrintList::printListReversed(sf::RenderWindow& window, Event* tail, sf::Sprite& eventBoard,
+	sf::Font& font)
 {
 	sf::Text text; text.setFont(font); text.setCharacterSize(28); text.setFillColor(sf::Color::Black);
 	float y = 220;
@@ -39,7 +40,6 @@ void SearchAnEventNodes::PrintList::printListReversed(sf::RenderWindow& window, 
 		text.setString(tail->title); text.setPosition(100, y + 58);
 		eventBoard.setPosition(63, y);
 		window.draw(eventBoard); window.draw(text);
-		//std::cout << tail->title << " " << tail->year << " " << tail->topic << " " << tail->description << std::endl;
 		tail = tail->prevEvent; y += 70;
 		i++;
 	}
@@ -55,14 +55,16 @@ std::string toLower(std::string text)
 	return data;
 }
 
-Event* SearchAnEventNodes::PrintList::printFoundData(Event* head, sf::String searchData, void(Event::* appendNode)(Event*, std::string&, int&, std::string&, std::string&))
+Event* SearchAnEventNodes::PrintList::printFoundData(Event* head, sf::String searchData, 
+	void(Event::* appendNode)(Event*, std::string&, int&, std::string&, std::string&))
 {
 	Event* newHead = new Event;
 	int cur = 0;
 	std::string year;
 	while (head != NULL)
 	{
-		if (std::regex_match(searchData.toAnsiString(), std::regex(R"(^^\s*[-+]?((\d+(\.\d+)?)|(\d+\.)|(\.\d+))(e[-+]?\d+)?\s*$)")))
+		if (std::regex_match(searchData.toAnsiString(), 
+		std::regex(R"(^^\s*[-+]?((\d+(\.\d+)?)|(\d+\.)|(\.\d+))(e[-+]?\d+)?\s*$)")))
 		{
 			year = searchData.toAnsiString();
 			if (head->year == stoi(year))
@@ -115,7 +117,7 @@ void SearchAnEventNodes::ClearList::clearListTail(Event* tail)
 	clearList(temp);
 }
 
-void SearchAnEventNodes::TakeNodes::takeDataFromFile(Event*& head, void(Event::* appendNode)(Event*, std::string&,
+void SearchAnEventNodes::TakeNodes::takeDataFromFile(Event*& head, void(Event::* appendNode)(Event*, std::string&, 
 	int&, std::string&, std::string&), Event* (Event::* removeHead)(Event*))
 {
 	std::ifstream inputFile; inputFile.open("Events.txt", std::ios::in | std::ios::app);
@@ -141,7 +143,8 @@ void SearchAnEventNodes::TakeNodes::takeDataFromFile(Event*& head, void(Event::*
 
 		topic = data.substr(
 			yearMatch.position() + std::to_string(year).size() + 1,
-			std::distance(data.begin() + yearMatch.position() + std::to_string(year).size() + 1, std::find(data.begin() + yearMatch.position() + std::to_string(year).size() + 1, data.end(), ' ')));
+				std::distance(data.begin() + yearMatch.position() + std::to_string(year).size() + 1, 
+					std::find(data.begin() + yearMatch.position() + std::to_string(year).size() + 1, data.end(), ' ')));
 
 		description = data.substr(data.find(topic) + topic.size() + 1, std::string::npos);
 
@@ -190,7 +193,8 @@ void SearchAnEventNodes::SaveList::saveDataIntoFile(Event* head)
 
 	while (head != NULL)
 	{
-		outputData << head->title << " " << std::to_string(head->year) << " " << head->topic << " " << head->description << std::endl;
+		outputData << head->title << " " << std::to_string(head->year) << " " << head->topic << " " 
+		<< head->description << std::endl;
 		head = head->nextEvent;
 	}
 
@@ -203,14 +207,16 @@ void SearchAnEventNodes::SaveList::saveDataIntoFileTail(Event* tail)
 
 	while (tail != NULL)
 	{
-		outputData << tail->title << " " << std::to_string(tail->year) << " " << tail->topic << " " << tail->description << std::endl;
+		outputData << tail->title << " " << std::to_string(tail->year) << " " << tail->topic << " " 
+		<< tail->description << std::endl;
 		tail = tail->prevEvent;
 	}
 
 	outputData.close();
 }
 
-void SearchAnEventNodes::SaveList::saveEventInfo(Event* head, Event* tail, int cordinateY, int node, sf::String& title, sf::String& year, sf::String& topic, sf::String& description, bool& sortCheck)
+void SearchAnEventNodes::SaveList::saveEventInfo(Event* head, Event* tail, int cordinateY, int node, 
+	sf::String& title, sf::String& year, sf::String& topic, sf::String& description, bool& sortCheck)
 {
 	int nodeCur = 1;
 	if (SearchAnEventNodes::TakeNodes::takeNodeIndex(cordinateY, node) != 0)
@@ -259,7 +265,8 @@ void SearchAnEventNodes::SaveList::saveAfterRemoveWhenSearched(Event* entireFile
 	{
 		if (title != entireFile->title)
 		{
-			data = entireFile->title + " " + std::to_string(entireFile->year) + " " + entireFile->topic + " " + entireFile->description;
+			data = entireFile->title + " " + std::to_string(entireFile->year) + " " + entireFile->topic 
+			+ " " + entireFile->description;
 			dataV.push_back(data);
 		}
 		entireFile = entireFile->nextEvent;
