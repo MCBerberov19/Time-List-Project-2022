@@ -86,14 +86,7 @@ Event* SearchAnEventNodes::PrintList::printFoundData(Event* head, sf::String sea
 		head = head->nextEvent;
 	}
 
-	if (cur > 0)
-	{
-		newHead = newHead->removeHead(newHead);
-	}
-	else
-	{
-		newHead = NULL;
-	}
+	newHead = (cur > 0) ? newHead->removeHead(newHead) : NULL;
 
 	return newHead;
 }
