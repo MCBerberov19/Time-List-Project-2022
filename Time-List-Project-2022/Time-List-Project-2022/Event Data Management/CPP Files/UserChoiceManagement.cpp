@@ -325,7 +325,8 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 				{
 					ChoiceFlow::MainMenu::playSound(buffer, sound, 3);
 					sortCheck = true;
-					head = SearchAnEventNodes::PrintList::printFoundData(entireFile, searchData, &Event::appendNode);
+					head = SearchAnEventNodes::PrintList::printFoundData(entireFile, searchData, &Event::appendNode, 
+					sortType, sortCheck);
 					box = 0;
 					lastSearched = searchData;
 					searchData = "";

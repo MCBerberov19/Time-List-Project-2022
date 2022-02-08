@@ -58,7 +58,7 @@ std::string toLower(std::string text)
 }
 
 Event* SearchAnEventNodes::PrintList::printFoundData(Event* head, sf::String searchData, 
-	void(Event::* appendNode)(Event*, std::string&, int&, std::string&, std::string&))
+	void(Event::* appendNode)(Event*, std::string&, int&, std::string&, std::string&), int& sortType, bool& sortCheck)
 {
 	Event* newHead = new Event;
 	int cur = 0;
@@ -93,6 +93,9 @@ Event* SearchAnEventNodes::PrintList::printFoundData(Event* head, sf::String sea
 	}
 
 	newHead = (cur > 0) ? newHead->removeHead(newHead) : NULL;
+
+	sortType = 1; sortCheck = true;
+	newHead = newHead->mergeSortList(newHead, 1);
 
 	return newHead;
 }
