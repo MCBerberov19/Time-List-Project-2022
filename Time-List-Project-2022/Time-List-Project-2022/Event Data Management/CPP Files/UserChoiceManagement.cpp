@@ -336,7 +336,8 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 			else if ((sf::Mouse::getPosition(window).x >= 575 && sf::Mouse::getPosition(window).x <= 620) &&
 				(sf::Mouse::getPosition(window).y >= 270 && sf::Mouse::getPosition(window).y <= 270 +
 				(65 * SearchAnEventNodes::TakeNodes::takeLastNodePos(head)) && sf::Mouse::getPosition(window).y<= 672) &&
-				SearchAnEventNodes::TakeNodes::checkValidSpaces(sf::Mouse::getPosition(window).y)) //Info button 
+				SearchAnEventNodes::TakeNodes::checkValidSpaces(sf::Mouse::getPosition(window).y) &&
+				SearchAnEventNodes::TakeNodes::takeLastNodePos(head) != 0) //Info button 
 			{
 				ChoiceFlow::MainMenu::playSound(buffer, sound, 1);
 				stage = 4;
@@ -347,7 +348,8 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 			else if ((sf::Mouse::getPosition(window).x >= 621 && sf::Mouse::getPosition(window).x <= 659) &&
 				(sf::Mouse::getPosition(window).y >= 270 && sf::Mouse::getPosition(window).y <= 270 +
 					(65 * SearchAnEventNodes::TakeNodes::takeLastNodePos(head)) && sf::Mouse::getPosition(window).y <= 672) &&
-				SearchAnEventNodes::TakeNodes::checkValidSpaces(sf::Mouse::getPosition(window).y)) //Edit button 
+				SearchAnEventNodes::TakeNodes::checkValidSpaces(sf::Mouse::getPosition(window).y) &&
+				SearchAnEventNodes::TakeNodes::takeLastNodePos(head) != 0) //Edit button 
 			{
 				ChoiceFlow::MainMenu::playSound(buffer, sound, 1);
 				stage = 5;
@@ -358,7 +360,8 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 			else if ((sf::Mouse::getPosition(window).x >= 660 && sf::Mouse::getPosition(window).x <= 705) &&
 				(sf::Mouse::getPosition(window).y >= 270 && sf::Mouse::getPosition(window).y <= 270 +
 					(65 * SearchAnEventNodes::TakeNodes::takeLastNodePos(head)) && sf::Mouse::getPosition(window).y <= 672) &&
-				SearchAnEventNodes::TakeNodes::checkValidSpaces(sf::Mouse::getPosition(window).y)) //Remove an event
+				SearchAnEventNodes::TakeNodes::checkValidSpaces(sf::Mouse::getPosition(window).y) &&
+				SearchAnEventNodes::TakeNodes::takeLastNodePos(head) != 0) //Remove an event
 			{
 				ChoiceFlow::MainMenu::playSound(buffer, sound, 4);
 				if (ChoiceFlow::SearchedAnEvent::ifSearched)
