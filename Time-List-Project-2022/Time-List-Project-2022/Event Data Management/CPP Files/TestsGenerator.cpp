@@ -6,6 +6,7 @@ EventGenerator::EventGenerator(Event* entireFile, int(*takeLastNodePos)(Event*))
 
 	this->title = data["Title"];
 	this->topic = data["Topic"];
+	//Secure the answer of the generated event in gray code
 	this->grayYear = convertToGrayCode(stoi(data["Year"]));
 }
 
@@ -17,8 +18,10 @@ std::map<std::string, std::string> EventGenerator::generateRandomNode(Event* ent
 
 	while (entireFile != NULL)
 	{
+		//Find the generated event
 		if (node == i)
 		{
+			//Save its data
 			data = {
 				{"Title", entireFile->title},
 				{"Topic", entireFile->topic},
@@ -52,10 +55,12 @@ std::vector<int> EventGenerator::convertToGrayCode(int decNum)
 	std::vector<int> binary = convertToBinary(decNum);
 	std::vector<int> gray;
 
+	//Save the MSB
 	gray.push_back(binary[0]);
 
 	for (size_t i = 1; i < binary.size(); i++)
 	{
+		//Xor of the two digits
 		gray.push_back(binary[i - 1] ^ binary[i]);
 	}
 
@@ -65,10 +70,12 @@ std::vector<int> EventGenerator::convertToGrayCode(int decNum)
 std::vector<int> EventGenerator::convertToBinaryFromGray()
 {
 	std::vector<int> bin;
+	//Save the MSB
 	bin.push_back(this->grayYear[0]);
 
 	for (size_t i = 1; i < this->grayYear.size(); i++)
 	{
+		//Xor of the two digits
 		bin.push_back(bin[i - 1] ^ grayYear[i]);
 	}
 

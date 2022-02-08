@@ -43,6 +43,8 @@ void ChoiceFlow::MainMenu::onClickMainMenu(sf::RenderWindow& window, sf::Event& 
 {
 	while (window.pollEvent(event1))
 	{
+
+		//Close the window
 		if (event1.type == sf::Event::Closed)
 		{
 			window.close();
@@ -51,19 +53,19 @@ void ChoiceFlow::MainMenu::onClickMainMenu(sf::RenderWindow& window, sf::Event& 
 		if (event1.key.code == sf::Mouse::Left && event1.type == sf::Event::MouseButtonPressed)
 		{
 			if ((sf::Mouse::getPosition(window).x >= 260 && sf::Mouse::getPosition(window).x <= 560) &&
-				(sf::Mouse::getPosition(window).y >= 305 && sf::Mouse::getPosition(window).y <= 390))
+				(sf::Mouse::getPosition(window).y >= 305 && sf::Mouse::getPosition(window).y <= 390)) //Enter an event page
 			{
 				playSound(buffer, sound, 1);
 				stage = 1;
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 260 && sf::Mouse::getPosition(window).x <= 560) &&
-				(sf::Mouse::getPosition(window).y >= 455 && sf::Mouse::getPosition(window).y <= 540))
+				(sf::Mouse::getPosition(window).y >= 455 && sf::Mouse::getPosition(window).y <= 540)) //Search an event page
 			{
 				playSound(buffer, sound, 1);
 				stage = 2;
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 260 && sf::Mouse::getPosition(window).x <= 560) &&
-				(sf::Mouse::getPosition(window).y >= 605 && sf::Mouse::getPosition(window).y <= 690))
+				(sf::Mouse::getPosition(window).y >= 605 && sf::Mouse::getPosition(window).y <= 690)) // Test your knowledge
 			{
 				playSound(buffer, sound, 1);
 				stage = 3;
@@ -78,6 +80,7 @@ void ChoiceFlow::EnterAnEvent::onClickEventPage(sf::RenderWindow& window, sf::Ev
 {
 	while (window.pollEvent(event1))
 	{
+		//Close the window
 		if (event1.type == sf::Event::Closed)
 		{
 			window.close();
@@ -85,39 +88,38 @@ void ChoiceFlow::EnterAnEvent::onClickEventPage(sf::RenderWindow& window, sf::Ev
 
 		if (event1.key.code == sf::Mouse::Left && event1.type == sf::Event::MouseButtonPressed)
 		{
-			if ((sf::Mouse::getPosition(window).x >= 30 && sf::Mouse::getPosition(window).x <= 90) && //Back
-				(sf::Mouse::getPosition(window).y >= 30 && sf::Mouse::getPosition(window).y <= 90))
+			if ((sf::Mouse::getPosition(window).x >= 30 && sf::Mouse::getPosition(window).x <= 90) && 
+				(sf::Mouse::getPosition(window).y >= 30 && sf::Mouse::getPosition(window).y <= 90)) //Back
 			{
-				//Going back to the main menu
 				ChoiceFlow::MainMenu::playSound(buffer, sound, 1);
 				stage = 0;
 			}
 
-			else if ((sf::Mouse::getPosition(window).x >= 180 && sf::Mouse::getPosition(window).x <= 605) && //title
+			else if ((sf::Mouse::getPosition(window).x >= 180 && sf::Mouse::getPosition(window).x <= 605) && //Title
 				(sf::Mouse::getPosition(window).y >= 115 && sf::Mouse::getPosition(window).y <= 160))
 			{
 				box = 1;
 			}
 
-			else if ((sf::Mouse::getPosition(window).x >= 150 && sf::Mouse::getPosition(window).x <= 305) && //year
+			else if ((sf::Mouse::getPosition(window).x >= 150 && sf::Mouse::getPosition(window).x <= 305) && //Year
 				(sf::Mouse::getPosition(window).y >= 210 && sf::Mouse::getPosition(window).y <= 260))
 			{
 				box = 2;
 			}
 
-			else if ((sf::Mouse::getPosition(window).x >= 440 && sf::Mouse::getPosition(window).x <= 685) && //topic
+			else if ((sf::Mouse::getPosition(window).x >= 440 && sf::Mouse::getPosition(window).x <= 685) && //Topic
 				(sf::Mouse::getPosition(window).y >= 210 && sf::Mouse::getPosition(window).y <= 260))
 			{
 				box = 3;
 			}
 
-			else if ((sf::Mouse::getPosition(window).x >= 140 && sf::Mouse::getPosition(window).x <= 680) && //description
+			else if ((sf::Mouse::getPosition(window).x >= 140 && sf::Mouse::getPosition(window).x <= 680) && //Description
 				(sf::Mouse::getPosition(window).y >= 330 && sf::Mouse::getPosition(window).y <= 600))
 			{
 				box = 4;
 			}
 
-			else if ((sf::Mouse::getPosition(window).x >= 285 && sf::Mouse::getPosition(window).x <= 525) && //enter
+			else if ((sf::Mouse::getPosition(window).x >= 285 && sf::Mouse::getPosition(window).x <= 525) && //Enter
 				(sf::Mouse::getPosition(window).y >= 650 && sf::Mouse::getPosition(window).y <= 735))
 			{
 				if (title.getSize() > 0 && topic.getSize() > 0 && description.getSize() > 0 && year.getSize() > 0)
@@ -255,9 +257,8 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 		if (event1.key.code == sf::Mouse::Left && event1.type == sf::Event::MouseButtonPressed)
 		{
 			if ((sf::Mouse::getPosition(window).x >= 30 && sf::Mouse::getPosition(window).x <= 90) &&
-				(sf::Mouse::getPosition(window).y >= 30 && sf::Mouse::getPosition(window).y <= 90))
+				(sf::Mouse::getPosition(window).y >= 30 && sf::Mouse::getPosition(window).y <= 90)) //Back
 			{
-				//Going back to the main menu
 				ChoiceFlow::MainMenu::playSound(buffer, sound, 1);
 				stage = 0;
 				SearchAnEventNodes::ClearList::clearList(head);
@@ -268,15 +269,13 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 				sortCheck = true;
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 85 && sf::Mouse::getPosition(window).x <= 710) &&
-				(sf::Mouse::getPosition(window).y >= 125 && sf::Mouse::getPosition(window).y <= 182))
+				(sf::Mouse::getPosition(window).y >= 125 && sf::Mouse::getPosition(window).y <= 182)) //Search box
 			{
-				//Type box
 				box = 1;
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 85 && sf::Mouse::getPosition(window).x <= 178) &&
-				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 255))
+				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 255)) //Sort by title
 			{
-				//Sort by title
 				ChoiceFlow::MainMenu::playSound(buffer, sound, 2);
 				sortType = 1;
 				head->mergeSortList(head, 1);
@@ -285,9 +284,8 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 				box = 0;
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 179 && sf::Mouse::getPosition(window).x <= 290) &&
-				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 255))
+				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 255)) //Sort by year
 			{
-				//Sort by year
 				ChoiceFlow::MainMenu::playSound(buffer, sound, 2);
 				sortType = 2;
 				head->mergeSortList(head, 2);
@@ -296,9 +294,8 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 				box = 0;
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 291 && sf::Mouse::getPosition(window).x <= 387) &&
-				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 255))
+				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 255)) //Sort by topic
 			{
-				//Sort by topic
 				ChoiceFlow::MainMenu::playSound(buffer, sound, 2);
 				sortType = 3;
 				head->mergeSortList(head, 3);
@@ -307,26 +304,23 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 				box = 0;
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 470 && sf::Mouse::getPosition(window).x <= 590) &&
-				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 250))
+				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 250)) //Sort ascending
 			{
-				//Sort ascending
 				ChoiceFlow::MainMenu::playSound(buffer, sound, 2);
 				sortCheck = true;
 				box = 0;
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 592 && sf::Mouse::getPosition(window).x <= 710) &&
-				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 250))
+				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 250)) //Sort descending
 			{
-				//Sort descending
 				ChoiceFlow::MainMenu::playSound(buffer, sound, 2);
 				sortCheck = false;
 				tail = tail->getTail(head);
 				box = 0;
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 255 && sf::Mouse::getPosition(window).x <= 555) &&
-				(sf::Mouse::getPosition(window).y >= 685 && sf::Mouse::getPosition(window).y <= 780))
+				(sf::Mouse::getPosition(window).y >= 685 && sf::Mouse::getPosition(window).y <= 780)) //Search button
 			{
-				//Search button
 				if (searchData.getSize() > 0)
 				{
 					ChoiceFlow::MainMenu::playSound(buffer, sound, 3);
@@ -338,27 +332,24 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 					ChoiceFlow::SearchedAnEvent::ifSearched = true;
 				}
 			}
-			else if (sf::Mouse::getPosition(window).x >= 575 && sf::Mouse::getPosition(window).x <= 620)
+			else if (sf::Mouse::getPosition(window).x >= 575 && sf::Mouse::getPosition(window).x <= 620) //Info button 
 			{
-				//Info button
 				ChoiceFlow::MainMenu::playSound(buffer, sound, 1);
 				stage = 4;
 				SearchAnEventNodes::SaveList::saveEventInfo(head, tail, sf::Mouse::getPosition(window).y, 1, 
 					title, year, topic, description, sortCheck);
 				box = 0;
 			}
-			else if (sf::Mouse::getPosition(window).x >= 621 && sf::Mouse::getPosition(window).x <= 659)
+			else if (sf::Mouse::getPosition(window).x >= 621 && sf::Mouse::getPosition(window).x <= 659) //Edit button
 			{
-				//Edit button
 				ChoiceFlow::MainMenu::playSound(buffer, sound, 1);
 				stage = 5;
 				SearchAnEventNodes::SaveList::saveEventInfo(head, tail, sf::Mouse::getPosition(window).y, 1, 
 					title, year, topic, description, sortCheck);
 				box = 0;
 			}
-			else if (sf::Mouse::getPosition(window).x >= 660 && sf::Mouse::getPosition(window).x <= 705)
+			else if (sf::Mouse::getPosition(window).x >= 660 && sf::Mouse::getPosition(window).x <= 705) //Remove an event
 			{
-				//Remove an event
 				ChoiceFlow::MainMenu::playSound(buffer, sound, 4);
 				if (ChoiceFlow::SearchedAnEvent::ifSearched)
 				{
@@ -389,6 +380,7 @@ void ChoiceFlow::SearchedAnEvent::onClickInfoPage(sf::RenderWindow& window, sf::
 {
 	while (window.pollEvent(event1))
 	{
+		//Close the window
 		if (event1.type == sf::Event::Closed)
 		{
 			window.close();
@@ -397,9 +389,8 @@ void ChoiceFlow::SearchedAnEvent::onClickInfoPage(sf::RenderWindow& window, sf::
 		if (event1.key.code == sf::Mouse::Left && event1.type == sf::Event::MouseButtonPressed)
 		{
 			if ((sf::Mouse::getPosition(window).x >= 30 && sf::Mouse::getPosition(window).x <= 90) &&
-				(sf::Mouse::getPosition(window).y >= 30 && sf::Mouse::getPosition(window).y <= 90))
+				(sf::Mouse::getPosition(window).y >= 30 && sf::Mouse::getPosition(window).y <= 90)) //Back
 			{
-				//Going back to the search menu
 				ChoiceFlow::MainMenu::playSound(buffer, sound, 1);
 				stage = 2;
 			}
@@ -441,6 +432,7 @@ void ChoiceFlow::SearchedAnEvent::saveEditedEventData(sf::String& title, sf::Str
 	}
 	curData.close();
 
+	//Clear the file and save the edited data
 	std::ofstream newData; newData.open("Events.txt", std::ios::out | std::ios::trunc);
 
 	for (size_t i = 0; i < lines.size(); i++)
@@ -469,6 +461,7 @@ void ChoiceFlow::SearchedAnEvent::onClickEditPage(sf::RenderWindow& window, sf::
 
 	while (window.pollEvent(event1))
 	{
+		//Close the window
 		if (event1.type == sf::Event::Closed)
 		{
 			window.close();
@@ -477,38 +470,37 @@ void ChoiceFlow::SearchedAnEvent::onClickEditPage(sf::RenderWindow& window, sf::
 		if (event1.key.code == sf::Mouse::Left && event1.type == sf::Event::MouseButtonPressed)
 		{
 			if ((sf::Mouse::getPosition(window).x >= 30 && sf::Mouse::getPosition(window).x <= 90) &&
-				(sf::Mouse::getPosition(window).y >= 30 && sf::Mouse::getPosition(window).y <= 90))
+				(sf::Mouse::getPosition(window).y >= 30 && sf::Mouse::getPosition(window).y <= 90)) //Back
 			{
-				//Going back to the search menu
 				ChoiceFlow::MainMenu::playSound(buffer, sound, 1);
 				stage = 2;
 				inputData::oldTitleCheck = true;
 			}
-			else if ((sf::Mouse::getPosition(window).x >= 180 && sf::Mouse::getPosition(window).x <= 605) && //title
+			else if ((sf::Mouse::getPosition(window).x >= 180 && sf::Mouse::getPosition(window).x <= 605) && //Title
 				(sf::Mouse::getPosition(window).y >= 115 && sf::Mouse::getPosition(window).y <= 160))
 			{
 				box = 1;
 			}
 
-			else if ((sf::Mouse::getPosition(window).x >= 150 && sf::Mouse::getPosition(window).x <= 305) && //year
+			else if ((sf::Mouse::getPosition(window).x >= 150 && sf::Mouse::getPosition(window).x <= 305) && //Year
 				(sf::Mouse::getPosition(window).y >= 210 && sf::Mouse::getPosition(window).y <= 260))
 			{
 				box = 2;
 			}
 
-			else if ((sf::Mouse::getPosition(window).x >= 440 && sf::Mouse::getPosition(window).x <= 685) && //topic
+			else if ((sf::Mouse::getPosition(window).x >= 440 && sf::Mouse::getPosition(window).x <= 685) && //Topic
 				(sf::Mouse::getPosition(window).y >= 210 && sf::Mouse::getPosition(window).y <= 260))
 			{
 				box = 3;
 			}
 
-			else if ((sf::Mouse::getPosition(window).x >= 140 && sf::Mouse::getPosition(window).x <= 680) && //description
+			else if ((sf::Mouse::getPosition(window).x >= 140 && sf::Mouse::getPosition(window).x <= 680) && //Description
 				(sf::Mouse::getPosition(window).y >= 330 && sf::Mouse::getPosition(window).y <= 600))
 			{
 				box = 4;
 			}
 
-			else if ((sf::Mouse::getPosition(window).x >= 277 && sf::Mouse::getPosition(window).x <= 577) && //enter
+			else if ((sf::Mouse::getPosition(window).x >= 277 && sf::Mouse::getPosition(window).x <= 577) && //Enter
 				(sf::Mouse::getPosition(window).y >= 650 && sf::Mouse::getPosition(window).y <= 750))
 			{
 				//Save edited an event data
@@ -552,9 +544,8 @@ void ChoiceFlow::TestKnowledge::onClickTestPage(sf::RenderWindow& window, sf::Ev
 		if (event1.key.code == sf::Mouse::Left && event1.type == sf::Event::MouseButtonPressed)
 		{
 			if ((sf::Mouse::getPosition(window).x >= 30 && sf::Mouse::getPosition(window).x <= 90) &&
-				(sf::Mouse::getPosition(window).y >= 30 && sf::Mouse::getPosition(window).y <= 90))
+				(sf::Mouse::getPosition(window).y >= 30 && sf::Mouse::getPosition(window).y <= 90)) //Back
 			{
-				//Going back to the main menu
 				ChoiceFlow::MainMenu::playSound(buffer, sound, 1);
 				stage = 0;
 				crCheck = true;
@@ -565,18 +556,17 @@ void ChoiceFlow::TestKnowledge::onClickTestPage(sf::RenderWindow& window, sf::Ev
 					delete eventG;
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 135 && sf::Mouse::getPosition(window).x <= 290) &&
-				(sf::Mouse::getPosition(window).y >= 310 && sf::Mouse::getPosition(window).y <= 355))
+				(sf::Mouse::getPosition(window).y >= 310 && sf::Mouse::getPosition(window).y <= 355)) //Year box
 			{
-				//Type box
 				box = 1;
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 240 && sf::Mouse::getPosition(window).x <= 565) &&
-				(sf::Mouse::getPosition(window).y >= 485 && sf::Mouse::getPosition(window).y <= 575))
+				(sf::Mouse::getPosition(window).y >= 485 && sf::Mouse::getPosition(window).y <= 575)) //Generate button
 			{
-				//Generate an event
 				if (SearchAnEventNodes::TakeNodes::takeLastNodePos(entireFile) > 1)
 				{
 					ChoiceFlow::MainMenu::playSound(buffer, sound, 5);
+					//Generate new event if there is one create already delete that one and create new
 					if (generated) delete eventG;
 					eventG = new EventGenerator(entireFile, &SearchAnEventNodes::TakeNodes::takeLastNodePos);
 					titleText = eventG->title; topicText = eventG->topic;
@@ -586,9 +576,8 @@ void ChoiceFlow::TestKnowledge::onClickTestPage(sf::RenderWindow& window, sf::Ev
 				}
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 35 && sf::Mouse::getPosition(window).x <= 275) &&
-				(sf::Mouse::getPosition(window).y >= 695 && sf::Mouse::getPosition(window).y <= 775))
+				(sf::Mouse::getPosition(window).y >= 695 && sf::Mouse::getPosition(window).y <= 775)) //Reveal the answer button
 			{
-				//Reveal the answer of the event
 				if (generated)
 				{
 					ChoiceFlow::MainMenu::playSound(buffer, sound, 6);
@@ -599,9 +588,9 @@ void ChoiceFlow::TestKnowledge::onClickTestPage(sf::RenderWindow& window, sf::Ev
 				box = 0;
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 525 && sf::Mouse::getPosition(window).x <= 765) &&
-				(sf::Mouse::getPosition(window).y >= 700 && sf::Mouse::getPosition(window).y <= 775))
+				(sf::Mouse::getPosition(window).y >= 700 && sf::Mouse::getPosition(window).y <= 775)) //Check the answer button
 			{
-				//Check user answer
+				//Check if there is a generated event and the answer is typed
 				if (generated && yearAnswer.getSize() > 0)
 				{
 					ChoiceFlow::MainMenu::playSound(buffer, sound, 7);

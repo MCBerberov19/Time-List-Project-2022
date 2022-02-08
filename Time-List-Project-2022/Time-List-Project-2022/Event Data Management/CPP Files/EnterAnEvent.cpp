@@ -7,6 +7,7 @@ EnterAnEventC::EnterAnEventC(sf::String title, int year, sf::String topic, sf::S
 	this->topic = topic;
 	this->description = description;
 
+	//Save the data in the "Events.txt" file
 	setTextData();
 }
 

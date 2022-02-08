@@ -173,8 +173,8 @@ void printSearchAnEventPage(sf::RenderWindow& window, Event*& head, Event*& tail
 	window.draw(searchBox);
 	window.draw(searchData);
 	ascendingSort.setPosition(333, 160);
-	descendingSort.setPosition(333, 160); // Create check for printing ascending or descending on click
-	//eventBoard.setPosition(63, 220); <- these are the cordinates
+	descendingSort.setPosition(333, 160);
+	//Check for print ascending(from head to tail) or descending(from tail to head).
 	if (ChoiceFlow::SearchedAnEvent::sortCheck)
 	{
 		window.draw(ascendingSort);
@@ -188,6 +188,7 @@ void printSearchAnEventPage(sf::RenderWindow& window, Event*& head, Event*& tail
 	sortByTitle.setPosition(-10, 78);
 	sortByYear.setPosition(-90, 10);
 	sortByTopic.setPosition(-90, 10);
+	//Check for print sorted by par
 	switch (ChoiceFlow::SearchedAnEvent::sortType)
 	{
 	case 1:
@@ -461,14 +462,16 @@ void printTestKnowledgePage(sf::RenderWindow& window, EventGenerator* answer)
 	title.setPosition(-45, -15);
 	window.draw(title);
 	window.draw(titleText);
-	if (ChoiceFlow::TestKnowledge::inputData::checked)
+	if (ChoiceFlow::TestKnowledge::inputData::checked) //Check if the check button is pressed
 	{
+		//If the answer is correct
 		if (ChoiceFlow::TestKnowledge::inputData::yearAnswer.toAnsiString() == 
 			std::to_string(answer->convertToDecimalFromBinary()))
 		{
 			message.setFillColor(sf::Color::Green);
 			message.setString("Correct!");
 		}
+		//Otherwise
 		else
 		{
 			message.setFillColor(sf::Color::Red);
@@ -514,22 +517,22 @@ void setMenu(int& stage)
 			printEnterAnEventPage(window);
 			switch (ChoiceFlow::EnterAnEvent::inputData::box)
 			{
-			case 1:
+			case 1: //Input the title
 				ChoiceFlow::EnterAnEvent::inputEventData(event1, ChoiceFlow::EnterAnEvent::inputData::title, 27, false);
 				break;
-			case 2:
+			case 2: //Input the year
 				ChoiceFlow::EnterAnEvent::inputEventData(event1, ChoiceFlow::EnterAnEvent::inputData::year, 4, true);
 				break;
-			case 3:
+			case 3: //Input the topic
 				ChoiceFlow::EnterAnEvent::inputEventData(event1, ChoiceFlow::EnterAnEvent::inputData::topic, 12, false);
 				break;
-			case 4:
+			case 4: //Input the description
 				ChoiceFlow::EnterAnEvent::inputEventData(event1, ChoiceFlow::EnterAnEvent::inputData::description, 316, false);
 				break;
 			}
 			break;
 		case 2:
-			if (ChoiceFlow::SearchedAnEvent::crCheck)
+			if (ChoiceFlow::SearchedAnEvent::crCheck) //Check if the list is created
 			{
 				head = new Event; tail = new Event; entireFile = new Event;
 				SearchAnEventNodes::TakeNodes::takeDataFromFile(head, &Event::appendNode, &Event::removeHead);
@@ -548,14 +551,14 @@ void setMenu(int& stage)
 			ChoiceFlow::SearchedAnEvent::sortType, ChoiceFlow::EnterAnEvent::inputData::box,
 			ChoiceFlow::SearchedAnEvent::inputData::searchData, entireFile, buffer, sound);
 
-			if (ChoiceFlow::EnterAnEvent::inputData::box == 1)
+			if (ChoiceFlow::EnterAnEvent::inputData::box == 1) //input search data
 			{
 				ChoiceFlow::EnterAnEvent::inputEventData(event1, ChoiceFlow::SearchedAnEvent::inputData::searchData, 25, false);
 			}
 			break;
 		case 3:
 			printTestKnowledgePage(window, eventG);
-			if (ChoiceFlow::TestKnowledge::inputData::crCheck)
+			if (ChoiceFlow::TestKnowledge::inputData::crCheck) //Check if the list is created
 			{
 				entireFile = new Event;
 				SearchAnEventNodes::TakeNodes::takeDataFromFile(entireFile, &Event::appendNode, &Event::removeHead);
@@ -571,6 +574,7 @@ void setMenu(int& stage)
 			if (ChoiceFlow::EnterAnEvent::inputData::box == 1 && !ChoiceFlow::TestKnowledge::inputData::revealed && 
 			ChoiceFlow::TestKnowledge::inputData::generated && !ChoiceFlow::TestKnowledge::inputData::checked)
 			{
+				//Input the year answer data
 				ChoiceFlow::EnterAnEvent::inputEventData(event1, ChoiceFlow::TestKnowledge::inputData::yearAnswer, 4, true);
 			}
 			break;
@@ -588,16 +592,16 @@ void setMenu(int& stage)
 
 			switch (ChoiceFlow::EnterAnEvent::inputData::box)
 			{
-			case 1:
+			case 1: //Input the title in the edit page
 				ChoiceFlow::EnterAnEvent::inputEventData(event1, ChoiceFlow::SearchedAnEvent::inputData::title, 27, false);
 				break;
-			case 2:
+			case 2: //Input the year in the edit page
 				ChoiceFlow::EnterAnEvent::inputEventData(event1, ChoiceFlow::SearchedAnEvent::inputData::year, 4, true);
 				break;
-			case 3:
+			case 3: //Input the topic in the edit page
 				ChoiceFlow::EnterAnEvent::inputEventData(event1, ChoiceFlow::SearchedAnEvent::inputData::topic, 12, false);
 				break;
-			case 4:
+			case 4: //Input the description in the edit page
 				ChoiceFlow::EnterAnEvent::inputEventData(event1, ChoiceFlow::SearchedAnEvent::inputData::description, 316, false);
 				break;
 			}

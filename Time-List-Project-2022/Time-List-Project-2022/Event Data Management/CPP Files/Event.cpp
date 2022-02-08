@@ -43,6 +43,7 @@ void Event::appendNode(Event* head, std::string& title, int& year, std::string& 
 {
 	Event* tail = getTail(head);
 
+	//Make the tail to point to a new event
 	tail->nextEvent = new Event(title, year, topic, description);
 	if (tail == NULL)
 	{
@@ -63,6 +64,7 @@ Event* Event::removeHead(Event* head)
 	return newHead;
 }
 
+//Split to two halfes
 Event* Event::split(Event* head)
 {
 	Event* f = head, * s = head;
@@ -77,6 +79,7 @@ Event* Event::split(Event* head)
 	return temp;
 }
 
+//Merge the two halfes and sorting them at the same time
 Event* Event::merge(Event* f, Event* s, int sortType)
 {
 	if (!f)
@@ -85,6 +88,7 @@ Event* Event::merge(Event* f, Event* s, int sortType)
 	if (!s)
 		return f;
 
+	//Check what type of sorting
 	switch (sortType)
 	{
 	case 1:
@@ -138,6 +142,7 @@ Event* Event::merge(Event* f, Event* s, int sortType)
 	}
 }
 
+//Function to return the sorted list
 Event* Event::mergeSortList(Event*& head, int sortType)
 {
 	if (!head || !head->nextEvent)
@@ -145,9 +150,11 @@ Event* Event::mergeSortList(Event*& head, int sortType)
 
 	Event* secondHalf = split(head);
 
+	//First and second half
 	head = mergeSortList(head, sortType);
 	secondHalf = mergeSortList(secondHalf, sortType);
 
+	//Merge halves
 	return merge(head, secondHalf, sortType);
 }
 
@@ -165,6 +172,7 @@ void Event::removeNode(Event*& head, Event*& tail, int cordinateY, int node, boo
 		{
 			while (head != NULL)
 			{
+				//Check the cordinates of the clicked event
 				if (nodeCur == SearchAnEventNodes::TakeNodes::takeNodeIndex(cordinateY, node))
 				{
 					if (SearchAnEventNodes::TakeNodes::takeNodeIndex(cordinateY, node) == 1)
@@ -210,6 +218,7 @@ void Event::removeNode(Event*& head, Event*& tail, int cordinateY, int node, boo
 		{
 			while (tail != NULL)
 			{
+				//Check the cordinates of the clicked event
 				if (nodeCur == SearchAnEventNodes::TakeNodes::takeNodeIndex(cordinateY, node))
 				{
 					if (SearchAnEventNodes::TakeNodes::takeNodeIndex(cordinateY, node) == 1)

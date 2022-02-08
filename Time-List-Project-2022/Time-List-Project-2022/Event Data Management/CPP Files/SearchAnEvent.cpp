@@ -8,6 +8,7 @@ void SearchAnEventNodes::PrintList::printList(sf::RenderWindow& window, Event* h
 	float y = 220;
 	int i = 0;
 
+	//Printing only the first six events
 	while (head != NULL)
 	{
 		if (i == 6)
@@ -23,6 +24,7 @@ void SearchAnEventNodes::PrintList::printList(sf::RenderWindow& window, Event* h
 	}
 }
 
+//Print the list from its tail backwards
 void SearchAnEventNodes::PrintList::printListReversed(sf::RenderWindow& window, Event* tail, sf::Sprite& eventBoard,
 	sf::Font& font)
 {
@@ -63,6 +65,7 @@ Event* SearchAnEventNodes::PrintList::printFoundData(Event* head, sf::String sea
 	std::string year;
 	while (head != NULL)
 	{
+		//Check if the entered data is a number
 		if (std::regex_match(searchData.toAnsiString(), 
 		std::regex(R"(^^\s*[-+]?((\d+(\.\d+)?)|(\d+\.)|(\.\d+))(e[-+]?\d+)?\s*$)")))
 		{
@@ -73,6 +76,7 @@ Event* SearchAnEventNodes::PrintList::printFoundData(Event* head, sf::String sea
 				cur++;
 			}
 		}
+		//If its a text
 		else
 		{
 			std::string dataTitle = toLower(head->title);
@@ -117,6 +121,7 @@ void SearchAnEventNodes::ClearList::clearListTail(Event* tail)
 	clearList(temp);
 }
 
+//Opening the file and save the events to a linked list
 void SearchAnEventNodes::TakeNodes::takeDataFromFile(Event*& head, void(Event::* appendNode)(Event*, std::string&, 
 	int&, std::string&, std::string&), Event* (Event::* removeHead)(Event*))
 {
@@ -187,6 +192,7 @@ int SearchAnEventNodes::TakeNodes::takeLastNodePos(Event* head)
 	return pos;
 }
 
+//Saving the data into the file
 void SearchAnEventNodes::SaveList::saveDataIntoFile(Event* head)
 {
 	std::ofstream outputData; outputData.open("Events.txt", std::ios::out | std::ios::trunc);
