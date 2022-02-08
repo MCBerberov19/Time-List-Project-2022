@@ -28,6 +28,8 @@ namespace SearchAnEventNodes
 		int takeNodeIndex(int cordinateY, int node);
 
 		int takeLastNodePos(Event* head);
+
+		bool checkValidSpaces(int cordinateY);
 	}
 
 	namespace SaveList

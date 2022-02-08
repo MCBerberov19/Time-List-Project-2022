@@ -3,42 +3,43 @@
 #include "../Header Files/SearchAnEvent.h"
 #include <vector>
 #include <regex>
+#include <iostream>
 
 void ChoiceFlow::MainMenu::playSound(sf::SoundBuffer& buffer, sf::Sound& sound, int soundType)
 {
-	switch (soundType) 
+	switch (soundType)
 	{
-		case 1:
-			buffer.loadFromFile("Sounds/click.wav");
-			break;
-		case 2:
-			buffer.loadFromFile("Sounds/sort.wav");
-			break;
-		case 3:
-			buffer.loadFromFile("Sounds/search.wav");
-			break;
-		case 4:
-			buffer.loadFromFile("Sounds/delete.wav");
-			break;
-		case 5:
-			buffer.loadFromFile("Sounds/generate.wav");
-			break;
-		case 6:
-			buffer.loadFromFile("Sounds/reveal.wav");
-			break;
-		case 7:
-			buffer.loadFromFile("Sounds/check.wav");
-			break;
-		case 8:
-			buffer.loadFromFile("Sounds/enter.wav");
-			break;
+	case 1:
+		buffer.loadFromFile("Sounds/click.wav");
+		break;
+	case 2:
+		buffer.loadFromFile("Sounds/sort.wav");
+		break;
+	case 3:
+		buffer.loadFromFile("Sounds/search.wav");
+		break;
+	case 4:
+		buffer.loadFromFile("Sounds/delete.wav");
+		break;
+	case 5:
+		buffer.loadFromFile("Sounds/generate.wav");
+		break;
+	case 6:
+		buffer.loadFromFile("Sounds/reveal.wav");
+		break;
+	case 7:
+		buffer.loadFromFile("Sounds/check.wav");
+		break;
+	case 8:
+		buffer.loadFromFile("Sounds/enter.wav");
+		break;
 	}
 
 	sound.setBuffer(buffer);
 	sound.play();
 }
 
-void ChoiceFlow::MainMenu::onClickMainMenu(sf::RenderWindow& window, sf::Event& event1, int& stage, 
+void ChoiceFlow::MainMenu::onClickMainMenu(sf::RenderWindow& window, sf::Event& event1, int& stage,
 	sf::SoundBuffer& buffer, sf::Sound& sound)
 {
 	while (window.pollEvent(event1))
@@ -74,8 +75,8 @@ void ChoiceFlow::MainMenu::onClickMainMenu(sf::RenderWindow& window, sf::Event& 
 	}
 }
 
-void ChoiceFlow::EnterAnEvent::onClickEventPage(sf::RenderWindow& window, sf::Event& event1, int& stage, int& box, 
-	sf::String& title, sf::String& year, sf::String& topic, 
+void ChoiceFlow::EnterAnEvent::onClickEventPage(sf::RenderWindow& window, sf::Event& event1, int& stage, int& box,
+	sf::String& title, sf::String& year, sf::String& topic,
 	sf::String& description, sf::SoundBuffer& buffer, sf::Sound& sound)
 {
 	while (window.pollEvent(event1))
@@ -88,7 +89,7 @@ void ChoiceFlow::EnterAnEvent::onClickEventPage(sf::RenderWindow& window, sf::Ev
 
 		if (event1.key.code == sf::Mouse::Left && event1.type == sf::Event::MouseButtonPressed)
 		{
-			if ((sf::Mouse::getPosition(window).x >= 30 && sf::Mouse::getPosition(window).x <= 90) && 
+			if ((sf::Mouse::getPosition(window).x >= 30 && sf::Mouse::getPosition(window).x <= 90) &&
 				(sf::Mouse::getPosition(window).y >= 30 && sf::Mouse::getPosition(window).y <= 90)) //Back
 			{
 				ChoiceFlow::MainMenu::playSound(buffer, sound, 1);
@@ -136,7 +137,7 @@ void ChoiceFlow::EnterAnEvent::onClickEventPage(sf::RenderWindow& window, sf::Ev
 					year = "";
 				}
 			}
-			else 
+			else
 			{
 				box = 0;
 			}
@@ -175,9 +176,9 @@ void ChoiceFlow::EnterAnEvent::inputEventData(sf::Event& event1, sf::String& tex
 	}
 }
 
-void ChoiceFlow::EnterAnEvent::seperateLinesInDescription(sf::String& description, sf::Text& descriptionText1, 
-	sf::Text& descriptionText2, sf::Text& descriptionText3, sf::Text& descriptionText4, 
-	sf::Text& descriptionText5, sf::Text& descriptionText6, sf::Text& descriptionText7, 
+void ChoiceFlow::EnterAnEvent::seperateLinesInDescription(sf::String& description, sf::Text& descriptionText1,
+	sf::Text& descriptionText2, sf::Text& descriptionText3, sf::Text& descriptionText4,
+	sf::Text& descriptionText5, sf::Text& descriptionText6, sf::Text& descriptionText7,
 	sf::Text& descriptionText8)
 {
 	if (description.getSize() > 0 && description.getSize() <= 28)
@@ -242,9 +243,9 @@ void ChoiceFlow::EnterAnEvent::seperateLinesInDescription(sf::String& descriptio
 	}
 }
 
-void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage, 
-	Event*& head, Event*& tail, bool& crCheck, bool& sortCheck, sf::String& title, sf::String& year, 
-	sf::String& topic, sf::String& description, int& sortType, int& box, sf::String& searchData, 
+void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage,
+	Event*& head, Event*& tail, bool& crCheck, bool& sortCheck, sf::String& title, sf::String& year,
+	sf::String& topic, sf::String& description, int& sortType, int& box, sf::String& searchData,
 	Event*& entireFile, sf::SoundBuffer& buffer, sf::Sound& sound)
 {
 	while (window.pollEvent(event1))
@@ -325,31 +326,40 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 				{
 					ChoiceFlow::MainMenu::playSound(buffer, sound, 3);
 					sortCheck = true;
-					head = SearchAnEventNodes::PrintList::printFoundData(entireFile, searchData, &Event::appendNode, 
-					sortType, sortCheck);
+					head = SearchAnEventNodes::PrintList::printFoundData(entireFile, searchData, &Event::appendNode,
+						sortType, sortCheck);
 					box = 0;
 					lastSearched = searchData;
 					searchData = "";
 					ChoiceFlow::SearchedAnEvent::ifSearched = true;
 				}
 			}
-			else if (sf::Mouse::getPosition(window).x >= 575 && sf::Mouse::getPosition(window).x <= 620) //Info button 
+			else if ((sf::Mouse::getPosition(window).x >= 575 && sf::Mouse::getPosition(window).x <= 620) &&
+				(sf::Mouse::getPosition(window).y >= 270 && sf::Mouse::getPosition(window).y <= 270 +
+				(65 * SearchAnEventNodes::TakeNodes::takeLastNodePos(head)) && sf::Mouse::getPosition(window).y<= 672) &&
+				SearchAnEventNodes::TakeNodes::checkValidSpaces(sf::Mouse::getPosition(window).y)) //Info button 
 			{
 				ChoiceFlow::MainMenu::playSound(buffer, sound, 1);
 				stage = 4;
-				SearchAnEventNodes::SaveList::saveEventInfo(head, tail, sf::Mouse::getPosition(window).y, 1, 
+				SearchAnEventNodes::SaveList::saveEventInfo(head, tail, sf::Mouse::getPosition(window).y, 1,
 					title, year, topic, description, sortCheck);
 				box = 0;
 			}
-			else if (sf::Mouse::getPosition(window).x >= 621 && sf::Mouse::getPosition(window).x <= 659) //Edit button
+			else if ((sf::Mouse::getPosition(window).x >= 621 && sf::Mouse::getPosition(window).x <= 659) &&
+				(sf::Mouse::getPosition(window).y >= 270 && sf::Mouse::getPosition(window).y <= 270 +
+					(65 * SearchAnEventNodes::TakeNodes::takeLastNodePos(head)) && sf::Mouse::getPosition(window).y <= 672) &&
+				SearchAnEventNodes::TakeNodes::checkValidSpaces(sf::Mouse::getPosition(window).y)) //Edit button 
 			{
 				ChoiceFlow::MainMenu::playSound(buffer, sound, 1);
 				stage = 5;
-				SearchAnEventNodes::SaveList::saveEventInfo(head, tail, sf::Mouse::getPosition(window).y, 1, 
+				SearchAnEventNodes::SaveList::saveEventInfo(head, tail, sf::Mouse::getPosition(window).y, 1,
 					title, year, topic, description, sortCheck);
 				box = 0;
 			}
-			else if (sf::Mouse::getPosition(window).x >= 660 && sf::Mouse::getPosition(window).x <= 705) //Remove an event
+			else if ((sf::Mouse::getPosition(window).x >= 660 && sf::Mouse::getPosition(window).x <= 705) &&
+				(sf::Mouse::getPosition(window).y >= 270 && sf::Mouse::getPosition(window).y <= 270 +
+					(65 * SearchAnEventNodes::TakeNodes::takeLastNodePos(head)) && sf::Mouse::getPosition(window).y <= 672) &&
+				SearchAnEventNodes::TakeNodes::checkValidSpaces(sf::Mouse::getPosition(window).y)) //Remove an event
 			{
 				ChoiceFlow::MainMenu::playSound(buffer, sound, 4);
 				if (ChoiceFlow::SearchedAnEvent::ifSearched)
@@ -376,7 +386,7 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 	}
 }
 
-void ChoiceFlow::SearchedAnEvent::onClickInfoPage(sf::RenderWindow& window, sf::Event& event1, int& stage, 
+void ChoiceFlow::SearchedAnEvent::onClickInfoPage(sf::RenderWindow& window, sf::Event& event1, int& stage,
 	sf::SoundBuffer& buffer, sf::Sound& sound)
 {
 	while (window.pollEvent(event1))
@@ -399,7 +409,7 @@ void ChoiceFlow::SearchedAnEvent::onClickInfoPage(sf::RenderWindow& window, sf::
 	}
 }
 
-void ChoiceFlow::SearchedAnEvent::saveEditedEventData(sf::String& title, sf::String& year, sf::String& topic, 
+void ChoiceFlow::SearchedAnEvent::saveEditedEventData(sf::String& title, sf::String& year, sf::String& topic,
 	sf::String& description)
 {
 	std::ifstream curData; curData.open("Events.txt", std::ios::in | std::ios::app);
@@ -407,8 +417,8 @@ void ChoiceFlow::SearchedAnEvent::saveEditedEventData(sf::String& title, sf::Str
 	std::vector<std::string> lines;
 	std::smatch yearMatch;
 
-	editedData = title.toAnsiString() + " " + year.toAnsiString() + " " + topic.toAnsiString() + " " 
-	+ description.toAnsiString();
+	editedData = title.toAnsiString() + " " + year.toAnsiString() + " " + topic.toAnsiString() + " "
+		+ description.toAnsiString();
 	bool found = true;
 	int pos = 0;
 
@@ -450,8 +460,8 @@ void ChoiceFlow::SearchedAnEvent::saveEditedEventData(sf::String& title, sf::Str
 	newData.close();
 }
 
-void ChoiceFlow::SearchedAnEvent::onClickEditPage(sf::RenderWindow& window, sf::Event& event1, int& stage, 
-	int& box, sf::String& title, sf::String& year, sf::String& topic, sf::String& description, 
+void ChoiceFlow::SearchedAnEvent::onClickEditPage(sf::RenderWindow& window, sf::Event& event1, int& stage,
+	int& box, sf::String& title, sf::String& year, sf::String& topic, sf::String& description,
 	bool& crCheck, int& sortType, sf::SoundBuffer& buffer, sf::Sound& sound)
 {
 	if (inputData::oldTitleCheck)
@@ -521,7 +531,7 @@ void ChoiceFlow::SearchedAnEvent::onClickEditPage(sf::RenderWindow& window, sf::
 
 				}
 			}
-			else 
+			else
 			{
 				box = 0;
 			}
@@ -530,9 +540,9 @@ void ChoiceFlow::SearchedAnEvent::onClickEditPage(sf::RenderWindow& window, sf::
 	}
 }
 
-void ChoiceFlow::TestKnowledge::onClickTestPage(sf::RenderWindow& window, sf::Event& event1, int& stage, 
-	Event*& entireFile, bool& crCheck, int& box, sf::String& yearAnswer, sf::String& titleText, 
-	sf::String& topicText, EventGenerator*& eventG, bool& revealed, bool& generated, bool& checked, 
+void ChoiceFlow::TestKnowledge::onClickTestPage(sf::RenderWindow& window, sf::Event& event1, int& stage,
+	Event*& entireFile, bool& crCheck, int& box, sf::String& yearAnswer, sf::String& titleText,
+	sf::String& topicText, EventGenerator*& eventG, bool& revealed, bool& generated, bool& checked,
 	sf::SoundBuffer& buffer, sf::Sound& sound)
 {
 	while (window.pollEvent(event1))

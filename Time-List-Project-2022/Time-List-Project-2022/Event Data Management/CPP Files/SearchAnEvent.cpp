@@ -205,6 +205,22 @@ int SearchAnEventNodes::TakeNodes::takeLastNodePos(Event* head)
 	return pos;
 }
 
+bool SearchAnEventNodes::TakeNodes::checkValidSpaces(int cordinateY)
+{
+	int inValidSpace = 325;
+
+	for (int i = 0; i < 6; i++)
+	{
+		if (cordinateY >= inValidSpace && cordinateY <= inValidSpace + 10)
+		{
+			return false;
+		}
+		inValidSpace += 70;
+	}
+
+	return true;
+}
+
 //Saving the data into the file
 void SearchAnEventNodes::SaveList::saveDataIntoFile(Event* head)
 {
