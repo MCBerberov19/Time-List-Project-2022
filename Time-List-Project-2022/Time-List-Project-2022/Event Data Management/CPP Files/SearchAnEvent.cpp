@@ -205,6 +205,7 @@ int SearchAnEventNodes::TakeNodes::takeLastNodePos(Event* head)
 	return pos;
 }
 
+//Checks for click in the middle of two event boarders
 bool SearchAnEventNodes::TakeNodes::checkValidSpaces(int cordinateY)
 {
 	int inValidSpace = 325;

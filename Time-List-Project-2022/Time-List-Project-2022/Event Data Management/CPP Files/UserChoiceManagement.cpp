@@ -3,7 +3,6 @@
 #include "../Header Files/SearchAnEvent.h"
 #include <vector>
 #include <regex>
-#include <iostream>
 
 void ChoiceFlow::MainMenu::playSound(sf::SoundBuffer& buffer, sf::Sound& sound, int soundType)
 {
