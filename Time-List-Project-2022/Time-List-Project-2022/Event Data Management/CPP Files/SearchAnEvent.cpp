@@ -11,6 +11,11 @@ void SearchAnEventNodes::PrintList::printList(sf::RenderWindow& window, Event* h
 	//Printing only the first six events
 	while (head != NULL)
 	{
+		if (head->title == "")
+		{
+			return;
+		}
+
 		if (i == 6)
 		{
 			return;
@@ -34,6 +39,11 @@ void SearchAnEventNodes::PrintList::printListReversed(sf::RenderWindow& window, 
 
 	while (tail != NULL)
 	{
+		if (tail->title == "")
+		{
+			return;
+		}
+
 		if (i == 6)
 		{
 			return;
