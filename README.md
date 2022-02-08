@@ -1,3 +1,9 @@
+<p align="center">
+  <a href=" rel="noopener">
+    <img src="Photos/logo.png" alt="Logo" width=400" >
+  </a>
+</p>
+
 ## 📖 Description <a name="description"></a>
 This is a program for C++, made for the school project - "Linked Lists". This is an app that registers and manages historical events, made with the help of linked lists.
 
