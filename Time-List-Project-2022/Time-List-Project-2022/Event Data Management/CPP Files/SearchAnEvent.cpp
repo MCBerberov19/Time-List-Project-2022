@@ -198,7 +198,11 @@ int SearchAnEventNodes::TakeNodes::takeLastNodePos(Event* head)
 
 	while (head != NULL)
 	{
-		pos++;
+		if (head->title != "")
+		{
+			pos++;
+		}
+
 		head = head->nextEvent;
 	}
 
