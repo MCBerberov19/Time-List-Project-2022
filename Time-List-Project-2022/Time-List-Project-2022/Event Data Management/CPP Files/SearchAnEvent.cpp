@@ -1,7 +1,9 @@
 #include "../Header Files/SearchAnEvent.h"
 #include <regex>
 
-void SearchAnEventNodes::PrintList::printList(sf::RenderWindow& window, Event* head, sf::Sprite& eventBoard, 
+using namespace SearchAnEventNodes;
+
+void PrintList::printList(sf::RenderWindow& window, Event* head, sf::Sprite& eventBoard, 
 	sf::Font& font)
 {
 	sf::Text text; text.setFont(font); text.setCharacterSize(28); text.setFillColor(sf::Color::Black);
@@ -30,7 +32,7 @@ void SearchAnEventNodes::PrintList::printList(sf::RenderWindow& window, Event* h
 }
 
 //Print the list from its tail backwards
-void SearchAnEventNodes::PrintList::printListReversed(sf::RenderWindow& window, Event* tail, sf::Sprite& eventBoard,
+void PrintList::printListReversed(sf::RenderWindow& window, Event* tail, sf::Sprite& eventBoard,
 	sf::Font& font)
 {
 	sf::Text text; text.setFont(font); text.setCharacterSize(28); text.setFillColor(sf::Color::Black);
@@ -67,7 +69,7 @@ std::string toLower(std::string text)
 	return data;
 }
 
-Event* SearchAnEventNodes::PrintList::printFoundData(Event* head, sf::String searchData, 
+Event* PrintList::printFoundData(Event* head, sf::String searchData, 
 	void(Event::* appendNode)(Event*, std::string&, int&, std::string&, std::string&), int& sortType, bool& sortCheck)
 {
 	Event* newHead = new Event;
@@ -110,7 +112,7 @@ Event* SearchAnEventNodes::PrintList::printFoundData(Event* head, sf::String sea
 	return newHead;
 }
 
-void SearchAnEventNodes::ClearList::clearList(Event* head)
+void ClearList::clearList(Event* head)
 {
 	if (head == NULL)
 	{
@@ -122,7 +124,7 @@ void SearchAnEventNodes::ClearList::clearList(Event* head)
 	clearList(temp);
 }
 
-void SearchAnEventNodes::ClearList::clearListTail(Event* tail)
+void ClearList::clearListTail(Event* tail)
 {
 	if (tail == NULL)
 	{
@@ -135,7 +137,7 @@ void SearchAnEventNodes::ClearList::clearListTail(Event* tail)
 }
 
 //Opening the file and save the events to a linked list
-void SearchAnEventNodes::TakeNodes::takeDataFromFile(Event*& head, void(Event::* appendNode)(Event*, std::string&, 
+void TakeNodes::takeDataFromFile(Event*& head, void(Event::* appendNode)(Event*, std::string&, 
 	int&, std::string&, std::string&), Event* (Event::* removeHead)(Event*))
 {
 	std::ifstream inputFile; inputFile.open("Events.txt", std::ios::in | std::ios::app);
@@ -178,7 +180,7 @@ void SearchAnEventNodes::TakeNodes::takeDataFromFile(Event*& head, void(Event::*
 	}
 }
 
-int SearchAnEventNodes::TakeNodes::takeNodeIndex(int cordinateY, int node)
+int TakeNodes::takeNodeIndex(int cordinateY, int node)
 {
 	if (cordinateY >= 270 && cordinateY <= 320)
 	{
@@ -192,7 +194,7 @@ int SearchAnEventNodes::TakeNodes::takeNodeIndex(int cordinateY, int node)
 	return takeNodeIndex(cordinateY - 70, ++node);
 }
 
-int SearchAnEventNodes::TakeNodes::takeLastNodePos(Event* head)
+int TakeNodes::takeLastNodePos(Event* head)
 {
 	int pos = 0;
 
@@ -210,7 +212,7 @@ int SearchAnEventNodes::TakeNodes::takeLastNodePos(Event* head)
 }
 
 //Checks for click in the middle of two event boarders
-bool SearchAnEventNodes::TakeNodes::checkValidSpaces(int cordinateY)
+bool TakeNodes::checkValidSpaces(int cordinateY)
 {
 	int inValidSpace = 325;
 
@@ -227,7 +229,7 @@ bool SearchAnEventNodes::TakeNodes::checkValidSpaces(int cordinateY)
 }
 
 //Saving the data into the file
-void SearchAnEventNodes::SaveList::saveDataIntoFile(Event* head)
+void SaveList::saveDataIntoFile(Event* head)
 {
 	std::ofstream outputData; outputData.open("Events.txt", std::ios::out | std::ios::trunc);
 
@@ -241,7 +243,7 @@ void SearchAnEventNodes::SaveList::saveDataIntoFile(Event* head)
 	outputData.close();
 }
 
-void SearchAnEventNodes::SaveList::saveDataIntoFileTail(Event* tail)
+void SaveList::saveDataIntoFileTail(Event* tail)
 {
 	std::ofstream outputData; outputData.open("Events.txt", std::ios::out | std::ios::trunc);
 
@@ -255,17 +257,17 @@ void SearchAnEventNodes::SaveList::saveDataIntoFileTail(Event* tail)
 	outputData.close();
 }
 
-void SearchAnEventNodes::SaveList::saveEventInfo(Event* head, Event* tail, int cordinateY, int node, 
+void SaveList::saveEventInfo(Event* head, Event* tail, int cordinateY, int node, 
 	sf::String& title, sf::String& year, sf::String& topic, sf::String& description, bool& sortCheck)
 {
 	int nodeCur = 1;
-	if (SearchAnEventNodes::TakeNodes::takeNodeIndex(cordinateY, node) != 0)
+	if (TakeNodes::takeNodeIndex(cordinateY, node) != 0)
 	{
 		if (sortCheck)
 		{
 			while (head != NULL)
 			{
-				if (nodeCur == SearchAnEventNodes::TakeNodes::takeNodeIndex(cordinateY, node))
+				if (nodeCur == TakeNodes::takeNodeIndex(cordinateY, node))
 				{
 					title = head->title;
 					year = std::to_string(head->year);
@@ -281,7 +283,7 @@ void SearchAnEventNodes::SaveList::saveEventInfo(Event* head, Event* tail, int c
 		{
 			while (tail != NULL)
 			{
-				if (nodeCur == SearchAnEventNodes::TakeNodes::takeNodeIndex(cordinateY, node))
+				if (nodeCur == TakeNodes::takeNodeIndex(cordinateY, node))
 				{
 					title = tail->title;
 					year = std::to_string(tail->year);
@@ -296,7 +298,7 @@ void SearchAnEventNodes::SaveList::saveEventInfo(Event* head, Event* tail, int c
 	}
 }
 
-void SearchAnEventNodes::SaveList::saveAfterRemoveWhenSearched(Event* entireFile, std::string& title)
+void SaveList::saveAfterRemoveWhenSearched(Event* entireFile, std::string& title)
 {
 	std::vector<std::string> dataV;
 	std::string data;

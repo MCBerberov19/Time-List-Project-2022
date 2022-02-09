@@ -4,7 +4,11 @@
 #include <vector>
 #include <regex>
 
-void ChoiceFlow::MainMenu::playSound(sf::SoundBuffer& buffer, sf::Sound& sound, int soundType)
+using namespace ChoiceFlow;
+using namespace SearchAnEventNodes::ClearList;
+using namespace SearchAnEventNodes::TakeNodes;
+
+void MainMenu::playSound(sf::SoundBuffer& buffer, sf::Sound& sound, int soundType)
 {
 	switch (soundType)
 	{
@@ -38,7 +42,7 @@ void ChoiceFlow::MainMenu::playSound(sf::SoundBuffer& buffer, sf::Sound& sound, 
 	sound.play();
 }
 
-void ChoiceFlow::MainMenu::onClickMainMenu(sf::RenderWindow& window, sf::Event& event1, int& stage,
+void MainMenu::onClickMainMenu(sf::RenderWindow& window, sf::Event& event1, int& stage,
 	sf::SoundBuffer& buffer, sf::Sound& sound)
 {
 	while (window.pollEvent(event1))
@@ -74,7 +78,7 @@ void ChoiceFlow::MainMenu::onClickMainMenu(sf::RenderWindow& window, sf::Event& 
 	}
 }
 
-void ChoiceFlow::EnterAnEvent::onClickEventPage(sf::RenderWindow& window, sf::Event& event1, int& stage, int& box,
+void EnterAnEvent::onClickEventPage(sf::RenderWindow& window, sf::Event& event1, int& stage, int& box,
 	sf::String& title, sf::String& year, sf::String& topic,
 	sf::String& description, sf::SoundBuffer& buffer, sf::Sound& sound)
 {
@@ -91,7 +95,7 @@ void ChoiceFlow::EnterAnEvent::onClickEventPage(sf::RenderWindow& window, sf::Ev
 			if ((sf::Mouse::getPosition(window).x >= 30 && sf::Mouse::getPosition(window).x <= 90) &&
 				(sf::Mouse::getPosition(window).y >= 30 && sf::Mouse::getPosition(window).y <= 90)) //Back
 			{
-				ChoiceFlow::MainMenu::playSound(buffer, sound, 1);
+				MainMenu::playSound(buffer, sound, 1);
 				stage = 0;
 			}
 
@@ -125,7 +129,7 @@ void ChoiceFlow::EnterAnEvent::onClickEventPage(sf::RenderWindow& window, sf::Ev
 				if (title.getSize() > 0 && topic.getSize() > 0 && description.getSize() > 0 && year.getSize() > 0)
 				{
 					//Enter an event button
-					ChoiceFlow::MainMenu::playSound(buffer, sound, 8);
+					MainMenu::playSound(buffer, sound, 8);
 					EnterAnEventC* newEvent = new EnterAnEventC(title, stoi(year.toAnsiString()), topic, description);
 					delete newEvent;
 
@@ -144,7 +148,7 @@ void ChoiceFlow::EnterAnEvent::onClickEventPage(sf::RenderWindow& window, sf::Ev
 	}
 }
 
-void ChoiceFlow::EnterAnEvent::inputEventData(sf::Event& event1, sf::String& text, int size, bool num)
+void EnterAnEvent::inputEventData(sf::Event& event1, sf::String& text, int size, bool num)
 {
 	if (event1.type == sf::Event::TextEntered)
 	{
@@ -175,7 +179,7 @@ void ChoiceFlow::EnterAnEvent::inputEventData(sf::Event& event1, sf::String& tex
 	}
 }
 
-void ChoiceFlow::EnterAnEvent::seperateLinesInDescription(sf::String& description, sf::Text& descriptionText1,
+void EnterAnEvent::seperateLinesInDescription(sf::String& description, sf::Text& descriptionText1,
 	sf::Text& descriptionText2, sf::Text& descriptionText3, sf::Text& descriptionText4,
 	sf::Text& descriptionText5, sf::Text& descriptionText6, sf::Text& descriptionText7,
 	sf::Text& descriptionText8)
@@ -242,7 +246,7 @@ void ChoiceFlow::EnterAnEvent::seperateLinesInDescription(sf::String& descriptio
 	}
 }
 
-void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage,
+void SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage,
 	Event*& head, Event*& tail, bool& crCheck, bool& sortCheck, sf::String& title, sf::String& year,
 	sf::String& topic, sf::String& description, int& sortType, int& box, sf::String& searchData,
 	Event*& entireFile, sf::SoundBuffer& buffer, sf::Sound& sound)
@@ -259,9 +263,9 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 			if ((sf::Mouse::getPosition(window).x >= 30 && sf::Mouse::getPosition(window).x <= 90) &&
 				(sf::Mouse::getPosition(window).y >= 30 && sf::Mouse::getPosition(window).y <= 90)) //Back
 			{
-				ChoiceFlow::MainMenu::playSound(buffer, sound, 1);
+				MainMenu::playSound(buffer, sound, 1);
 				stage = 0;
-				SearchAnEventNodes::ClearList::clearList(head);
+				clearList(head);
 				crCheck = true;
 				box = 0;
 				searchData = "";
@@ -276,7 +280,7 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 			else if ((sf::Mouse::getPosition(window).x >= 85 && sf::Mouse::getPosition(window).x <= 178) &&
 				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 255)) //Sort by title
 			{
-				ChoiceFlow::MainMenu::playSound(buffer, sound, 2);
+				MainMenu::playSound(buffer, sound, 2);
 				sortType = 1;
 				head->mergeSortList(head, 1);
 				tail = tail->getTail(head);
@@ -286,7 +290,7 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 			else if ((sf::Mouse::getPosition(window).x >= 179 && sf::Mouse::getPosition(window).x <= 290) &&
 				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 255)) //Sort by year
 			{
-				ChoiceFlow::MainMenu::playSound(buffer, sound, 2);
+				MainMenu::playSound(buffer, sound, 2);
 				sortType = 2;
 				head->mergeSortList(head, 2);
 				tail = tail->getTail(head);
@@ -296,7 +300,7 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 			else if ((sf::Mouse::getPosition(window).x >= 291 && sf::Mouse::getPosition(window).x <= 387) &&
 				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 255)) //Sort by topic
 			{
-				ChoiceFlow::MainMenu::playSound(buffer, sound, 2);
+				MainMenu::playSound(buffer, sound, 2);
 				sortType = 3;
 				head->mergeSortList(head, 3);
 				tail = tail->getTail(head);
@@ -306,14 +310,14 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 			else if ((sf::Mouse::getPosition(window).x >= 470 && sf::Mouse::getPosition(window).x <= 590) &&
 				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 250)) //Sort ascending
 			{
-				ChoiceFlow::MainMenu::playSound(buffer, sound, 2);
+				MainMenu::playSound(buffer, sound, 2);
 				sortCheck = true;
 				box = 0;
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 592 && sf::Mouse::getPosition(window).x <= 710) &&
 				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 250)) //Sort descending
 			{
-				ChoiceFlow::MainMenu::playSound(buffer, sound, 2);
+				MainMenu::playSound(buffer, sound, 2);
 				sortCheck = false;
 				tail = tail->getTail(head);
 				box = 0;
@@ -323,23 +327,24 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 			{
 				if (searchData.getSize() > 0)
 				{
-					ChoiceFlow::MainMenu::playSound(buffer, sound, 3);
+					MainMenu::playSound(buffer, sound, 3);
 					sortCheck = true;
-					head = SearchAnEventNodes::PrintList::printFoundData(entireFile, searchData, &Event::appendNode,
-						sortType, sortCheck);
+
+					head = SearchAnEventNodes::PrintList::printFoundData(entireFile, searchData,
+						&Event::appendNode, sortType, sortCheck);
+
 					box = 0;
 					lastSearched = searchData;
 					searchData = "";
-					ChoiceFlow::SearchedAnEvent::ifSearched = true;
+					SearchedAnEvent::ifSearched = true;
 				}
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 575 && sf::Mouse::getPosition(window).x <= 620) &&
 				(sf::Mouse::getPosition(window).y >= 270 && sf::Mouse::getPosition(window).y <= 270 +
-				(65 * SearchAnEventNodes::TakeNodes::takeLastNodePos(head)) && sf::Mouse::getPosition(window).y<= 672) &&
-				SearchAnEventNodes::TakeNodes::checkValidSpaces(sf::Mouse::getPosition(window).y) &&
-				SearchAnEventNodes::TakeNodes::takeLastNodePos(head) != 0) //Info button 
+					(65 * takeLastNodePos(head)) && sf::Mouse::getPosition(window).y <= 672) &&
+				checkValidSpaces(sf::Mouse::getPosition(window).y) && takeLastNodePos(head) != 0) //Info button 
 			{
-				ChoiceFlow::MainMenu::playSound(buffer, sound, 1);
+				MainMenu::playSound(buffer, sound, 1);
 				stage = 4;
 				SearchAnEventNodes::SaveList::saveEventInfo(head, tail, sf::Mouse::getPosition(window).y, 1,
 					title, year, topic, description, sortCheck);
@@ -347,11 +352,10 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 621 && sf::Mouse::getPosition(window).x <= 659) &&
 				(sf::Mouse::getPosition(window).y >= 270 && sf::Mouse::getPosition(window).y <= 270 +
-					(65 * SearchAnEventNodes::TakeNodes::takeLastNodePos(head)) && sf::Mouse::getPosition(window).y <= 672) &&
-				SearchAnEventNodes::TakeNodes::checkValidSpaces(sf::Mouse::getPosition(window).y) &&
-				SearchAnEventNodes::TakeNodes::takeLastNodePos(head) != 0) //Edit button 
+					(65 * takeLastNodePos(head)) && sf::Mouse::getPosition(window).y <= 672) &&
+				checkValidSpaces(sf::Mouse::getPosition(window).y) && takeLastNodePos(head) != 0) //Edit button 
 			{
-				ChoiceFlow::MainMenu::playSound(buffer, sound, 1);
+				MainMenu::playSound(buffer, sound, 1);
 				stage = 5;
 				SearchAnEventNodes::SaveList::saveEventInfo(head, tail, sf::Mouse::getPosition(window).y, 1,
 					title, year, topic, description, sortCheck);
@@ -359,23 +363,22 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 660 && sf::Mouse::getPosition(window).x <= 705) &&
 				(sf::Mouse::getPosition(window).y >= 270 && sf::Mouse::getPosition(window).y <= 270 +
-					(65 * SearchAnEventNodes::TakeNodes::takeLastNodePos(head)) && sf::Mouse::getPosition(window).y <= 672) &&
-				SearchAnEventNodes::TakeNodes::checkValidSpaces(sf::Mouse::getPosition(window).y) &&
-				SearchAnEventNodes::TakeNodes::takeLastNodePos(head) != 0) //Remove an event
+					(65 * takeLastNodePos(head)) && sf::Mouse::getPosition(window).y <= 672) &&
+				checkValidSpaces(sf::Mouse::getPosition(window).y) && takeLastNodePos(head) != 0) //Remove an event
 			{
-				ChoiceFlow::MainMenu::playSound(buffer, sound, 4);
-				if (ChoiceFlow::SearchedAnEvent::ifSearched)
+				MainMenu::playSound(buffer, sound, 4);
+				if (SearchedAnEvent::ifSearched)
 				{
 					head->removeAfterSearch(head, tail, sf::Mouse::getPosition(window).y, 1, sortCheck, deletedTitle);
 					SearchAnEventNodes::SaveList::saveAfterRemoveWhenSearched(entireFile, deletedTitle);
-					SearchAnEventNodes::ClearList::clearList(entireFile);
+					clearList(entireFile);
 					entireFile = new Event;
-					SearchAnEventNodes::TakeNodes::takeDataFromFile(entireFile, &Event::appendNode, &Event::removeHead);
+					takeDataFromFile(entireFile, &Event::appendNode, &Event::removeHead);
 				}
 				else
 				{
 					head->removeNode(head, tail, sf::Mouse::getPosition(window).y, 1, sortCheck);
-					SearchAnEventNodes::TakeNodes::takeDataFromFile(entireFile, &Event::appendNode, &Event::removeHead);
+					takeDataFromFile(entireFile, &Event::appendNode, &Event::removeHead);
 				}
 				box = 0;
 			}
@@ -388,7 +391,7 @@ void ChoiceFlow::SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf
 	}
 }
 
-void ChoiceFlow::SearchedAnEvent::onClickInfoPage(sf::RenderWindow& window, sf::Event& event1, int& stage,
+void SearchedAnEvent::onClickInfoPage(sf::RenderWindow& window, sf::Event& event1, int& stage,
 	sf::SoundBuffer& buffer, sf::Sound& sound)
 {
 	while (window.pollEvent(event1))
@@ -404,14 +407,14 @@ void ChoiceFlow::SearchedAnEvent::onClickInfoPage(sf::RenderWindow& window, sf::
 			if ((sf::Mouse::getPosition(window).x >= 30 && sf::Mouse::getPosition(window).x <= 90) &&
 				(sf::Mouse::getPosition(window).y >= 30 && sf::Mouse::getPosition(window).y <= 90)) //Back
 			{
-				ChoiceFlow::MainMenu::playSound(buffer, sound, 1);
+				MainMenu::playSound(buffer, sound, 1);
 				stage = 2;
 			}
 		}
 	}
 }
 
-void ChoiceFlow::SearchedAnEvent::saveEditedEventData(sf::String& title, sf::String& year, sf::String& topic,
+void SearchedAnEvent::saveEditedEventData(sf::String& title, sf::String& year, sf::String& topic,
 	sf::String& description)
 {
 	std::ifstream curData; curData.open("Events.txt", std::ios::in | std::ios::app);
@@ -419,8 +422,7 @@ void ChoiceFlow::SearchedAnEvent::saveEditedEventData(sf::String& title, sf::Str
 	std::vector<std::string> lines;
 	std::smatch yearMatch;
 
-	editedData = title.toAnsiString() + " " + year.toAnsiString() + " " + topic.toAnsiString() + " "
-		+ description.toAnsiString();
+	editedData = title.toAnsiString() + " " + year.toAnsiString() + " " + topic.toAnsiString() + " " + description.toAnsiString();
 	bool found = true;
 	int pos = 0;
 
@@ -462,7 +464,7 @@ void ChoiceFlow::SearchedAnEvent::saveEditedEventData(sf::String& title, sf::Str
 	newData.close();
 }
 
-void ChoiceFlow::SearchedAnEvent::onClickEditPage(sf::RenderWindow& window, sf::Event& event1, int& stage,
+void SearchedAnEvent::onClickEditPage(sf::RenderWindow& window, sf::Event& event1, int& stage,
 	int& box, sf::String& title, sf::String& year, sf::String& topic, sf::String& description,
 	bool& crCheck, int& sortType, sf::SoundBuffer& buffer, sf::Sound& sound)
 {
@@ -485,7 +487,7 @@ void ChoiceFlow::SearchedAnEvent::onClickEditPage(sf::RenderWindow& window, sf::
 			if ((sf::Mouse::getPosition(window).x >= 30 && sf::Mouse::getPosition(window).x <= 90) &&
 				(sf::Mouse::getPosition(window).y >= 30 && sf::Mouse::getPosition(window).y <= 90)) //Back
 			{
-				ChoiceFlow::MainMenu::playSound(buffer, sound, 1);
+				MainMenu::playSound(buffer, sound, 1);
 				stage = 2;
 				inputData::oldTitleCheck = true;
 			}
@@ -519,7 +521,7 @@ void ChoiceFlow::SearchedAnEvent::onClickEditPage(sf::RenderWindow& window, sf::
 				//Save edited an event data
 				if (title.getSize() > 0 && topic.getSize() > 0 && description.getSize() > 0 && year.getSize() > 0)
 				{
-					ChoiceFlow::MainMenu::playSound(buffer, sound, 1);
+					MainMenu::playSound(buffer, sound, 1);
 					saveEditedEventData(title, year, topic, description);
 
 					inputData::oldTitleCheck = true;
@@ -542,7 +544,7 @@ void ChoiceFlow::SearchedAnEvent::onClickEditPage(sf::RenderWindow& window, sf::
 	}
 }
 
-void ChoiceFlow::TestKnowledge::onClickTestPage(sf::RenderWindow& window, sf::Event& event1, int& stage,
+void TestKnowledge::onClickTestPage(sf::RenderWindow& window, sf::Event& event1, int& stage,
 	Event*& entireFile, bool& crCheck, int& box, sf::String& yearAnswer, sf::String& titleText,
 	sf::String& topicText, EventGenerator*& eventG, bool& revealed, bool& generated, bool& checked,
 	sf::SoundBuffer& buffer, sf::Sound& sound)
@@ -559,10 +561,10 @@ void ChoiceFlow::TestKnowledge::onClickTestPage(sf::RenderWindow& window, sf::Ev
 			if ((sf::Mouse::getPosition(window).x >= 30 && sf::Mouse::getPosition(window).x <= 90) &&
 				(sf::Mouse::getPosition(window).y >= 30 && sf::Mouse::getPosition(window).y <= 90)) //Back
 			{
-				ChoiceFlow::MainMenu::playSound(buffer, sound, 1);
+				MainMenu::playSound(buffer, sound, 1);
 				stage = 0;
 				crCheck = true;
-				SearchAnEventNodes::ClearList::clearList(entireFile);
+				clearList(entireFile);
 				box = 0;
 				titleText = ""; topicText = ""; yearAnswer = ""; revealed = false; generated = false; checked = false;
 				if (generated)
@@ -576,12 +578,12 @@ void ChoiceFlow::TestKnowledge::onClickTestPage(sf::RenderWindow& window, sf::Ev
 			else if ((sf::Mouse::getPosition(window).x >= 240 && sf::Mouse::getPosition(window).x <= 565) &&
 				(sf::Mouse::getPosition(window).y >= 485 && sf::Mouse::getPosition(window).y <= 575)) //Generate button
 			{
-				if (SearchAnEventNodes::TakeNodes::takeLastNodePos(entireFile) > 1)
+				if (takeLastNodePos(entireFile) > 1)
 				{
-					ChoiceFlow::MainMenu::playSound(buffer, sound, 5);
+					MainMenu::playSound(buffer, sound, 5);
 					//Generate new event if there is one create already delete that one and create new
 					if (generated) delete eventG;
-					eventG = new EventGenerator(entireFile, &SearchAnEventNodes::TakeNodes::takeLastNodePos);
+					eventG = new EventGenerator(entireFile, &takeLastNodePos);
 					titleText = eventG->title; topicText = eventG->topic;
 					box = 0;
 					yearAnswer = "";
@@ -593,7 +595,7 @@ void ChoiceFlow::TestKnowledge::onClickTestPage(sf::RenderWindow& window, sf::Ev
 			{
 				if (generated)
 				{
-					ChoiceFlow::MainMenu::playSound(buffer, sound, 6);
+					MainMenu::playSound(buffer, sound, 6);
 					yearAnswer = std::to_string(eventG->convertToDecimalFromBinary());
 					revealed = true;
 					checked = false;
@@ -606,7 +608,7 @@ void ChoiceFlow::TestKnowledge::onClickTestPage(sf::RenderWindow& window, sf::Ev
 				//Check if there is a generated event and the answer is typed
 				if (generated && yearAnswer.getSize() > 0)
 				{
-					ChoiceFlow::MainMenu::playSound(buffer, sound, 7);
+					MainMenu::playSound(buffer, sound, 7);
 					checked = true;
 					revealed = false;
 				}

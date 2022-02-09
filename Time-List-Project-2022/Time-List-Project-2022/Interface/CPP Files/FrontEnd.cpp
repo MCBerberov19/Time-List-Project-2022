@@ -2,6 +2,8 @@
 #include "../Header Files/FrontEnd.h"
 #include "../../Event Data Management/Header Files/SearchAnEvent.h"
 
+using namespace ChoiceFlow;
+
 void printMainMenu(sf::RenderWindow& window)
 {
 	sf::Texture t1, t2, t3, t4, t5;
@@ -56,17 +58,17 @@ void printEnterAnEventPage(sf::RenderWindow& window)
 	titleText.setCharacterSize(25);
 	titleText.setFillColor(sf::Color::Black);
 	titleText.setPosition(240, 125);
-	titleText.setString(ChoiceFlow::EnterAnEvent::inputData::title);
+	titleText.setString(EnterAnEvent::inputData::title);
 	yearText.setFont(font);
 	yearText.setCharacterSize(25);
 	yearText.setFillColor(sf::Color::Black);
 	yearText.setPosition(210, 218);
-	yearText.setString(ChoiceFlow::EnterAnEvent::inputData::year);
+	yearText.setString(EnterAnEvent::inputData::year);
 	topicText.setFont(font);
 	topicText.setCharacterSize(25);
 	topicText.setFillColor(sf::Color::Black);
 	topicText.setPosition(505, 220);
-	topicText.setString(ChoiceFlow::EnterAnEvent::inputData::topic);
+	topicText.setString(EnterAnEvent::inputData::topic);
 	descriptionText1.setFont(font);
 	descriptionText1.setCharacterSize(25);
 	descriptionText1.setFillColor(sf::Color::Black);
@@ -115,7 +117,7 @@ void printEnterAnEventPage(sf::RenderWindow& window)
 	description.setPosition(10, 280);
 	window.draw(description);
 
-	ChoiceFlow::EnterAnEvent::seperateLinesInDescription(ChoiceFlow::EnterAnEvent::inputData::description, 
+	EnterAnEvent::seperateLinesInDescription(EnterAnEvent::inputData::description, 
 	descriptionText1, descriptionText2, descriptionText3, descriptionText4, descriptionText5, 
 	descriptionText6, descriptionText7, descriptionText8);
 
@@ -142,7 +144,7 @@ void printSearchAnEventPage(sf::RenderWindow& window, Event*& head, Event*& tail
 	searchData.setFont(font);
 	searchData.setFillColor(sf::Color::Black);
 	searchData.setPosition(332, 139);
-	searchData.setString(ChoiceFlow::SearchedAnEvent::inputData::searchData);
+	searchData.setString(SearchedAnEvent::inputData::searchData);
 
 	t1.loadFromFile("Images and Fonts/background.jpg");
 	t2.loadFromFile("Images and Fonts/back.png");
@@ -175,7 +177,7 @@ void printSearchAnEventPage(sf::RenderWindow& window, Event*& head, Event*& tail
 	ascendingSort.setPosition(333, 160);
 	descendingSort.setPosition(333, 160);
 	//Check for print ascending(from head to tail) or descending(from tail to head).
-	if (ChoiceFlow::SearchedAnEvent::sortCheck)
+	if (SearchedAnEvent::sortCheck)
 	{
 		window.draw(ascendingSort);
 		SearchAnEventNodes::PrintList::printList(window, head, eventBoard, font);
@@ -189,7 +191,7 @@ void printSearchAnEventPage(sf::RenderWindow& window, Event*& head, Event*& tail
 	sortByYear.setPosition(-90, 10);
 	sortByTopic.setPosition(-90, 10);
 	//Check for print sorted by par
-	switch (ChoiceFlow::SearchedAnEvent::sortType)
+	switch (SearchedAnEvent::sortType)
 	{
 	case 1:
 		window.draw(sortByTitle);
@@ -231,17 +233,17 @@ void printInfoPage(sf::RenderWindow& window)
 	titleText.setCharacterSize(25);
 	titleText.setFillColor(sf::Color::Black);
 	titleText.setPosition(240, 125);
-	titleText.setString(ChoiceFlow::SearchedAnEvent::inputData::title);
+	titleText.setString(SearchedAnEvent::inputData::title);
 	yearText.setFont(font);
 	yearText.setCharacterSize(25);
 	yearText.setFillColor(sf::Color::Black);
 	yearText.setPosition(210, 218);
-	yearText.setString(ChoiceFlow::SearchedAnEvent::inputData::year);
+	yearText.setString(SearchedAnEvent::inputData::year);
 	topicText.setFont(font);
 	topicText.setCharacterSize(25);
 	topicText.setFillColor(sf::Color::Black);
 	topicText.setPosition(505, 220);
-	topicText.setString(ChoiceFlow::SearchedAnEvent::inputData::topic);
+	topicText.setString(SearchedAnEvent::inputData::topic);
 	descriptionText1.setFont(font);
 	descriptionText1.setCharacterSize(25);
 	descriptionText1.setFillColor(sf::Color::Black);
@@ -290,7 +292,7 @@ void printInfoPage(sf::RenderWindow& window)
 	description.setPosition(10, 280);
 	window.draw(description);
 
-	ChoiceFlow::EnterAnEvent::seperateLinesInDescription(ChoiceFlow::SearchedAnEvent::inputData::description, 
+	EnterAnEvent::seperateLinesInDescription(SearchedAnEvent::inputData::description, 
 	descriptionText1, descriptionText2, descriptionText3, descriptionText4, descriptionText5, descriptionText6, 
 	descriptionText7, descriptionText8);
 
@@ -332,17 +334,17 @@ void printEditPage(sf::RenderWindow& window)
 	titleText.setCharacterSize(25);
 	titleText.setFillColor(sf::Color::Black);
 	titleText.setPosition(240, 125);
-	titleText.setString(ChoiceFlow::SearchedAnEvent::inputData::title);
+	titleText.setString(SearchedAnEvent::inputData::title);
 	yearText.setFont(font);
 	yearText.setCharacterSize(25);
 	yearText.setFillColor(sf::Color::Black);
 	yearText.setPosition(210, 218);
-	yearText.setString(ChoiceFlow::SearchedAnEvent::inputData::year);
+	yearText.setString(SearchedAnEvent::inputData::year);
 	topicText.setFont(font);
 	topicText.setCharacterSize(25);
 	topicText.setFillColor(sf::Color::Black);
 	topicText.setPosition(505, 220);
-	topicText.setString(ChoiceFlow::SearchedAnEvent::inputData::topic);
+	topicText.setString(SearchedAnEvent::inputData::topic);
 	descriptionText1.setFont(font);
 	descriptionText1.setCharacterSize(25);
 	descriptionText1.setFillColor(sf::Color::Black);
@@ -391,7 +393,7 @@ void printEditPage(sf::RenderWindow& window)
 	description.setPosition(10, 280);
 	window.draw(description);
 
-	ChoiceFlow::EnterAnEvent::seperateLinesInDescription(ChoiceFlow::SearchedAnEvent::inputData::description,
+	EnterAnEvent::seperateLinesInDescription(SearchedAnEvent::inputData::description,
 	descriptionText1, descriptionText2, descriptionText3, descriptionText4, descriptionText5, descriptionText6,
 	descriptionText7, descriptionText8);
 
@@ -426,17 +428,17 @@ void printTestKnowledgePage(sf::RenderWindow& window, EventGenerator* answer)
 	yearText.setCharacterSize(25);
 	yearText.setFillColor(sf::Color::Black);
 	yearText.setPosition(193, 318);
-	yearText.setString(ChoiceFlow::TestKnowledge::inputData::yearAnswer);
+	yearText.setString(TestKnowledge::inputData::yearAnswer);
 	titleText.setFont(font);
 	titleText.setCharacterSize(25);
 	titleText.setFillColor(sf::Color::Black);
 	titleText.setPosition(243, 160);
-	titleText.setString(ChoiceFlow::TestKnowledge::inputData::titleText);
+	titleText.setString(TestKnowledge::inputData::titleText);
 	topicText.setFont(font);
 	topicText.setCharacterSize(25);
 	topicText.setFillColor(sf::Color::Black);
 	topicText.setPosition(510, 318);
-	topicText.setString(ChoiceFlow::TestKnowledge::inputData::topicText);
+	topicText.setString(TestKnowledge::inputData::topicText);
 	message.setFont(font);
 	message.setCharacterSize(25);
 	message.setPosition(335, 400);
@@ -462,10 +464,10 @@ void printTestKnowledgePage(sf::RenderWindow& window, EventGenerator* answer)
 	title.setPosition(-45, -15);
 	window.draw(title);
 	window.draw(titleText);
-	if (ChoiceFlow::TestKnowledge::inputData::checked) //Check if the check button is pressed
+	if (TestKnowledge::inputData::checked) //Check if the check button is pressed
 	{
 		//If the answer is correct
-		if (ChoiceFlow::TestKnowledge::inputData::yearAnswer.toAnsiString() == 
+		if (TestKnowledge::inputData::yearAnswer.toAnsiString() == 
 			std::to_string(answer->convertToDecimalFromBinary()))
 		{
 			message.setFillColor(sf::Color::Green);
@@ -508,31 +510,31 @@ void setMenu(int& stage)
 		{
 		case 0:
 			printMainMenu(window);
-			ChoiceFlow::MainMenu::onClickMainMenu(window, event1, stage, buffer, sound);
+			MainMenu::onClickMainMenu(window, event1, stage, buffer, sound);
 			break;
 		case 1:
-			ChoiceFlow::EnterAnEvent::onClickEventPage(window, event1, stage, ChoiceFlow::EnterAnEvent::inputData::box, 
-			ChoiceFlow::EnterAnEvent::inputData::title, ChoiceFlow::EnterAnEvent::inputData::year, 
-			ChoiceFlow::EnterAnEvent::inputData::topic, ChoiceFlow::EnterAnEvent::inputData::description, buffer, sound);
+			EnterAnEvent::onClickEventPage(window, event1, stage,EnterAnEvent::inputData::box, 
+			EnterAnEvent::inputData::title, EnterAnEvent::inputData::year, 
+			EnterAnEvent::inputData::topic, EnterAnEvent::inputData::description, buffer, sound);
 			printEnterAnEventPage(window);
-			switch (ChoiceFlow::EnterAnEvent::inputData::box)
+			switch (EnterAnEvent::inputData::box)
 			{
 			case 1: //Input the title
-				ChoiceFlow::EnterAnEvent::inputEventData(event1, ChoiceFlow::EnterAnEvent::inputData::title, 27, false);
+				EnterAnEvent::inputEventData(event1, EnterAnEvent::inputData::title, 27, false);
 				break;
 			case 2: //Input the year
-				ChoiceFlow::EnterAnEvent::inputEventData(event1, ChoiceFlow::EnterAnEvent::inputData::year, 4, true);
+				EnterAnEvent::inputEventData(event1, EnterAnEvent::inputData::year, 4, true);
 				break;
 			case 3: //Input the topic
-				ChoiceFlow::EnterAnEvent::inputEventData(event1, ChoiceFlow::EnterAnEvent::inputData::topic, 12, false);
+				EnterAnEvent::inputEventData(event1, EnterAnEvent::inputData::topic, 12, false);
 				break;
 			case 4: //Input the description
-				ChoiceFlow::EnterAnEvent::inputEventData(event1, ChoiceFlow::EnterAnEvent::inputData::description, 316, false);
+				EnterAnEvent::inputEventData(event1, EnterAnEvent::inputData::description, 316, false);
 				break;
 			}
 			break;
 		case 2:
-			if (ChoiceFlow::SearchedAnEvent::crCheck) //Check if the list is created
+			if (SearchedAnEvent::crCheck) //Check if the list is created
 			{
 				head = new Event; tail = new Event; entireFile = new Event;
 				SearchAnEventNodes::TakeNodes::takeDataFromFile(head, &Event::appendNode, &Event::removeHead);
@@ -540,69 +542,69 @@ void setMenu(int& stage)
 				head->mergeSortList(head, 1);
 				tail = tail->getTail(head);
 				head = head->getHead(tail);
-				ChoiceFlow::SearchedAnEvent::crCheck = false;
+				SearchedAnEvent::crCheck = false;
 			}
 			printSearchAnEventPage(window, head, tail);
 
-			ChoiceFlow::SearchedAnEvent::onClickSearchPage(window, event1, stage, head, tail, 
-			ChoiceFlow::SearchedAnEvent::crCheck, ChoiceFlow::SearchedAnEvent::sortCheck, 
-			ChoiceFlow::SearchedAnEvent::inputData::title, ChoiceFlow::SearchedAnEvent::inputData::year, 
-			ChoiceFlow::SearchedAnEvent::inputData::topic, ChoiceFlow::SearchedAnEvent::inputData::description, 
-			ChoiceFlow::SearchedAnEvent::sortType, ChoiceFlow::EnterAnEvent::inputData::box,
-			ChoiceFlow::SearchedAnEvent::inputData::searchData, entireFile, buffer, sound);
+			SearchedAnEvent::onClickSearchPage(window, event1, stage, head, tail, 
+			SearchedAnEvent::crCheck, SearchedAnEvent::sortCheck, 
+			SearchedAnEvent::inputData::title, SearchedAnEvent::inputData::year, 
+			SearchedAnEvent::inputData::topic, SearchedAnEvent::inputData::description, 
+			SearchedAnEvent::sortType, EnterAnEvent::inputData::box,
+			SearchedAnEvent::inputData::searchData, entireFile, buffer, sound);
 
-			if (ChoiceFlow::EnterAnEvent::inputData::box == 1) //input search data
+			if (EnterAnEvent::inputData::box == 1) //input search data
 			{
-				ChoiceFlow::EnterAnEvent::inputEventData(event1, ChoiceFlow::SearchedAnEvent::inputData::searchData, 25, false);
+				EnterAnEvent::inputEventData(event1, SearchedAnEvent::inputData::searchData, 25, false);
 			}
 			break;
 		case 3:
 			printTestKnowledgePage(window, eventG);
-			if (ChoiceFlow::TestKnowledge::inputData::crCheck) //Check if the list is created
+			if (TestKnowledge::inputData::crCheck) //Check if the list is created
 			{
 				entireFile = new Event;
 				SearchAnEventNodes::TakeNodes::takeDataFromFile(entireFile, &Event::appendNode, &Event::removeHead);
-				ChoiceFlow::TestKnowledge::inputData::crCheck = false;
+				TestKnowledge::inputData::crCheck = false;
 			}
 
-			ChoiceFlow::TestKnowledge::onClickTestPage(window, event1, stage, entireFile, 
-			ChoiceFlow::TestKnowledge::inputData::crCheck, ChoiceFlow::EnterAnEvent::inputData::box, 
-			ChoiceFlow::TestKnowledge::inputData::yearAnswer, ChoiceFlow::TestKnowledge::inputData::titleText, 
-			ChoiceFlow::TestKnowledge::inputData::topicText, eventG, ChoiceFlow::TestKnowledge::inputData::revealed, 
-			ChoiceFlow::TestKnowledge::inputData::generated, ChoiceFlow::TestKnowledge::inputData::checked, buffer, sound);
+			TestKnowledge::onClickTestPage(window, event1, stage, entireFile, 
+			TestKnowledge::inputData::crCheck, EnterAnEvent::inputData::box, 
+			TestKnowledge::inputData::yearAnswer, TestKnowledge::inputData::titleText, 
+			TestKnowledge::inputData::topicText, eventG, TestKnowledge::inputData::revealed, 
+			TestKnowledge::inputData::generated, TestKnowledge::inputData::checked, buffer, sound);
 
-			if (ChoiceFlow::EnterAnEvent::inputData::box == 1 && !ChoiceFlow::TestKnowledge::inputData::revealed && 
-			ChoiceFlow::TestKnowledge::inputData::generated && !ChoiceFlow::TestKnowledge::inputData::checked)
+			if (EnterAnEvent::inputData::box == 1 && !TestKnowledge::inputData::revealed && 
+			TestKnowledge::inputData::generated && !TestKnowledge::inputData::checked)
 			{
 				//Input the year answer data
-				ChoiceFlow::EnterAnEvent::inputEventData(event1, ChoiceFlow::TestKnowledge::inputData::yearAnswer, 4, true);
+				EnterAnEvent::inputEventData(event1, TestKnowledge::inputData::yearAnswer, 4, true);
 			}
 			break;
 		case 4:
 			printInfoPage(window);
-			ChoiceFlow::SearchedAnEvent::onClickInfoPage(window, event1, stage, buffer, sound);
+			SearchedAnEvent::onClickInfoPage(window, event1, stage, buffer, sound);
 			break;
 		case 5:
 			printEditPage(window);
 
-			ChoiceFlow::SearchedAnEvent::onClickEditPage(window, event1, stage, ChoiceFlow::EnterAnEvent::inputData::box, 
-			ChoiceFlow::SearchedAnEvent::inputData::title, ChoiceFlow::SearchedAnEvent::inputData::year, 
-			ChoiceFlow::SearchedAnEvent::inputData::topic, ChoiceFlow::SearchedAnEvent::inputData::description, 
-			ChoiceFlow::SearchedAnEvent::crCheck, ChoiceFlow::SearchedAnEvent::sortType, buffer, sound);
+			SearchedAnEvent::onClickEditPage(window, event1, stage, EnterAnEvent::inputData::box, 
+			SearchedAnEvent::inputData::title, SearchedAnEvent::inputData::year, 
+			SearchedAnEvent::inputData::topic, SearchedAnEvent::inputData::description, 
+			SearchedAnEvent::crCheck, SearchedAnEvent::sortType, buffer, sound);
 
-			switch (ChoiceFlow::EnterAnEvent::inputData::box)
+			switch (EnterAnEvent::inputData::box)
 			{
 			case 1: //Input the title in the edit page
-				ChoiceFlow::EnterAnEvent::inputEventData(event1, ChoiceFlow::SearchedAnEvent::inputData::title, 27, false);
+				EnterAnEvent::inputEventData(event1, SearchedAnEvent::inputData::title, 27, false);
 				break;
 			case 2: //Input the year in the edit page
-				ChoiceFlow::EnterAnEvent::inputEventData(event1, ChoiceFlow::SearchedAnEvent::inputData::year, 4, true);
+				EnterAnEvent::inputEventData(event1, SearchedAnEvent::inputData::year, 4, true);
 				break;
 			case 3: //Input the topic in the edit page
-				ChoiceFlow::EnterAnEvent::inputEventData(event1, ChoiceFlow::SearchedAnEvent::inputData::topic, 12, false);
+				EnterAnEvent::inputEventData(event1, SearchedAnEvent::inputData::topic, 12, false);
 				break;
 			case 4: //Input the description in the edit page
-				ChoiceFlow::EnterAnEvent::inputEventData(event1, ChoiceFlow::SearchedAnEvent::inputData::description, 316, false);
+				EnterAnEvent::inputEventData(event1, SearchedAnEvent::inputData::description, 316, false);
 				break;
 			}
 			break;

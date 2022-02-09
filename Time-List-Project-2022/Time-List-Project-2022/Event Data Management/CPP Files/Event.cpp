@@ -1,6 +1,9 @@
 #include "../Header Files/Event.h"
 #include "../Header Files/SearchAnEvent.h"
 
+using namespace SearchAnEventNodes::TakeNodes;
+using namespace SearchAnEventNodes::ClearList;
+
 Event::Event(std::string& title, int& year, std::string& topic, std::string& description)
 {
 	this->title = title;
@@ -164,22 +167,22 @@ void Event::removeNode(Event*& head, Event*& tail, int cordinateY, int node, boo
 	Event* headCur = head;
 	Event* tailCur = getTail(head);
 
-	int last = SearchAnEventNodes::TakeNodes::takeLastNodePos(head);
+	int last = takeLastNodePos(head);
 
-	if (SearchAnEventNodes::TakeNodes::takeNodeIndex(cordinateY, node) != 0)
+	if (takeNodeIndex(cordinateY, node) != 0)
 	{
 		if (sortCheck)
 		{
 			while (head != NULL)
 			{
 				//Check the cordinates of the clicked event
-				if (nodeCur == SearchAnEventNodes::TakeNodes::takeNodeIndex(cordinateY, node))
+				if (nodeCur == takeNodeIndex(cordinateY, node))
 				{
-					if (SearchAnEventNodes::TakeNodes::takeNodeIndex(cordinateY, node) == 1)
+					if (takeNodeIndex(cordinateY, node) == 1)
 					{
 						if (head->nextEvent == NULL)
 						{
-							SearchAnEventNodes::ClearList::clearList(head);
+							clearList(head);
 							head = NULL;
 							tail = NULL;
 						}
@@ -191,7 +194,7 @@ void Event::removeNode(Event*& head, Event*& tail, int cordinateY, int node, boo
 						break;
 
 					}
-					else if (SearchAnEventNodes::TakeNodes::takeNodeIndex(cordinateY, node) == last)
+					else if (takeNodeIndex(cordinateY, node) == last)
 					{
 						head->prevEvent->nextEvent = NULL;
 						tail->prevEvent->nextEvent = NULL;
@@ -219,13 +222,13 @@ void Event::removeNode(Event*& head, Event*& tail, int cordinateY, int node, boo
 			while (tail != NULL)
 			{
 				//Check the cordinates of the clicked event
-				if (nodeCur == SearchAnEventNodes::TakeNodes::takeNodeIndex(cordinateY, node))
+				if (nodeCur == takeNodeIndex(cordinateY, node))
 				{
-					if (SearchAnEventNodes::TakeNodes::takeNodeIndex(cordinateY, node) == 1)
+					if (takeNodeIndex(cordinateY, node) == 1)
 					{
 						if (tail->prevEvent == NULL)
 						{
-							SearchAnEventNodes::ClearList::clearListTail(tail);
+							clearListTail(tail);
 							head = NULL;
 							tail = NULL;
 						}
@@ -237,7 +240,7 @@ void Event::removeNode(Event*& head, Event*& tail, int cordinateY, int node, boo
 						break;
 
 					}
-					else if (SearchAnEventNodes::TakeNodes::takeNodeIndex(cordinateY, node) == last)
+					else if (takeNodeIndex(cordinateY, node) == last)
 					{
 						tail->nextEvent->prevEvent = NULL;
 						head->nextEvent->prevEvent = NULL;
@@ -271,22 +274,22 @@ void Event::removeAfterSearch(Event*& head, Event*& tail, int cordinateY, int no
 	Event* headCur = head;
 	Event* tailCur = getTail(head);
 
-	int last = SearchAnEventNodes::TakeNodes::takeLastNodePos(head);
+	int last = takeLastNodePos(head);
 
-	if (SearchAnEventNodes::TakeNodes::takeNodeIndex(cordinateY, node) != 0)
+	if (takeNodeIndex(cordinateY, node) != 0)
 	{
 		if (sortCheck)
 		{
 			while (head != NULL)
 			{
-				if (nodeCur == SearchAnEventNodes::TakeNodes::takeNodeIndex(cordinateY, node))
+				if (nodeCur == takeNodeIndex(cordinateY, node))
 				{
-					if (SearchAnEventNodes::TakeNodes::takeNodeIndex(cordinateY, node) == 1)
+					if (takeNodeIndex(cordinateY, node) == 1)
 					{
 						if (head->nextEvent == NULL)
 						{
 							title = head->title;
-							SearchAnEventNodes::ClearList::clearList(head);
+							clearList(head);
 							head = NULL;
 							tail = NULL;
 						}
@@ -299,7 +302,7 @@ void Event::removeAfterSearch(Event*& head, Event*& tail, int cordinateY, int no
 						break;
 
 					}
-					else if (SearchAnEventNodes::TakeNodes::takeNodeIndex(cordinateY, node) == last)
+					else if (takeNodeIndex(cordinateY, node) == last)
 					{
 						title = head->title;
 						head->prevEvent->nextEvent = NULL;
@@ -327,14 +330,14 @@ void Event::removeAfterSearch(Event*& head, Event*& tail, int cordinateY, int no
 		{
 			while (tail != NULL)
 			{
-				if (nodeCur == SearchAnEventNodes::TakeNodes::takeNodeIndex(cordinateY, node))
+				if (nodeCur == takeNodeIndex(cordinateY, node))
 				{
-					if (SearchAnEventNodes::TakeNodes::takeNodeIndex(cordinateY, node) == 1)
+					if (takeNodeIndex(cordinateY, node) == 1)
 					{
 						if (tail->prevEvent == NULL)
 						{
 							title = tail->title;
-							SearchAnEventNodes::ClearList::clearListTail(tail);
+							clearListTail(tail);
 							head = NULL;
 							tail = NULL;
 						}
@@ -347,7 +350,7 @@ void Event::removeAfterSearch(Event*& head, Event*& tail, int cordinateY, int no
 						break;
 
 					}
-					else if (SearchAnEventNodes::TakeNodes::takeNodeIndex(cordinateY, node) == last)
+					else if (takeNodeIndex(cordinateY, node) == last)
 					{
 						title = tail->title;
 						tail->nextEvent->prevEvent = NULL;
