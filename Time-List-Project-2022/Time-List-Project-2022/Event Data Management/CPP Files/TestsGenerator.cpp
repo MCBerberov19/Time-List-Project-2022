@@ -1,6 +1,8 @@
 #include "../Header Files/TestsGenerator.h"
 
-EventGenerator::EventGenerator(Event* entireFile, int(*takeLastNodePos)(Event*))
+typedef int(*takeLastNodePosCallback)(Event*);
+
+EventGenerator::EventGenerator(Event* entireFile, takeLastNodePosCallback takeLastNodePos)
 {
 	std::map<std::string, std::string> data = generateRandomNode(entireFile, takeLastNodePos);
 
@@ -10,7 +12,7 @@ EventGenerator::EventGenerator(Event* entireFile, int(*takeLastNodePos)(Event*))
 	this->grayYear = convertToGrayCode(stoi(data["Year"]));
 }
 
-std::map<std::string, std::string> EventGenerator::generateRandomNode(Event* entireFile, int(*takeLastNodePos)(Event*))
+std::map<std::string, std::string> EventGenerator::generateRandomNode(Event* entireFile, takeLastNodePosCallback takeLastNodePos)
 {
 	int node = rand() % takeLastNodePos(entireFile);
 	int i = 0;
