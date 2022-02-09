@@ -3,6 +3,10 @@
 
 using namespace SearchAnEventNodes;
 
+typedef void(Event::* appendNodeCallback)(Event*, std::string&, int&, std::string&, std::string&);
+
+typedef Event* (Event::* removeHeadCallback)(Event*);
+
 void PrintList::printList(sf::RenderWindow& window, Event* head, sf::Sprite& eventBoard, 
 	sf::Font& font)
 {
@@ -70,7 +74,7 @@ std::string toLower(std::string text)
 }
 
 Event* PrintList::printFoundData(Event* head, sf::String searchData, 
-	void(Event::* appendNode)(Event*, std::string&, int&, std::string&, std::string&), int& sortType, bool& sortCheck)
+	appendNodeCallback appendNode, int& sortType, bool& sortCheck)
 {
 	Event* newHead = new Event;
 	int cur = 0;
@@ -78,8 +82,7 @@ Event* PrintList::printFoundData(Event* head, sf::String searchData,
 	while (head != NULL)
 	{
 		//Check if the entered data is a number
-		if (std::regex_match(searchData.toAnsiString(), 
-		std::regex(R"(^^\s*[-+]?((\d+(\.\d+)?)|(\d+\.)|(\.\d+))(e[-+]?\d+)?\s*$)")))
+		if (std::regex_match(searchData.toAnsiString(), std::regex("^[0-9]+$")))
 		{
 			year = searchData.toAnsiString();
 			if (head->year == stoi(year))
@@ -137,8 +140,8 @@ void ClearList::clearListTail(Event* tail)
 }
 
 //Opening the file and save the events to a linked list
-void TakeNodes::takeDataFromFile(Event*& head, void(Event::* appendNode)(Event*, std::string&, 
-	int&, std::string&, std::string&), Event* (Event::* removeHead)(Event*))
+void TakeNodes::takeDataFromFile(Event*& head, appendNodeCallback appendNode, 
+	removeHeadCallback removeHead)
 {
 	std::ifstream inputFile; inputFile.open("Events.txt", std::ios::in | std::ios::app);
 	std::string data;
