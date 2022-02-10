@@ -13,6 +13,8 @@ public:
 	std::string title;
 	std::string topic;
 
+	EventGenerator() {};
+
 	EventGenerator(Event* entireFile, takeLastNodePosCallback takeLastNodePos);
 
 	std::map<std::string, std::string> generateRandomNode(Event* entireFile, takeLastNodePosCallback takeLastNodePos);
