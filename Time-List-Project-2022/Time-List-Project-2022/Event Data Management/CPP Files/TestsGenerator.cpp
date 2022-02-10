@@ -1,7 +1,5 @@
 #include "../Header Files/TestsGenerator.h"
 
-typedef int(*takeLastNodePosCallback)(Event*);
-
 EventGenerator::EventGenerator(Event* entireFile, takeLastNodePosCallback takeLastNodePos)
 {
 	std::map<std::string, std::string> data = generateRandomNode(entireFile, takeLastNodePos);

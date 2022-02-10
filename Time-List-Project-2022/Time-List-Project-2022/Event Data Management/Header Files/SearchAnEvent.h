@@ -1,6 +1,10 @@
 #pragma once
 #include "Event.h"
 
+typedef void(Event::* appendNodeCallback)(Event*, std::string&, int&, std::string&, std::string&);
+
+typedef Event* (Event::* removeHeadCallback)(Event*);
+
 namespace SearchAnEventNodes
 {
 	namespace PrintList
@@ -10,7 +14,7 @@ namespace SearchAnEventNodes
 		void printListReversed(sf::RenderWindow& window, Event* tail, sf::Sprite& eventBoard, sf::Font& font);
 
 		Event* printFoundData(Event* head, sf::String searchData, 
-		void(Event::* appendNode)(Event*, std::string&, int&, std::string&, std::string&), int& sortType, bool& sortCheck);
+			appendNodeCallback appendNode, int& sortType, bool& sortCheck);
 	}
 
 	namespace ClearList
@@ -22,8 +26,7 @@ namespace SearchAnEventNodes
 
 	namespace TakeNodes
 	{
-		void takeDataFromFile(Event*& head, void(Event::* appendNode)(Event*, std::string&, int&, std::string&, std::string&), 
-		Event* (Event::* removeHead)(Event*));
+		void takeDataFromFile(Event*& head, appendNodeCallback appendNode, removeHeadCallback removeHead);
 
 		int takeNodeIndex(int cordinateY, int node);
 

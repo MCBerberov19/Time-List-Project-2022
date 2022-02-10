@@ -3,10 +3,6 @@
 
 using namespace SearchAnEventNodes;
 
-typedef void(Event::* appendNodeCallback)(Event*, std::string&, int&, std::string&, std::string&);
-
-typedef Event* (Event::* removeHeadCallback)(Event*);
-
 void PrintList::printList(sf::RenderWindow& window, Event* head, sf::Sprite& eventBoard, 
 	sf::Font& font)
 {

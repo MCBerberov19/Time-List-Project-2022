@@ -2,6 +2,8 @@
 #include "Event.h"
 #include <map>
 
+typedef int(*takeLastNodePosCallback)(Event*);
+
 class EventGenerator
 {
 private:
@@ -11,9 +13,9 @@ public:
 	std::string title;
 	std::string topic;
 
-	EventGenerator(Event* entireFile, int(*takeLastNodePos)(Event*));
+	EventGenerator(Event* entireFile, takeLastNodePosCallback takeLastNodePos);
 
-	std::map<std::string, std::string> generateRandomNode(Event* entireFile, int(*takeLastNodePos)(Event*));
+	std::map<std::string, std::string> generateRandomNode(Event* entireFile, takeLastNodePosCallback takeLastNodePos);
 
 	std::vector<int> convertToBinary(int decNum);
 
