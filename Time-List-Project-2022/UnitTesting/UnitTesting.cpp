@@ -12,7 +12,7 @@ namespace UnitTesting
 	TEST_CLASS(UnitTesting)
 	{
 	public:
-
+		// TestsGenerator
 		BEGIN_TEST_METHOD_ATTRIBUTE(expectToReturnBinaryRepresentationOfTwo)
 		TEST_OWNER(L"VNTeneva19")
 		TEST_PRIORITY("Medium")
@@ -145,6 +145,117 @@ namespace UnitTesting
 
 		}
 
+		BEGIN_TEST_METHOD_ATTRIBUTE(expectToReturnGrayCodeRepresentationOfFive)
+		TEST_OWNER(L"VNTeneva19")
+		TEST_PRIORITY("Medium")
+		END_TEST_METHOD_ATTRIBUTE()
+		TEST_METHOD(expectToReturnGrayCodeRepresentationOfFive)
+		{
+			// Arrange
+			EventGenerator eventGenerator;
+			std::vector<int> binary;
+			std::vector<int> expected = { 1, 1, 1 };
+
+			// Act
+			binary = eventGenerator.convertToGrayCode(5);
+
+			// Assert
+			for (size_t i = 0; i < binary.size(); i++)
+			{
+				Assert::AreEqual(expected[i], binary[i]);
+			}
+
+		}
+
+		BEGIN_TEST_METHOD_ATTRIBUTE(expectToReturnGrayCodeRepresentationOfEight)
+		TEST_OWNER(L"VNTeneva19")
+		TEST_PRIORITY("Medium")
+		END_TEST_METHOD_ATTRIBUTE()
+		TEST_METHOD(expectToReturnGrayCodeRepresentationOfEight)
+		{
+			// Arrange
+			EventGenerator eventGenerator;
+			std::vector<int> binary;
+			std::vector<int> expected = { 1, 1, 0, 0 };
+
+			// Act
+			binary = eventGenerator.convertToGrayCode(8);
+
+			// Assert
+			for (size_t i = 0; i < binary.size(); i++)
+			{
+				Assert::AreEqual(expected[i], binary[i]);
+			}
+
+		}
+
+		BEGIN_TEST_METHOD_ATTRIBUTE(expectToReturnGrayCodeRepresentationOfTwentyFive)
+		TEST_OWNER(L"VNTeneva19")
+		TEST_PRIORITY("Medium")
+		END_TEST_METHOD_ATTRIBUTE()
+		TEST_METHOD(expectToReturnGrayCodeRepresentationOfTwentyFive)
+		{
+			// Arrange
+			EventGenerator eventGenerator;
+			std::vector<int> binary;
+			std::vector<int> expected = { 1, 0, 1, 0, 1 };
+
+			// Act
+			binary = eventGenerator.convertToGrayCode(25);
+
+			// Assert
+			for (size_t i = 0; i < binary.size(); i++)
+			{
+				Assert::AreEqual(expected[i], binary[i]);
+			}
+
+		}
+
+		BEGIN_TEST_METHOD_ATTRIBUTE(expectToReturnGrayCodeRepresentationOfOneHundredAndThirteen)
+		TEST_OWNER(L"VNTeneva19")
+		TEST_PRIORITY("Medium")
+		END_TEST_METHOD_ATTRIBUTE()
+		TEST_METHOD(expectToReturnGrayCodeRepresentationOfOneHundredAndThirteen)
+		{
+			// Arrange
+			EventGenerator eventGenerator;
+			std::vector<int> binary;
+			std::vector<int> expected = { 1, 0, 0, 1, 0, 0, 1 };
+
+			// Act
+			binary = eventGenerator.convertToGrayCode(113);
+
+			// Assert
+			for (size_t i = 0; i < binary.size(); i++)
+			{
+				Assert::AreEqual(expected[i], binary[i]);
+			}
+
+		}
+
+		BEGIN_TEST_METHOD_ATTRIBUTE(expectToReturnGrayCodeRepresentationOfOneThousandAndThirtyFour)
+		TEST_OWNER(L"VNTeneva19")
+		TEST_PRIORITY("Medium")
+		END_TEST_METHOD_ATTRIBUTE()
+		TEST_METHOD(expectToReturnGrayCodeRepresentationOfOneThousandAndThirtyFour)
+		{
+			// Arrange
+			EventGenerator eventGenerator;
+			std::vector<int> binary;
+			std::vector<int> expected = { 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1 };
+
+			// Act
+			binary = eventGenerator.convertToGrayCode(1034);
+
+			// Assert
+			for (size_t i = 0; i < binary.size(); i++)
+			{
+				Assert::AreEqual(expected[i], binary[i]);
+			}
+
+		}
+
+		// SearchAnEvent
 		BEGIN_TEST_METHOD_ATTRIBUTE(expectToReturnVariableNodeWhenCordinateYIsInRange)
 		TEST_OWNER(L"VNTeneva19")
 		TEST_PRIORITY("High")
@@ -191,5 +302,22 @@ namespace UnitTesting
 			// Assert
 			Assert::AreEqual(2, result);
 		}
+
+		BEGIN_TEST_METHOD_ATTRIBUTE(expectToReturnZeroWhenCordinateYIsGreaterThanThreeHundredAndTwenty)
+		TEST_OWNER(L"VNTeneva19")
+		TEST_PRIORITY("High")
+		END_TEST_METHOD_ATTRIBUTE()
+		TEST_METHOD(expectToReturnZeroWhenCordinateYIsGreaterThanThreeHundredAndTwenty)
+		{
+			// Arrange
+			int cordinateY = 330, node = 1;
+
+			// Act
+			int result = SearchAnEventNodes::TakeNodes::takeNodeIndex(cordinateY, node);
+
+			// Assert
+			Assert::AreEqual(0, result);
+		}
+
 	};
 }
