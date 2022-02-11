@@ -319,5 +319,53 @@ namespace UnitTesting
 			Assert::AreEqual(0, result);
 		}
 
+		BEGIN_TEST_METHOD_ATTRIBUTE(expectToReturnZeroWhenHeadIsNull)
+		TEST_OWNER(L"VNTeneva19")
+		TEST_PRIORITY("High")
+		END_TEST_METHOD_ATTRIBUTE()
+		TEST_METHOD(expectToReturnZeroWhenHeadIsNull)
+		{
+			// Arrange
+			Event* head = NULL;
+
+			// Act
+			int result = SearchAnEventNodes::TakeNodes::takeLastNodePos(head);
+
+			// Assert
+			Assert::AreEqual(0, result);
+		}
+
+		BEGIN_TEST_METHOD_ATTRIBUTE(expectToReturnTrueWhenCordinateYIsGreaterThanThreeHundredAndTwentyFive)
+		TEST_OWNER(L"VNTeneva19")
+		TEST_PRIORITY("High")
+		END_TEST_METHOD_ATTRIBUTE()
+		TEST_METHOD(expectToReturnTrueWhenCordinateYIsGreaterThanThreeHundredAndTwentyFive)
+		{
+			// Arrange
+			int cordinateY = 350;
+
+			// Act
+			bool result = SearchAnEventNodes::TakeNodes::checkValidSpaces(cordinateY);
+
+			// Assert
+			Assert::AreEqual(true, result);
+		}
+
+		BEGIN_TEST_METHOD_ATTRIBUTE(expectToReturnTrueWhenCordinateYIsLessThanThreeHundredAndTwentyFive)
+		TEST_OWNER(L"VNTeneva19")
+		TEST_PRIORITY("High")
+		END_TEST_METHOD_ATTRIBUTE()
+		TEST_METHOD(expectToReturnTrueWhenCordinateYIsLessThanThreeHundredAndTwentyFive)
+		{
+			// Arrange
+			int cordinateY = 250;
+
+			// Act
+			bool result = SearchAnEventNodes::TakeNodes::checkValidSpaces(cordinateY);
+
+			// Assert
+			Assert::AreEqual(true, result);
+		}
+
 	};
 }
