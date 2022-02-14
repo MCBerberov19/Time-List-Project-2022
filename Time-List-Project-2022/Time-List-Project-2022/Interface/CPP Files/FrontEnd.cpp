@@ -33,8 +33,7 @@ void printMainMenu(sf::RenderWindow& window)
 
 void printEnterAnEventPage(sf::RenderWindow& window)
 {
-	sf::Text titleText, yearText, topicText, descriptionText1, descriptionText2, descriptionText3, 
-	descriptionText4, descriptionText5, descriptionText6, descriptionText7, descriptionText8;
+	sf::Text titleText, yearText, topicText, descriptionText[8];
 	sf::Texture t1, t2, t3, t4, t5, t6, t7;
 	sf::Font font;
 	font.loadFromFile("Images and Fonts/arial.ttf");
@@ -69,38 +68,22 @@ void printEnterAnEventPage(sf::RenderWindow& window)
 	topicText.setFillColor(sf::Color::Black);
 	topicText.setPosition(505, 220);
 	topicText.setString(EnterAnEvent::inputData::topic);
-	descriptionText1.setFont(font);
-	descriptionText1.setCharacterSize(25);
-	descriptionText1.setFillColor(sf::Color::Black);
-	descriptionText1.setPosition(305, 338);
-	descriptionText2.setFont(font);
-	descriptionText2.setCharacterSize(25);
-	descriptionText2.setFillColor(sf::Color::Black);
-	descriptionText2.setPosition(145, 370);
-	descriptionText3.setFont(font);
-	descriptionText3.setCharacterSize(25);
-	descriptionText3.setFillColor(sf::Color::Black);
-	descriptionText3.setPosition(145, 402);
-	descriptionText4.setFont(font);
-	descriptionText4.setCharacterSize(25);
-	descriptionText4.setFillColor(sf::Color::Black);
-	descriptionText4.setPosition(145, 434);
-	descriptionText5.setFont(font);
-	descriptionText5.setCharacterSize(25);
-	descriptionText5.setFillColor(sf::Color::Black);
-	descriptionText5.setPosition(145, 466);
-	descriptionText6.setFont(font);
-	descriptionText6.setCharacterSize(25);
-	descriptionText6.setFillColor(sf::Color::Black);
-	descriptionText6.setPosition(145, 498);
-	descriptionText7.setFont(font);
-	descriptionText7.setCharacterSize(25);
-	descriptionText7.setFillColor(sf::Color::Black);
-	descriptionText7.setPosition(145, 530);
-	descriptionText8.setFont(font);
-	descriptionText8.setCharacterSize(25);
-	descriptionText8.setFillColor(sf::Color::Black);
-	descriptionText8.setPosition(145, 562);
+
+	descriptionText[0].setFont(font);
+	descriptionText[0].setCharacterSize(25);
+	descriptionText[0].setFillColor(sf::Color::Black);
+	descriptionText[0].setPosition(305, 338);
+
+	int y = 370;
+
+	for (int i = 1; i < 8; i++)
+	{
+		descriptionText[i].setFont(font);
+		descriptionText[i].setCharacterSize(25);
+		descriptionText[i].setFillColor(sf::Color::Black);
+		descriptionText[i].setPosition(145, y);
+		y += 32;
+	}
 
 	window.draw(background);
 	backButton.setPosition(30, 30);
@@ -117,18 +100,13 @@ void printEnterAnEventPage(sf::RenderWindow& window)
 	description.setPosition(10, 280);
 	window.draw(description);
 
-	EnterAnEvent::seperateLinesInDescription(EnterAnEvent::inputData::description, 
-	descriptionText1, descriptionText2, descriptionText3, descriptionText4, descriptionText5, 
-	descriptionText6, descriptionText7, descriptionText8);
+	EnterAnEvent::seperateLinesInDescription(EnterAnEvent::inputData::description, descriptionText);
 
-	window.draw(descriptionText1);
-	window.draw(descriptionText2);
-	window.draw(descriptionText3);
-	window.draw(descriptionText4);
-	window.draw(descriptionText5);
-	window.draw(descriptionText6);
-	window.draw(descriptionText7);
-	window.draw(descriptionText8);
+	for (int i = 0; i < 8; i++)
+	{
+		window.draw(descriptionText[i]);
+	}
+
 	enter.setPosition(275, 645);
 	window.draw(enter);
 }
@@ -209,8 +187,7 @@ void printSearchAnEventPage(sf::RenderWindow& window, Event*& head, Event*& tail
 
 void printInfoPage(sf::RenderWindow& window)
 {
-	sf::Text titleText, yearText, topicText, descriptionText1, descriptionText2, descriptionText3, 
-	descriptionText4, descriptionText5, descriptionText6, descriptionText7, descriptionText8;
+	sf::Text titleText, yearText, topicText, descriptionText[8];
 	sf::Texture t1, t2, t3, t4, t5, t6;
 	sf::Font font;
 	font.loadFromFile("Images and Fonts/arial.ttf");
@@ -244,38 +221,22 @@ void printInfoPage(sf::RenderWindow& window)
 	topicText.setFillColor(sf::Color::Black);
 	topicText.setPosition(505, 220);
 	topicText.setString(SearchedAnEvent::inputData::topic);
-	descriptionText1.setFont(font);
-	descriptionText1.setCharacterSize(25);
-	descriptionText1.setFillColor(sf::Color::Black);
-	descriptionText1.setPosition(305, 338);
-	descriptionText2.setFont(font);
-	descriptionText2.setCharacterSize(25);
-	descriptionText2.setFillColor(sf::Color::Black);
-	descriptionText2.setPosition(145, 370);
-	descriptionText3.setFont(font);
-	descriptionText3.setCharacterSize(25);
-	descriptionText3.setFillColor(sf::Color::Black);
-	descriptionText3.setPosition(145, 402);
-	descriptionText4.setFont(font);
-	descriptionText4.setCharacterSize(25);
-	descriptionText4.setFillColor(sf::Color::Black);
-	descriptionText4.setPosition(145, 434);
-	descriptionText5.setFont(font);
-	descriptionText5.setCharacterSize(25);
-	descriptionText5.setFillColor(sf::Color::Black);
-	descriptionText5.setPosition(145, 466);
-	descriptionText6.setFont(font);
-	descriptionText6.setCharacterSize(25);
-	descriptionText6.setFillColor(sf::Color::Black);
-	descriptionText6.setPosition(145, 498);
-	descriptionText7.setFont(font);
-	descriptionText7.setCharacterSize(25);
-	descriptionText7.setFillColor(sf::Color::Black);
-	descriptionText7.setPosition(145, 530);
-	descriptionText8.setFont(font);
-	descriptionText8.setCharacterSize(25);
-	descriptionText8.setFillColor(sf::Color::Black);
-	descriptionText8.setPosition(145, 562);
+
+	descriptionText[0].setFont(font);
+	descriptionText[0].setCharacterSize(25);
+	descriptionText[0].setFillColor(sf::Color::Black);
+	descriptionText[0].setPosition(305, 338);
+
+	int y = 370;
+
+	for (int i = 1; i < 8; i++)
+	{
+		descriptionText[i].setFont(font);
+		descriptionText[i].setCharacterSize(25);
+		descriptionText[i].setFillColor(sf::Color::Black);
+		descriptionText[i].setPosition(145, y);
+		y += 32;
+	}
 
 	window.draw(background);
 	backButton.setPosition(30, 30);
@@ -292,24 +253,17 @@ void printInfoPage(sf::RenderWindow& window)
 	description.setPosition(10, 280);
 	window.draw(description);
 
-	EnterAnEvent::seperateLinesInDescription(SearchedAnEvent::inputData::description, 
-	descriptionText1, descriptionText2, descriptionText3, descriptionText4, descriptionText5, descriptionText6, 
-	descriptionText7, descriptionText8);
+	EnterAnEvent::seperateLinesInDescription(SearchedAnEvent::inputData::description, descriptionText);
 
-	window.draw(descriptionText1);
-	window.draw(descriptionText2);
-	window.draw(descriptionText3);
-	window.draw(descriptionText4);
-	window.draw(descriptionText5);
-	window.draw(descriptionText6);
-	window.draw(descriptionText7);
-	window.draw(descriptionText8);
+	for (int i = 0; i < 8; i++)
+	{
+		window.draw(descriptionText[i]);
+	}
 }
 
 void printEditPage(sf::RenderWindow& window)
 {
-	sf::Text titleText, yearText, topicText, descriptionText1, descriptionText2, descriptionText3, descriptionText4,
-	descriptionText5, descriptionText6, descriptionText7, descriptionText8;
+	sf::Text titleText, yearText, topicText, descriptionText[8];
 
 	sf::Texture t1, t2, t3, t4, t5, t6, t7;
 	sf::Font font;
@@ -345,38 +299,22 @@ void printEditPage(sf::RenderWindow& window)
 	topicText.setFillColor(sf::Color::Black);
 	topicText.setPosition(505, 220);
 	topicText.setString(SearchedAnEvent::inputData::topic);
-	descriptionText1.setFont(font);
-	descriptionText1.setCharacterSize(25);
-	descriptionText1.setFillColor(sf::Color::Black);
-	descriptionText1.setPosition(305, 338);
-	descriptionText2.setFont(font);
-	descriptionText2.setCharacterSize(25);
-	descriptionText2.setFillColor(sf::Color::Black);
-	descriptionText2.setPosition(145, 370);
-	descriptionText3.setFont(font);
-	descriptionText3.setCharacterSize(25);
-	descriptionText3.setFillColor(sf::Color::Black);
-	descriptionText3.setPosition(145, 402);
-	descriptionText4.setFont(font);
-	descriptionText4.setCharacterSize(25);
-	descriptionText4.setFillColor(sf::Color::Black);
-	descriptionText4.setPosition(145, 434);
-	descriptionText5.setFont(font);
-	descriptionText5.setCharacterSize(25);
-	descriptionText5.setFillColor(sf::Color::Black);
-	descriptionText5.setPosition(145, 466);
-	descriptionText6.setFont(font);
-	descriptionText6.setCharacterSize(25);
-	descriptionText6.setFillColor(sf::Color::Black);
-	descriptionText6.setPosition(145, 498);
-	descriptionText7.setFont(font);
-	descriptionText7.setCharacterSize(25);
-	descriptionText7.setFillColor(sf::Color::Black);
-	descriptionText7.setPosition(145, 530);
-	descriptionText8.setFont(font);
-	descriptionText8.setCharacterSize(25);
-	descriptionText8.setFillColor(sf::Color::Black);
-	descriptionText8.setPosition(145, 562);
+
+	descriptionText[0].setFont(font);
+	descriptionText[0].setCharacterSize(25);
+	descriptionText[0].setFillColor(sf::Color::Black);
+	descriptionText[0].setPosition(305, 338);
+
+	int y = 370;
+
+	for (int i = 1; i < 8; i++)
+	{
+		descriptionText[i].setFont(font);
+		descriptionText[i].setCharacterSize(25);
+		descriptionText[i].setFillColor(sf::Color::Black);
+		descriptionText[i].setPosition(145, y);
+		y += 32;
+	}
 
 	window.draw(background);
 	backButton.setPosition(30, 30);
@@ -393,18 +331,13 @@ void printEditPage(sf::RenderWindow& window)
 	description.setPosition(10, 280);
 	window.draw(description);
 
-	EnterAnEvent::seperateLinesInDescription(SearchedAnEvent::inputData::description,
-	descriptionText1, descriptionText2, descriptionText3, descriptionText4, descriptionText5, descriptionText6,
-	descriptionText7, descriptionText8);
+	EnterAnEvent::seperateLinesInDescription(SearchedAnEvent::inputData::description, descriptionText);
 
-	window.draw(descriptionText1);
-	window.draw(descriptionText2);
-	window.draw(descriptionText3);
-	window.draw(descriptionText4);
-	window.draw(descriptionText5);
-	window.draw(descriptionText6);
-	window.draw(descriptionText7);
-	window.draw(descriptionText8);
+	for (int i = 0; i < 8; i++)
+	{
+		window.draw(descriptionText[i]);
+	}
+	
 	save.setPosition(270, 645);
 	window.draw(save);
 }

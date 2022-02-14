@@ -179,70 +179,67 @@ void EnterAnEvent::inputEventData(sf::Event& event1, sf::String& text, int size,
 	}
 }
 
-void EnterAnEvent::seperateLinesInDescription(sf::String& description, sf::Text& descriptionText1,
-	sf::Text& descriptionText2, sf::Text& descriptionText3, sf::Text& descriptionText4,
-	sf::Text& descriptionText5, sf::Text& descriptionText6, sf::Text& descriptionText7,
-	sf::Text& descriptionText8)
+void EnterAnEvent::seperateLinesInDescription(sf::String& description, sf::Text* descriptionText)
 {
 	if (description.getSize() > 0 && description.getSize() <= 28)
 	{
-		descriptionText1.setString(description.substring(0, 29));
+		descriptionText[0].setString(description.substring(0, 29));
 	}
 	else if (description.getSize() > 28 && description.getSize() <= 71)
 	{
-		descriptionText1.setString(description.substring(0, 29));
-		descriptionText2.setString(description.substring(29, 72));
+		descriptionText[0].setString(description.substring(0, 29));
+		descriptionText[1].setString(description.substring(29, 72));
 	}
 	else if (description.getSize() > 71 && description.getSize() <= 116)
 	{
-		descriptionText1.setString(description.substring(0, 29));
-		descriptionText2.setString(description.substring(29, 43));
-		descriptionText3.setString(description.substring(72, 117));
+		descriptionText[0].setString(description.substring(0, 29));
+		descriptionText[1].setString(description.substring(29, 43));
+		descriptionText[2].setString(description.substring(72, 117));
 	}
 	else if (description.getSize() > 116 && description.getSize() <= 160)
 	{
-		descriptionText1.setString(description.substring(0, 29));
-		descriptionText2.setString(description.substring(29, 43));
-		descriptionText3.setString(description.substring(72, 44));
-		descriptionText4.setString(description.substring(116, 161));
+		descriptionText[0].setString(description.substring(0, 29));
+		descriptionText[1].setString(description.substring(29, 43));
+		descriptionText[2].setString(description.substring(72, 44));
+		descriptionText[3].setString(description.substring(116, 161));
 	}
 	else if (description.getSize() > 160 && description.getSize() <= 203)
 	{
-		descriptionText1.setString(description.substring(0, 29));
-		descriptionText2.setString(description.substring(29, 43));
-		descriptionText3.setString(description.substring(72, 44));
-		descriptionText4.setString(description.substring(116, 44));
-		descriptionText5.setString(description.substring(160, 204));
+		descriptionText[0].setString(description.substring(0, 29));
+		descriptionText[1].setString(description.substring(29, 43));
+		descriptionText[2].setString(description.substring(72, 44));
+		descriptionText[3].setString(description.substring(116, 44));
+		descriptionText[4].setString(description.substring(160, 204));
 	}
 	else if (description.getSize() > 203 && description.getSize() <= 244)
 	{
-		descriptionText1.setString(description.substring(0, 29));
-		descriptionText2.setString(description.substring(29, 43));
-		descriptionText3.setString(description.substring(72, 44));
-		descriptionText4.setString(description.substring(116, 44));
-		descriptionText5.setString(description.substring(160, 43));
-		descriptionText6.setString(description.substring(203, 245));
+		descriptionText[0].setString(description.substring(0, 29));
+		descriptionText[1].setString(description.substring(29, 43));
+		descriptionText[2].setString(description.substring(72, 44));
+		descriptionText[3].setString(description.substring(116, 44));
+		descriptionText[4].setString(description.substring(160, 43));
+		descriptionText[5].setString(description.substring(203, 245));
 	}
 	else if (description.getSize() > 244 && description.getSize() <= 284)
 	{
-		descriptionText1.setString(description.substring(0, 29));
-		descriptionText2.setString(description.substring(29, 43));
-		descriptionText3.setString(description.substring(72, 44));
-		descriptionText4.setString(description.substring(116, 44));
-		descriptionText5.setString(description.substring(160, 43));
-		descriptionText6.setString(description.substring(203, 41));
-		descriptionText7.setString(description.substring(244, 285));
+		descriptionText[0].setString(description.substring(0, 29));
+		descriptionText[1].setString(description.substring(29, 43));
+		descriptionText[2].setString(description.substring(72, 44));
+		descriptionText[3].setString(description.substring(116, 44));
+		descriptionText[4].setString(description.substring(160, 43));
+		descriptionText[5].setString(description.substring(203, 41));
+		descriptionText[6].setString(description.substring(244, 285));
 	}
 	else if (description.getSize() > 284 && description.getSize() <= 317)
 	{
-		descriptionText1.setString(description.substring(0, 29));
-		descriptionText2.setString(description.substring(29, 43));
-		descriptionText3.setString(description.substring(72, 44));
-		descriptionText4.setString(description.substring(116, 44));
-		descriptionText5.setString(description.substring(160, 43));
-		descriptionText6.setString(description.substring(203, 41));
-		descriptionText7.setString(description.substring(244, 40));
-		descriptionText8.setString(description.substring(284, 317));
+		descriptionText[0].setString(description.substring(0, 29));
+		descriptionText[1].setString(description.substring(29, 43));
+		descriptionText[2].setString(description.substring(72, 44));
+		descriptionText[3].setString(description.substring(116, 44));
+		descriptionText[4].setString(description.substring(160, 43));
+		descriptionText[5].setString(description.substring(203, 41));
+		descriptionText[6].setString(description.substring(244, 40));
+		descriptionText[7].setString(description.substring(284, 317));
 	}
 }
 
