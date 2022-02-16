@@ -1,9 +1,12 @@
 #pragma once
 #include "Event.h"
+#include "../Header Files/UserChoiceManagement.h"
 
 typedef void(Event::* appendNodeCallback)(Event*, std::string&, int&, std::string&, std::string&);
 
 typedef Event* (Event::* removeHeadCallback)(Event*);
+
+using namespace	ChoiceFlow;
 
 namespace SearchAnEventNodes
 {
@@ -41,8 +44,8 @@ namespace SearchAnEventNodes
 
 		void saveDataIntoFileTail(Event* tail);
 
-		void saveEventInfo(Event* head, Event* tail, int cordinateY, int node, sf::String& title, sf::String& year,
-		sf::String& topic, sf::String& description, bool& sortCheck);
+		void saveEventInfo(Event* head, Event* tail, int cordinateY, int node,
+			SearchedAnEvent::inputData*& sData, bool& sortCheck);
 
 		void saveAfterRemoveWhenSearched(Event* entireFile, std::string& title);
 	}

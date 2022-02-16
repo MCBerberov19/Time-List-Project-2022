@@ -79,8 +79,7 @@ void MainMenu::onClickMainMenu(sf::RenderWindow& window, sf::Event& event1, int&
 }
 
 void EnterAnEvent::onClickEventPage(sf::RenderWindow& window, sf::Event& event1, int& stage, int& box,
-	sf::String& title, sf::String& year, sf::String& topic,
-	sf::String& description, sf::SoundBuffer& buffer, sf::Sound& sound)
+	EnterAnEvent::inputData*& eData, sf::SoundBuffer& buffer, sf::Sound& sound, bool& crCheck)
 {
 	while (window.pollEvent(event1))
 	{
@@ -97,6 +96,8 @@ void EnterAnEvent::onClickEventPage(sf::RenderWindow& window, sf::Event& event1,
 			{
 				MainMenu::playSound(buffer, sound, 1);
 				stage = 0;
+				crCheck = true;
+				delete eData;
 			}
 
 			else if ((sf::Mouse::getPosition(window).x >= 180 && sf::Mouse::getPosition(window).x <= 605) && //Title
@@ -126,18 +127,21 @@ void EnterAnEvent::onClickEventPage(sf::RenderWindow& window, sf::Event& event1,
 			else if ((sf::Mouse::getPosition(window).x >= 285 && sf::Mouse::getPosition(window).x <= 525) && //Enter
 				(sf::Mouse::getPosition(window).y >= 650 && sf::Mouse::getPosition(window).y <= 735))
 			{
-				if (title.getSize() > 0 && topic.getSize() > 0 && description.getSize() > 0 && year.getSize() > 0)
+				if (eData->title.getSize() > 0 && eData->topic.getSize() > 0 && eData->description.getSize() > 0 && eData->year.getSize() > 0)
 				{
 					//Enter an event button
 					MainMenu::playSound(buffer, sound, 8);
-					EnterAnEventC* newEvent = new EnterAnEventC(title, stoi(year.toAnsiString()), topic, description);
+					EnterAnEventC* newEvent = new EnterAnEventC(eData->title, stoi(eData->year.toAnsiString()), eData->topic, eData->description);
 					delete newEvent;
 
 					stage = 0;
-					title = "";
-					topic = "";
-					description = "";
-					year = "";
+					eData->title = "";
+					eData->topic = "";
+					eData->description = "";
+					eData->year = "";
+
+					crCheck = true;
+					delete eData;
 				}
 			}
 			else
@@ -244,9 +248,8 @@ void EnterAnEvent::seperateLinesInDescription(sf::String& description, sf::Text*
 }
 
 void SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf::Event& event1, int& stage,
-	Event*& head, Event*& tail, bool& crCheck, bool& sortCheck, sf::String& title, sf::String& year,
-	sf::String& topic, sf::String& description, int& sortType, int& box, sf::String& searchData,
-	Event*& entireFile, sf::SoundBuffer& buffer, sf::Sound& sound)
+	Event*& head, Event*& tail, SearchedAnEvent::inputData*& sData, SearchedAnEvent::checkData*& cData, int& box,
+	Event*& entireFile, sf::SoundBuffer& buffer, sf::Sound& sound, bool& crCheck)
 {
 	while (window.pollEvent(event1))
 	{
@@ -263,11 +266,12 @@ void SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf::Event& eve
 				MainMenu::playSound(buffer, sound, 1);
 				stage = 0;
 				clearList(head);
-				crCheck = true;
 				box = 0;
-				searchData = "";
-				sortType = 1;
-				sortCheck = true;
+				sData->searchData = "";
+				cData->sortType = 1;
+				cData->sortCheck = true;
+				crCheck = true;
+				delete sData; delete cData;
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 85 && sf::Mouse::getPosition(window).x <= 710) &&
 				(sf::Mouse::getPosition(window).y >= 125 && sf::Mouse::getPosition(window).y <= 182)) //Search box
@@ -278,7 +282,7 @@ void SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf::Event& eve
 				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 255)) //Sort by title
 			{
 				MainMenu::playSound(buffer, sound, 2);
-				sortType = 1;
+				cData->sortType = 1;
 				head->mergeSortList(head, 1);
 				tail = tail->getTail(head);
 				head = head->getHead(tail);
@@ -288,7 +292,7 @@ void SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf::Event& eve
 				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 255)) //Sort by year
 			{
 				MainMenu::playSound(buffer, sound, 2);
-				sortType = 2;
+				cData->sortType = 2;
 				head->mergeSortList(head, 2);
 				tail = tail->getTail(head);
 				head = head->getHead(tail);
@@ -298,7 +302,7 @@ void SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf::Event& eve
 				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 255)) //Sort by topic
 			{
 				MainMenu::playSound(buffer, sound, 2);
-				sortType = 3;
+				cData->sortType = 3;
 				head->mergeSortList(head, 3);
 				tail = tail->getTail(head);
 				head = head->getHead(tail);
@@ -308,32 +312,32 @@ void SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf::Event& eve
 				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 250)) //Sort ascending
 			{
 				MainMenu::playSound(buffer, sound, 2);
-				sortCheck = true;
+				cData->sortCheck = true;
 				box = 0;
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 592 && sf::Mouse::getPosition(window).x <= 710) &&
 				(sf::Mouse::getPosition(window).y >= 190 && sf::Mouse::getPosition(window).y <= 250)) //Sort descending
 			{
 				MainMenu::playSound(buffer, sound, 2);
-				sortCheck = false;
+				cData->sortCheck = false;
 				tail = tail->getTail(head);
 				box = 0;
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 255 && sf::Mouse::getPosition(window).x <= 555) &&
 				(sf::Mouse::getPosition(window).y >= 685 && sf::Mouse::getPosition(window).y <= 780)) //Search button
 			{
-				if (searchData.getSize() > 0)
+				if (sData->searchData.getSize() > 0)
 				{
 					MainMenu::playSound(buffer, sound, 3);
-					sortCheck = true;
+					cData->sortCheck = true;
 
-					head = SearchAnEventNodes::PrintList::printFoundData(entireFile, searchData,
-						&Event::appendNode, sortType, sortCheck);
+					head = SearchAnEventNodes::PrintList::printFoundData(entireFile, sData->searchData,
+						&Event::appendNode, cData->sortType, cData->sortCheck);
 
 					box = 0;
-					lastSearched = searchData;
-					searchData = "";
-					SearchedAnEvent::ifSearched = true;
+					cData->lastSearched = sData->searchData;
+					sData->searchData = "";
+					cData->ifSearched = true;
 				}
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 575 && sf::Mouse::getPosition(window).x <= 620) &&
@@ -344,7 +348,7 @@ void SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf::Event& eve
 				MainMenu::playSound(buffer, sound, 1);
 				stage = 4;
 				SearchAnEventNodes::SaveList::saveEventInfo(head, tail, sf::Mouse::getPosition(window).y, 1,
-					title, year, topic, description, sortCheck);
+					sData, cData->sortCheck);
 				box = 0;
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 621 && sf::Mouse::getPosition(window).x <= 659) &&
@@ -355,7 +359,7 @@ void SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf::Event& eve
 				MainMenu::playSound(buffer, sound, 1);
 				stage = 5;
 				SearchAnEventNodes::SaveList::saveEventInfo(head, tail, sf::Mouse::getPosition(window).y, 1,
-					title, year, topic, description, sortCheck);
+					sData, cData->sortCheck);
 				box = 0;
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 660 && sf::Mouse::getPosition(window).x <= 705) &&
@@ -364,17 +368,17 @@ void SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf::Event& eve
 				checkValidSpaces(sf::Mouse::getPosition(window).y) && takeLastNodePos(head) != 0) //Remove an event
 			{
 				MainMenu::playSound(buffer, sound, 4);
-				if (SearchedAnEvent::ifSearched)
+				if (cData->ifSearched)
 				{
-					head->removeAfterSearch(head, tail, sf::Mouse::getPosition(window).y, 1, sortCheck, deletedTitle);
-					SearchAnEventNodes::SaveList::saveAfterRemoveWhenSearched(entireFile, deletedTitle);
+					head->removeAfterSearch(head, tail, sf::Mouse::getPosition(window).y, 1, cData->sortCheck, cData->deletedTitle);
+					SearchAnEventNodes::SaveList::saveAfterRemoveWhenSearched(entireFile, cData->deletedTitle);
 					clearList(entireFile);
 					entireFile = new Event;
 					takeDataFromFile(entireFile, &Event::appendNode, &Event::removeHead);
 				}
 				else
 				{
-					head->removeNode(head, tail, sf::Mouse::getPosition(window).y, 1, sortCheck);
+					head->removeNode(head, tail, sf::Mouse::getPosition(window).y, 1, cData->sortCheck);
 					takeDataFromFile(entireFile, &Event::appendNode, &Event::removeHead);
 				}
 				box = 0;
@@ -389,7 +393,7 @@ void SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf::Event& eve
 }
 
 void SearchedAnEvent::onClickInfoPage(sf::RenderWindow& window, sf::Event& event1, int& stage,
-	sf::SoundBuffer& buffer, sf::Sound& sound)
+	sf::SoundBuffer& buffer, sf::Sound& sound, SearchedAnEvent::inputData*& sData)
 {
 	while (window.pollEvent(event1))
 	{
@@ -411,15 +415,14 @@ void SearchedAnEvent::onClickInfoPage(sf::RenderWindow& window, sf::Event& event
 	}
 }
 
-void SearchedAnEvent::saveEditedEventData(sf::String& title, sf::String& year, sf::String& topic,
-	sf::String& description)
+void SearchedAnEvent::saveEditedEventData(SearchedAnEvent::inputData*& sData)
 {
 	std::ifstream curData; curData.open("Events.txt", std::ios::in | std::ios::app);
 	std::string data, editedData, curTitle;
 	std::vector<std::string> lines;
 	std::smatch yearMatch;
 
-	editedData = title.toAnsiString() + " " + year.toAnsiString() + " " + topic.toAnsiString() + " " + description.toAnsiString();
+	editedData = sData->title.toAnsiString() + " " + sData->year.toAnsiString() + " " + sData->topic.toAnsiString() + " " + sData->description.toAnsiString();
 	bool found = true;
 	int pos = 0;
 
@@ -430,7 +433,7 @@ void SearchedAnEvent::saveEditedEventData(sf::String& title, sf::String& year, s
 
 		lines.push_back(data);
 
-		if (inputData::oldTitle == curTitle)
+		if (sData->oldTitle == curTitle)
 		{
 			found = false;
 		}
@@ -462,13 +465,13 @@ void SearchedAnEvent::saveEditedEventData(sf::String& title, sf::String& year, s
 }
 
 void SearchedAnEvent::onClickEditPage(sf::RenderWindow& window, sf::Event& event1, int& stage,
-	int& box, sf::String& title, sf::String& year, sf::String& topic, sf::String& description,
-	bool& crCheck, int& sortType, sf::SoundBuffer& buffer, sf::Sound& sound)
+	int& box, SearchedAnEvent::inputData*& sData,
+	SearchedAnEvent::checkData*& cData, sf::SoundBuffer& buffer, sf::Sound& sound, bool& crCheck)
 {
-	if (inputData::oldTitleCheck)
+	if (sData->oldTitleCheck)
 	{
-		inputData::oldTitle = title;
-		inputData::oldTitleCheck = false;
+		sData->oldTitle = sData->title;
+		sData->oldTitleCheck = false;
 	}
 
 	while (window.pollEvent(event1))
@@ -486,7 +489,7 @@ void SearchedAnEvent::onClickEditPage(sf::RenderWindow& window, sf::Event& event
 			{
 				MainMenu::playSound(buffer, sound, 1);
 				stage = 2;
-				inputData::oldTitleCheck = true;
+				sData->oldTitleCheck = true;
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 180 && sf::Mouse::getPosition(window).x <= 605) && //Title
 				(sf::Mouse::getPosition(window).y >= 115 && sf::Mouse::getPosition(window).y <= 160))
@@ -516,20 +519,19 @@ void SearchedAnEvent::onClickEditPage(sf::RenderWindow& window, sf::Event& event
 				(sf::Mouse::getPosition(window).y >= 650 && sf::Mouse::getPosition(window).y <= 750))
 			{
 				//Save edited an event data
-				if (title.getSize() > 0 && topic.getSize() > 0 && description.getSize() > 0 && year.getSize() > 0)
+				if (sData->title.getSize() > 0 && sData->topic.getSize() > 0 && sData->description.getSize() > 0 && sData->year.getSize() > 0)
 				{
 					MainMenu::playSound(buffer, sound, 1);
-					saveEditedEventData(title, year, topic, description);
+					saveEditedEventData(sData);
 
-					inputData::oldTitleCheck = true;
+					sData->oldTitleCheck = true;
+					sData->title = "";
+					sData->topic = "";
+					sData->description = "";
+					sData->year = "";
+					cData->sortType = 1;
 					crCheck = true;
-					title = "";
-					topic = "";
-					description = "";
-					year = "";
-					sortType = 1;
 					stage = 0;
-
 				}
 			}
 			else
@@ -541,10 +543,9 @@ void SearchedAnEvent::onClickEditPage(sf::RenderWindow& window, sf::Event& event
 	}
 }
 
-void TestKnowledge::onClickTestPage(sf::RenderWindow& window, sf::Event& event1, int& stage,
-	Event*& entireFile, bool& crCheck, int& box, sf::String& yearAnswer, sf::String& titleText,
-	sf::String& topicText, EventGenerator*& eventG, bool& revealed, bool& generated, bool& checked,
-	sf::SoundBuffer& buffer, sf::Sound& sound)
+void TestKnowledge::onClickTestPage(sf::RenderWindow& window, sf::Event& event1, int& stage, Event*& entireFile,
+	inputData*& tData, int& box,
+	EventGenerator*& eventG, sf::SoundBuffer& buffer, sf::Sound& sound, bool& crCheck)
 {
 	while (window.pollEvent(event1))
 	{
@@ -563,9 +564,14 @@ void TestKnowledge::onClickTestPage(sf::RenderWindow& window, sf::Event& event1,
 				crCheck = true;
 				clearList(entireFile);
 				box = 0;
-				titleText = ""; topicText = ""; yearAnswer = ""; revealed = false; generated = false; checked = false;
-				if (generated)
+				tData->titleText = ""; tData->topicText = "";
+				tData->yearAnswer = ""; tData->revealed = false;
+				tData->generated = false; tData->checked = false;
+				if (tData->generated)
 					delete eventG;
+
+				crCheck = true;
+				delete tData;
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 135 && sf::Mouse::getPosition(window).x <= 290) &&
 				(sf::Mouse::getPosition(window).y >= 310 && sf::Mouse::getPosition(window).y <= 355)) //Year box
@@ -579,23 +585,23 @@ void TestKnowledge::onClickTestPage(sf::RenderWindow& window, sf::Event& event1,
 				{
 					MainMenu::playSound(buffer, sound, 5);
 					//Generate new event if there is one create already delete that one and create new
-					if (generated) delete eventG;
+					if (tData->generated) delete eventG;
 					eventG = new EventGenerator(entireFile, &takeLastNodePos);
-					titleText = eventG->title; topicText = eventG->topic;
+					tData->titleText = eventG->title; tData->topicText = eventG->topic;
 					box = 0;
-					yearAnswer = "";
-					revealed = false; generated = true; checked = false;
+					tData->yearAnswer = "";
+					tData->revealed = false; tData->generated = true; tData->checked = false;
 				}
 			}
 			else if ((sf::Mouse::getPosition(window).x >= 35 && sf::Mouse::getPosition(window).x <= 275) &&
 				(sf::Mouse::getPosition(window).y >= 695 && sf::Mouse::getPosition(window).y <= 775)) //Reveal the answer button
 			{
-				if (generated)
+				if (tData->generated)
 				{
 					MainMenu::playSound(buffer, sound, 6);
-					yearAnswer = std::to_string(eventG->convertToDecimalFromBinary());
-					revealed = true;
-					checked = false;
+					tData->yearAnswer = std::to_string(eventG->convertToDecimalFromBinary());
+					tData->revealed = true;
+					tData->checked = false;
 				}
 				box = 0;
 			}
@@ -603,11 +609,11 @@ void TestKnowledge::onClickTestPage(sf::RenderWindow& window, sf::Event& event1,
 				(sf::Mouse::getPosition(window).y >= 700 && sf::Mouse::getPosition(window).y <= 775)) //Check the answer button
 			{
 				//Check if there is a generated event and the answer is typed
-				if (generated && yearAnswer.getSize() > 0)
+				if (tData->generated && tData->yearAnswer.getSize() > 0)
 				{
 					MainMenu::playSound(buffer, sound, 7);
-					checked = true;
-					revealed = false;
+					tData->checked = true;
+					tData->revealed = false;
 				}
 				box = 0;
 			}

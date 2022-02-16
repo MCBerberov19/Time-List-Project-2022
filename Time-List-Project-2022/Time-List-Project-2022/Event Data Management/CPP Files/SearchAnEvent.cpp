@@ -257,7 +257,7 @@ void SaveList::saveDataIntoFileTail(Event* tail)
 }
 
 void SaveList::saveEventInfo(Event* head, Event* tail, int cordinateY, int node, 
-	sf::String& title, sf::String& year, sf::String& topic, sf::String& description, bool& sortCheck)
+	SearchedAnEvent::inputData*& sData, bool& sortCheck)
 {
 	int nodeCur = 1;
 	if (TakeNodes::takeNodeIndex(cordinateY, node) != 0)
@@ -268,10 +268,10 @@ void SaveList::saveEventInfo(Event* head, Event* tail, int cordinateY, int node,
 			{
 				if (nodeCur == TakeNodes::takeNodeIndex(cordinateY, node))
 				{
-					title = head->title;
-					year = std::to_string(head->year);
-					topic = head->topic;
-					description = head->description;
+					sData->title = head->title;
+					sData->year = std::to_string(head->year);
+					sData->topic = head->topic;
+					sData->description = head->description;
 					break;
 				}
 				head = head->nextEvent;
@@ -284,10 +284,10 @@ void SaveList::saveEventInfo(Event* head, Event* tail, int cordinateY, int node,
 			{
 				if (nodeCur == TakeNodes::takeNodeIndex(cordinateY, node))
 				{
-					title = tail->title;
-					year = std::to_string(tail->year);
-					topic = tail->topic;
-					description = tail->description;
+					sData->title = tail->title;
+					sData->year = std::to_string(tail->year);
+					sData->topic = tail->topic;
+					sData->description = tail->description;
 					break;
 				}
 				tail = tail->prevEvent;
