@@ -6,7 +6,8 @@ using namespace SearchAnEventNodes;
 void PrintList::printList(sf::RenderWindow& window, Event* head, sf::Sprite& eventBoard, 
 	sf::Font& font)
 {
-	sf::Text text; text.setFont(font); text.setCharacterSize(28); text.setFillColor(sf::Color::Black);
+	sf::Text text; text.setFont(font); text.setCharacterSize(28); 
+	text.setFillColor(sf::Color::Black);
 	float y = 220;
 	int i = 0;
 
@@ -35,7 +36,8 @@ void PrintList::printList(sf::RenderWindow& window, Event* head, sf::Sprite& eve
 void PrintList::printListReversed(sf::RenderWindow& window, Event* tail, sf::Sprite& eventBoard,
 	sf::Font& font)
 {
-	sf::Text text; text.setFont(font); text.setCharacterSize(28); text.setFillColor(sf::Color::Black);
+	sf::Text text; text.setFont(font); text.setCharacterSize(28); 
+	text.setFillColor(sf::Color::Black);
 	float y = 220;
 	int i = 0;
 

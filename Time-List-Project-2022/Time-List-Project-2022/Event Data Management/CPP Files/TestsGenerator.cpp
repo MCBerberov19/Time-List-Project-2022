@@ -10,7 +10,8 @@ EventGenerator::EventGenerator(Event* entireFile, takeLastNodePosCallback takeLa
 	this->grayYear = convertToGrayCode(stoi(data["Year"]));
 }
 
-std::map<std::string, std::string> EventGenerator::generateRandomNode(Event* entireFile, takeLastNodePosCallback takeLastNodePos)
+std::map<std::string, std::string> EventGenerator::generateRandomNode(Event* entireFile, 
+	takeLastNodePosCallback takeLastNodePos)
 {
 	int node = rand() % takeLastNodePos(entireFile);
 	int i = 0;

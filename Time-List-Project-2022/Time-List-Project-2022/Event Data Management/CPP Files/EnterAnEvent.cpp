@@ -14,6 +14,7 @@ EnterAnEventC::EnterAnEventC(sf::String title, int year, sf::String topic, sf::S
 void EnterAnEventC::setTextData()
 {
 	userDataOut.open("Events.txt", std::ios::app | std::ios::out);
+
 	userDataOut << title.toAnsiString() << " " << std::to_string(year) << " " << topic.toAnsiString() 
 	<< " " << description.toAnsiString() << std::endl;
 }

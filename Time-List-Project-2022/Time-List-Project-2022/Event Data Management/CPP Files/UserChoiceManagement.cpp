@@ -127,11 +127,14 @@ void EnterAnEvent::onClickEventPage(sf::RenderWindow& window, sf::Event& event1,
 			else if ((sf::Mouse::getPosition(window).x >= 285 && sf::Mouse::getPosition(window).x <= 525) && //Enter
 				(sf::Mouse::getPosition(window).y >= 650 && sf::Mouse::getPosition(window).y <= 735))
 			{
-				if (eData->title.getSize() > 0 && eData->topic.getSize() > 0 && eData->description.getSize() > 0 && eData->year.getSize() > 0)
+				if (eData->title.getSize() > 0 && eData->topic.getSize() > 0 && eData->description.getSize() > 0
+					&& eData->year.getSize() > 0)
 				{
 					//Enter an event button
 					MainMenu::playSound(buffer, sound, 8);
-					EnterAnEventC* newEvent = new EnterAnEventC(eData->title, stoi(eData->year.toAnsiString()), eData->topic, eData->description);
+					EnterAnEventC* newEvent = new EnterAnEventC(eData->title, stoi(eData->year.toAnsiString()), 
+						eData->topic, eData->description);
+
 					delete newEvent;
 
 					stage = 0;
@@ -424,7 +427,9 @@ void SearchedAnEvent::saveEditedEventData(SearchedAnEvent::inputData*& sData)
 	std::vector<std::string> lines;
 	std::smatch yearMatch;
 
-	editedData = sData->title.toAnsiString() + " " + sData->year.toAnsiString() + " " + sData->topic.toAnsiString() + " " + sData->description.toAnsiString();
+	editedData = sData->title.toAnsiString() + " " + sData->year.toAnsiString() + " " + 
+								sData->topic.toAnsiString() + " " + sData->description.toAnsiString();
+
 	bool found = true;
 	int pos = 0;
 
@@ -467,8 +472,8 @@ void SearchedAnEvent::saveEditedEventData(SearchedAnEvent::inputData*& sData)
 }
 
 void SearchedAnEvent::onClickEditPage(sf::RenderWindow& window, sf::Event& event1, int& stage,
-	int& box, SearchedAnEvent::inputData*& sData,
-	SearchedAnEvent::checkData*& cData, sf::SoundBuffer& buffer, sf::Sound& sound, bool& crCheck)
+	int& box, SearchedAnEvent::inputData*& sData, SearchedAnEvent::checkData*& cData, 
+	sf::SoundBuffer& buffer, sf::Sound& sound, bool& crCheck)
 {
 	if (sData->oldTitleCheck)
 	{
@@ -546,8 +551,7 @@ void SearchedAnEvent::onClickEditPage(sf::RenderWindow& window, sf::Event& event
 }
 
 void TestKnowledge::onClickTestPage(sf::RenderWindow& window, sf::Event& event1, int& stage, Event*& entireFile,
-	inputData*& tData, int& box,
-	EventGenerator*& eventG, sf::SoundBuffer& buffer, sf::Sound& sound, bool& crCheck)
+	inputData*& tData, int& box, EventGenerator*& eventG, sf::SoundBuffer& buffer, sf::Sound& sound, bool& crCheck)
 {
 	while (window.pollEvent(event1))
 	{
@@ -569,6 +573,7 @@ void TestKnowledge::onClickTestPage(sf::RenderWindow& window, sf::Event& event1,
 				tData->titleText = ""; tData->topicText = "";
 				tData->yearAnswer = ""; tData->revealed = false;
 				tData->generated = false; tData->checked = false;
+
 				if (tData->generated)
 					delete eventG;
 

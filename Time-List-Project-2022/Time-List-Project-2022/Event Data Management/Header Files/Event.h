@@ -20,7 +20,8 @@ struct Event
 
 	Event* getHead(Event* tail);
 
-	void appendNode(Event* head, std::string& title, int& year, std::string& topic, std::string& description);
+	void appendNode(Event* head, std::string& title, int& year, std::string& topic, 
+		std::string& description);
 
 	Event* removeHead(Event* head);
 
@@ -32,5 +33,6 @@ struct Event
 
 	void removeNode(Event*& head, Event*& tail, int cordinateY, int node, bool& sortCheck);
 
-	void removeAfterSearch(Event*& head, Event*& tail, int cordinateY, int node, bool& sortCheck, std::string& title);
+	void removeAfterSearch(Event*& head, Event*& tail, int cordinateY, int node, bool& sortCheck, 
+		std::string& title);
 };
