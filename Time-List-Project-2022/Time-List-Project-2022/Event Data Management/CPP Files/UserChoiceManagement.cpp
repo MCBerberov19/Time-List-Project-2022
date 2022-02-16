@@ -379,6 +379,8 @@ void SearchedAnEvent::onClickSearchPage(sf::RenderWindow& window, sf::Event& eve
 				else
 				{
 					head->removeNode(head, tail, sf::Mouse::getPosition(window).y, 1, cData->sortCheck);
+					clearList(entireFile);
+					entireFile = new Event;
 					takeDataFromFile(entireFile, &Event::appendNode, &Event::removeHead);
 				}
 				box = 0;
